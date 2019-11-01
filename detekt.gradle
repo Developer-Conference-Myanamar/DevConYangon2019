@@ -1,0 +1,22 @@
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+detekt {
+  config = files("$rootDir/detekt-config.yml")
+  parallel = true
+  filters = ".*build.*,.*/resources/.*,.*/tmp/.*"
+  reports {
+    xml {
+      enabled = true // Enable/Disable XML report (default: true)
+      destination = file("$buildDir/reports/${project.name}_detekt.xml")
+      // Path where XML report will be stored (default: `build/reports/detekt/detekt.xml`)
+    }
+    html {
+      enabled = true // Enable/Disable HTML report (default: true)
+      destination = file("$buildDir/reports/${project.name}_detekt.html")
+      // Path where HTML report will be stored (default: `build/reports/detekt/detekt.html`)
+    }
+    txt {
+      enabled = false
+    }
+  }
+}

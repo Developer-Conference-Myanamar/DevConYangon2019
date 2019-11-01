@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion BuildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion BuildConfig.minSdk
+    targetSdkVersion BuildConfig.targetSdk
+    resConfigs "en", "mm"
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled false
+      debuggable true
+      buildConfigField "String", "BASE_URL", "\"https://devconmyanmar.org/api/\""
+    }
+    release {
+      minifyEnabled true
+      debuggable false
+      buildConfigField "String", "BASE_URL", "\"https://devconmyanmar.org/api/\""
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation project(':data')
+
+  testImplementation CommonLibs.junit
+  testImplementation Mockito.core
+  testImplementation Mockito.inline
+  testImplementation Mockito.kotlin
+  testImplementation OkHttp.mock_web_server
+  kaptTest Moshi.code_gen
+
+  kaptAndroidTest Dagger.compiler
+
+  //OkHttp
+  api OkHttp.client
+  implementation OkHttp.logger
+
+  //Retrofit
+  api Retrofit.core
+  implementation Retrofit.moshi_converter
+
+  //Moshi
+  implementation Moshi.core
+  kapt Moshi.code_gen
+
+  //Kotlin
+  implementation Kotlin.stdblib_jdk
+
+  //JavaxInject
+  implementation CommonLibs.javaxInject
+
+  //AndroidX Ext
+  implementation AndroidXCore.core_ktx
+
+  //Dagger
+  implementation Dagger.core
+  kapt Dagger.compiler
+
+  //Logging
+  implementation CommonLibs.timber
+}

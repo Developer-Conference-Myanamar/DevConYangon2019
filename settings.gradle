@@ -1,0 +1,2 @@
+include ':app', ':domain', ':data', ':cache', ':network', ':appbase'
+rootProject.name='DevConYangon2019'

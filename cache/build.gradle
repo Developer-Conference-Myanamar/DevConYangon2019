@@ -1,0 +1,97 @@
+buildscript {
+  repositories {
+    google()
+    mavenCentral()
+  }
+  dependencies {
+    classpath SqlDelight.gradle_plugin
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.squareup.sqldelight'
+
+android {
+  compileSdkVersion BuildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion BuildConfig.minSdk
+    targetSdkVersion BuildConfig.targetSdk
+    resConfigs "en", "mm"
+  }
+
+  buildTypes {
+    debug {
+      debuggable true
+    }
+    release {
+      minifyEnabled true
+      debuggable false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  testOptions {
+    unitTests {
+      includeAndroidResources = true
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+  }
+
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+}
+
+sqldelight {
+
+  DevConYangonDb {
+    packageName = "org.devconmyanmar.devconyangon"
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  implementation project(':data')
+
+  testImplementation CommonLibs.junit
+  testImplementation AndroidArchCore.test
+  testImplementation Mockito.core
+  testImplementation Mockito.inline
+  testImplementation Mockito.kotlin
+  testImplementation AndroidXTest.roboelectric
+  testImplementation AndroidXTestExt.junit
+  testImplementation AndroidXTestExt.junit_ktx
+  testImplementation AndroidXTestExt.truth
+  kaptTest Moshi.code_gen
+
+  kaptAndroidTest Dagger.compiler
+
+  //SqlDelight
+  implementation SqlDelight.android_driver
+
+  //Moshi
+  implementation Moshi.core
+  kapt Moshi.code_gen
+  implementation Moshi.geoshi
+
+  //Kotlin
+  implementation Kotlin.stdblib_jdk
+
+  //JavaxInject
+  implementation CommonLibs.javaxInject
+
+  //AndroidX Extension
+  implementation AndroidXCore.core_ktx
+
+  //Dagger
+  implementation Dagger.core
+  kapt Dagger.compiler
+}

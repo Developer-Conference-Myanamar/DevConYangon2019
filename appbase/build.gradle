@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion BuildConfig.compileSdk
+
+  defaultConfig {
+    minSdkVersion BuildConfig.minSdk
+    targetSdkVersion BuildConfig.targetSdk
+    resConfigs "en", "mm"
+  }
+
+  buildTypes {
+    debug {
+      minifyEnabled false
+      debuggable true
+    }
+    release {
+      minifyEnabled true
+      debuggable false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  api project(':domain')
+  api project(':data')
+  api project(':cache')
+  api project(':network')
+
+  testImplementation CommonLibs.junit
+  testImplementation Mockito.core
+  testImplementation Mockito.inline
+  testImplementation Mockito.kotlin
+
+  kaptAndroidTest Dagger.compiler
+
+  //AndroidX
+  api AndroidXFragment.fragment
+  api AndroidXFragment.fragment_ktx
+  api AndroidXCore.core_ktx
+  api AndroidXRecyclerView.recycler_view
+  api AndroidXAppCompat.app_compat
+  api AndroidXCardView.card_view
+  api AndroidXConstraintLayout.constraint_layout
+
+  //Arch
+  api AndroidArchLifeCycle.lifecycle
+  api AndroidArchLifeCycle.lives
+  kapt AndroidArchLifeCycle.lifecycle_compiler
+
+  api Material.material
+
+  //OkHttp
+  api OkHttp.client
+  implementation OkHttp.logger
+
+  //Retrofit
+  api Retrofit.core
+  implementation Retrofit.moshi_converter
+
+  //Moshi
+  implementation Moshi.core
+  kapt Moshi.code_gen
+
+  //Rx
+  implementation ReactiveX.rxandroid
+
+  //Kotlin
+  implementation Kotlin.stdblib_jdk
+  api KotlinCoroutine.android
+
+  //JavaxInject
+  implementation CommonLibs.javaxInject
+
+  //Dagger
+  api Dagger.core
+  api Dagger.android_core
+  api Dagger.android_support
+
+  kapt Dagger.compiler
+
+  //Logging
+  implementation CommonLibs.timber
+}
