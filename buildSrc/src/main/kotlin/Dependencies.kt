@@ -114,7 +114,7 @@ object AndroidArchWork {
 }
 
 object AndroidArchNavigation {
-  private const val version = "2.2.0-alpha02"
+  private const val version = "2.1.0"
 
   const val common = "androidx.navigation:navigation-common:$version"
   const val common_ktx = "androidx.navigation:navigation-common-ktx:$version"
@@ -124,8 +124,6 @@ object AndroidArchNavigation {
   const val runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$version"
   const val safe_args_generator = "androidx.navigation:navigation-safe-args-generator:$version"
   const val safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
-  const val testing = "androidx.navigation:navigation-testing:$version"
-  const val testing_ktx = "androidx.navigation:navigation-testing-ktx:$version"
   const val ui = "androidx.navigation:navigation-ui:$version"
   const val ui_ktx = "androidx.navigation:navigation-ui-ktx:$version"
 }

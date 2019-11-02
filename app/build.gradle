@@ -1,7 +1,21 @@
+buildscript {
+  repositories {
+    google()
+    mavenCentral()
+  }
+  dependencies {
+    classpath AndroidArchNavigation.safe_args_plugin
+  }
+}
+
+
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 
 android {
   compileSdkVersion BuildConfig.compileSdk
@@ -59,6 +73,11 @@ dependencies {
 
   //AndroidX work
   implementation AndroidArchWork.work_runtime_ktx
+
+  //Androidx Nav
+  implementation AndroidArchNavigation.fragment_ktx
+  implementation AndroidArchNavigation.ui_ktx
+  kapt AndroidArchNavigation.safe_args_generator
 
   //Inject
   implementation CommonLibs.javaxInject
