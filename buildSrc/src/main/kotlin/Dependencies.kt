@@ -19,7 +19,7 @@ object BuildConfig {
 }
 
 object CommonLibs {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:3.5.1"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-beta02"
 
   const val dexter = "com.karumi:dexter:5.0.0"
 
@@ -61,7 +61,7 @@ object AndroidXCardView {
 }
 
 object AndroidXConstraintLayout {
-  private const val version = "2.0.0-beta2"
+  private const val version = "2.0.0-beta3"
 
   const val constraint_layout = "androidx.constraintlayout:constraintlayout:$version"
 }
@@ -69,7 +69,7 @@ object AndroidXConstraintLayout {
 object AndroidXViewPager {
   const val view_pager = "androidx.viewpager:viewpager:1.0.0"
 
-  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0-beta03"
+  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0-rc01"
 }
 
 object AndroidXLegacy {

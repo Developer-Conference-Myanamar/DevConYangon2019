@@ -3,7 +3,7 @@ package org.devconmyanmar.devconyangon.feature.home
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.activity_home.bottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
 
@@ -16,6 +16,10 @@ class HomeActivity : MvpActivity<HomeView, HomeViewModel>(), HomeView {
 
   override val layoutResId: Int
     get() = R.layout.activity_home
+
+  private val bottomNavigationView by lazy {
+    findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+  }
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)

@@ -25,7 +25,7 @@ abstract class MvpFragment<V : Viewable, VM : BaseViewModel<V>> :
     try {
       viewModel.attachView(this as V)
     } catch (exception: Exception) {
-      Timber.e(InvalidMvpImplementationException())
+      Timber.e(exception)
       throw InvalidMvpImplementationException()
     }
   }
