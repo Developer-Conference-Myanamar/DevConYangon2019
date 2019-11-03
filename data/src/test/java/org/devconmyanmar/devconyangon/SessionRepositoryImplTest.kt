@@ -74,7 +74,8 @@ class SessionRepositoryImplTest {
           speakerId = SpeakerId(0),
           name = "Fake Wharton"
         )
-      )
+      ),
+      isFavorite = false
     )
 
     whenever(sessionNetworkDataSource.getSessions(any())).thenReturn(
@@ -116,7 +117,8 @@ class SessionRepositoryImplTest {
           speakerId = SpeakerId(0),
           name = "Fake Wharton"
         )
-      )
+      ),
+      isFavorite = false
     )
 
     whenever(sessionNetworkDataSource.getSessions(any())).thenAnswer {
