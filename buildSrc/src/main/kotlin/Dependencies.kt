@@ -244,7 +244,7 @@ object Firebase {
 }
 
 object Flipper {
-  private const val version = "0.25.0"
+  private const val version = "0.27.0"
 
   const val flipper = "com.facebook.flipper:flipper:$version"
   const val soloader = "com.facebook.soloader:soloader:0.5.1"

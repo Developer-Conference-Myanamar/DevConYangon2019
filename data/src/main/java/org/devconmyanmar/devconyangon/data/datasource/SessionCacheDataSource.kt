@@ -7,8 +7,9 @@ import org.threeten.bp.LocalDate
 /**
  * Created by Vincent on 11/3/19
  */
-interface SessionNetworkDataSource {
+interface SessionCacheDataSource {
 
-  fun getSessions(date: LocalDate): List<SessionEntity>
+  fun putSessionEntities(sessionEntities: List<SessionEntity>)
 
+  fun getSessionEntities(date: LocalDate): List<SessionEntity>
 }

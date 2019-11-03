@@ -112,6 +112,12 @@ dependencies {
   //Leak Canary
   debugImplementation LeakCanary.android
 
+  //Debugging
+  debugImplementation Flipper.flipper
+  debugImplementation Flipper.soloader
+  debugImplementation Flipper.network_plugin
+  releaseImplementation Flipper.filpper_no_op
+
   //Test
   testImplementation CommonLibs.junit
   testImplementation AndroidArchCore.test

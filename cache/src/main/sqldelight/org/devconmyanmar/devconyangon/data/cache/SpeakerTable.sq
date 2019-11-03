@@ -1,0 +1,16 @@
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId;
+
+CREATE TABLE SpeakerTable(
+  speaker_id INTEGER AS SpeakerId NOT NULL PRIMARY KEY,
+  speaker_title TEXT NOT NULL
+);
+
+insert_or_replace:
+INSERT OR REPLACE INTO SpeakerTable VALUES(:speaker_id, :speaker_title);
+
+select_by_id:
+SELECT * FROM SpeakerTable WHERE speaker_id =?;
+
+select_by_session:
+SELECT SpeakerTable.speaker_id,SpeakerTable.speaker_title FROM SpeakerTable
+JOIN SessionSpeakerTable ON SessionSpeakerTable.session = :sessionId;
