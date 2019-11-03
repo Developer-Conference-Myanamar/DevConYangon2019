@@ -1,0 +1,32 @@
+import java.lang.Boolean;
+import org.devconmyanmar.devconyangon.domain.model.RoomId;
+import org.devconmyanmar.devconyangon.domain.model.SessionId;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalTime;
+
+CREATE TABLE SessionTable(
+  session_id INTEGER AS SessionId NOT NULL PRIMARY KEY,
+  session_title TEXT NOT NULL,
+  date TEXT As LocalDate NOT NULL,
+  time TEXT AS LocalTime NOT NULL,
+  room INTEGER AS RoomId NOT NULL,
+  is_favourite INTEGER AS Boolean DEFAULT 0 NOT NULL,
+  FOREIGN KEY (room) REFERENCES RoomTable(room_id)
+);
+
+select_all_at_date:
+SELECT * FROM SessionTable
+WHERE date = :date;
+
+select_favorite_with_id:
+SELECT is_favourite FROM SessionTable
+WHERE session_id = :session_id;
+
+insert:
+INSERT INTO SessionTable(session_id, session_title, date, time, room) VALUES(:session_id, :session_title, :date, :time, :room);
+
+update_favourite:
+UPDATE SessionTable
+SET is_favourite = :is_favorite
+WHERE session_id = :session_id;

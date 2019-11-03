@@ -1,0 +1,12 @@
+import org.devconmyanmar.devconyangon.domain.model.RoomId;
+
+CREATE TABLE RoomTable(
+  room_id INTEGER AS RoomId NOT NULL PRIMARY KEY,
+  room_name TEXT NOT NULL
+);
+
+insert_or_replace:
+INSERT OR REPLACE INTO RoomTable VALUES(:room_id, :room_name);
+
+select_by_id:
+SELECT * FROM RoomTable WHERE room_id =?;

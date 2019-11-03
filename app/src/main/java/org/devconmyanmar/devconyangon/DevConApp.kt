@@ -1,5 +1,6 @@
 package org.devconmyanmar.devconyangon
 
+import android.os.Build
 import androidx.multidex.MultiDexApplication
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
@@ -36,7 +37,14 @@ class DevConApp : MultiDexApplication(), HasAndroidInjector {
 
     if (BuildConfig.DEBUG) {
       Timber.plant(DebugTree())
+      if (!isRoboUnitTest()) {
+        FlipperInitializer.initFlipper(this)
+      }
     }
 
+  }
+
+  fun isRoboUnitTest(): Boolean {
+    return "robolectric" == Build.FINGERPRINT
   }
 }

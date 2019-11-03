@@ -7,15 +7,10 @@ buildscript {
     classpath AndroidArchNavigation.safe_args_plugin
   }
 }
-
-
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
-
 
 android {
   compileSdkVersion BuildConfig.compileSdk
@@ -31,6 +26,10 @@ android {
     multiDexEnabled true
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  viewBinding {
+    enabled = true
   }
 
   buildTypes {
@@ -112,6 +111,12 @@ dependencies {
 
   //Leak Canary
   debugImplementation LeakCanary.android
+
+  //Debugging
+  debugImplementation Flipper.flipper
+  debugImplementation Flipper.soloader
+  debugImplementation Flipper.network_plugin
+  releaseImplementation Flipper.filpper_no_op
 
   //Test
   testImplementation CommonLibs.junit

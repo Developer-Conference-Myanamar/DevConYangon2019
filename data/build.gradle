@@ -2,16 +2,17 @@ apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':domain')
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  api project(':domain')
 
-    testImplementation CommonLibs.junit
-    testImplementation Mockito.core
-    testImplementation Mockito.inline
-    testImplementation Mockito.kotlin
+  testImplementation CommonLibs.junit
+  testImplementation Mockito.core
+  testImplementation Mockito.inline
+  testImplementation Mockito.kotlin
+  testImplementation ThreeTenBp.core
 
-    implementation Kotlin.stdblib_jdk
-    implementation CommonLibs.timber
+  implementation Kotlin.stdblib_jdk
+  implementation CommonLibs.timber
 }
 
 sourceCompatibility = "7"

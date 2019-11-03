@@ -7,6 +7,6 @@ import org.threeten.bp.ZoneId
  */
 object Zones {
 
-  val YANGON = ZoneId.of("Asia/Rangoon")
+  val YANGON = ZoneId.of("Asia/Yangon")
 
 }
