@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
+import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentSessionBinding
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.threeten.bp.LocalDate
@@ -49,11 +50,12 @@ class SessionFragment(
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    showShortToast("clicked")
+    //TODO: Show Session Detail
   }
 
   override fun onFavoriteClick(sessionId: SessionId, position: Int) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    viewModel.toggleFavoriteStatus(sessionId)
   }
 
 }

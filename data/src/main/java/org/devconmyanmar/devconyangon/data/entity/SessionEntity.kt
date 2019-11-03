@@ -16,7 +16,8 @@ data class SessionEntity(
   val sessionTitle: String,
   val dateTimeInInstant: Instant,
   val room: RoomEntity,
-  val speakers: List<SpeakerEntity>
+  val speakers: List<SpeakerEntity>,
+  val isFavorite: Boolean
 )
 
 class SessionEntityMapper @Inject constructor(
@@ -49,7 +50,8 @@ class SessionEntityToListingMapper @Inject constructor(
       sessionTitle = item.sessionTitle,
       dateTime = item.dateTimeInInstant.atZone(clock.zone),
       room = roomEntityMapper.map(item.room),
-      speakers = item.speakers.map(speakerEntityMapper::map)
+      speakers = item.speakers.map(speakerEntityMapper::map),
+      isFavorite = item.isFavorite
     )
   }
 

@@ -1,20 +1,20 @@
 package org.devconmyanmar.devconyangon.data.cache
 
 import org.devconmyanmar.devconyangon.DevConYangonDb
+import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
-import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
-import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.domain.helper.Zones
+import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.threeten.bp.LocalDate
-import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 /**
  * Created by Vincent on 11/3/19
  */
 class SessionCacheDataSourceImpl @Inject constructor(
-  private val db: DevConYangonDb
+  private val db: DevConYangonDb,
+  private val sessionTableMapper: SessionTableMapper
 ) : SessionCacheDataSource {
 
   override fun putSessionEntities(sessionEntities: List<SessionEntity>) {
@@ -27,7 +27,7 @@ class SessionCacheDataSourceImpl @Inject constructor(
 
         val dateTime = sessionEntity.dateTimeInInstant.atZone(Zones.YANGON)
 
-        db.sessionTableQueries.insert_or_replace(
+        db.sessionTableQueries.insert(
           sessionEntity.sessionId,
           sessionEntity.sessionTitle,
           dateTime.toLocalDate(),
@@ -46,31 +46,16 @@ class SessionCacheDataSourceImpl @Inject constructor(
   }
 
   override fun getSessionEntities(date: LocalDate): List<SessionEntity> {
-    return db.sessionTableQueries.select_all_at_date(
-      date = date,
-      mapper = { sessionId, sessionTitle, localDate, localTime, room ->
-        val roomQuery = db.roomTableQueries.select_by_id(room).executeAsOne()
-        val speakerQuery = db.speakerTableQueries.select_by_session(sessionId).executeAsList()
+    return db.sessionTableQueries.select_all_at_date(date).executeAsList()
+      .map(sessionTableMapper::map)
+  }
 
-        val dateTime = ZonedDateTime.of(localDate, localTime, Zones.YANGON)
+  override fun getFavoriteStatus(sessionId: SessionId): Boolean {
+    return db.sessionTableQueries.select_favorite_with_id(sessionId).executeAsOne()
+  }
 
-        SessionEntity(
-          sessionId = sessionId,
-          sessionTitle = sessionTitle,
-          dateTimeInInstant = dateTime.toInstant(),
-          room = RoomEntity(
-            roomQuery.room_id,
-            roomQuery.room_name
-          ),
-          speakers = speakerQuery.map {
-            SpeakerEntity(
-              speakerId = it.speaker_id,
-              name = it.speaker_title
-            )
-          }
-        )
-      }
-    ).executeAsList()
+  override fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean) {
+    db.sessionTableQueries.update_favourite(favoriteStatus, sessionId)
   }
 }
 

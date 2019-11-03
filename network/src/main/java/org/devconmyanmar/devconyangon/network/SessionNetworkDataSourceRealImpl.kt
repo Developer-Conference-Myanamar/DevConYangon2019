@@ -32,7 +32,8 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
             speakerId = SpeakerId(0),
             name = "Fake Wharton"
           )
-        )
+        ),
+        isFavorite = false
       ),
       SessionEntity(
         sessionId = SessionId(1),
@@ -47,7 +48,8 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
             speakerId = SpeakerId(0),
             name = "John Doe"
           )
-        )
+        ),
+        isFavorite = false
       ),
       SessionEntity(
         sessionId = SessionId(2),
@@ -62,7 +64,8 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
             speakerId = SpeakerId(0),
             name = "Walter White"
           )
-        )
+        ),
+        isFavorite = false
       )
     )
   }

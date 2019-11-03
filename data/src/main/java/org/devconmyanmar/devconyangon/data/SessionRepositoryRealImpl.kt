@@ -4,6 +4,7 @@ import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
 import org.devconmyanmar.devconyangon.data.datasource.SessionNetworkDataSource
 import org.devconmyanmar.devconyangon.data.entity.SessionEntityToListingMapper
 import org.devconmyanmar.devconyangon.data.exception.EmptyDataException
+import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SessionListing
 import org.devconmyanmar.devconyangon.domain.repository.SessionRepository
 import org.threeten.bp.LocalDate
@@ -17,7 +18,6 @@ class SessionRepositoryRealImpl @Inject constructor(
   private val sessionCacheDataSource: SessionCacheDataSource,
   private val sessionEntityToListingMapper: SessionEntityToListingMapper
 ) : SessionRepository {
-
   override suspend fun getSessionListing(date: LocalDate): List<SessionListing> {
 
     var networkException: Exception? = null
@@ -39,6 +39,11 @@ class SessionRepositoryRealImpl @Inject constructor(
     }
 
     return dataFromCache.map(sessionEntityToListingMapper::map)
+  }
+
+  override suspend fun toggleFavoriteStatus(sessionId: SessionId) {
+    val currentStatus = sessionCacheDataSource.getFavoriteStatus(sessionId)
+    sessionCacheDataSource.updateFavoriteStatus(sessionId, currentStatus.not())
   }
 
 }

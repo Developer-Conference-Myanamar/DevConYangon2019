@@ -1,6 +1,5 @@
 package org.devconmyanmar.devconyangon.domain.model
 
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZonedDateTime
 
 /**
@@ -11,5 +10,6 @@ data class SessionListing(
   val sessionTitle: String,
   val dateTime: ZonedDateTime,
   val room: Room,
-  val speakers: List<Speaker>
+  val speakers: List<Speaker>,
+  val isFavorite: Boolean
 )

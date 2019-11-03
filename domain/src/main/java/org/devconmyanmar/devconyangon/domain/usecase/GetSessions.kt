@@ -15,6 +15,7 @@ class GetSessions @Inject constructor(
   CoroutineUseCase<GetSessions.Params, List<SessionListing>>() {
 
   override suspend fun provide(params: Params): List<SessionListing> {
+
     return sessionRepository.getSessionListing(params.date)
   }
 

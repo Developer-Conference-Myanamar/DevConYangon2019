@@ -20,7 +20,7 @@ data class SessionViewItem(
   val roomName: String,
   val speakerNames: String,
   val shouldShowTime: Boolean,
-  val isFavorite: Boolean = false
+  val isFavorite: Boolean
 )
 
 class SessionViewItemListMapper @Inject constructor() :
@@ -53,7 +53,7 @@ class SessionViewItemListMapper @Inject constructor() :
         shouldShowTime = shouldShowTime,
         roomName = it.room.roomName,
         speakerNames = it.speakers.map { it.name }.asDelimitedString(','),
-        isFavorite = false
+        isFavorite = it.isFavorite
       )
     }
   }

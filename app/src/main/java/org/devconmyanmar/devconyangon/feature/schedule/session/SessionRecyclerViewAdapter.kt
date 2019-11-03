@@ -2,6 +2,7 @@ package org.devconmyanmar.devconyangon.feature.schedule.session
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseRecyclerViewAdapter
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseViewHolder
@@ -36,7 +37,7 @@ class SessionRecyclerViewAdapter(
   private val recyclerViewItemClickListener = recyclerViewItemClickListener { view, position ->
     when (view.id) {
       R.id.ivFavorite -> {
-        onSessionItemClickListener.onSessionItemClick(getItem(position).sessionId, position)
+        onSessionItemClickListener.onFavoriteClick(getItem(position).sessionId, position)
       }
       else -> {
         onSessionItemClickListener.onSessionItemClick(getItem(position).sessionId, position)
@@ -62,7 +63,7 @@ class SessionRecyclerViewAdapter(
       }
 
       binding.ivFavorite.setOnClickListener {
-        recyclerViewItemClickListener.onItemClick(it, adapterPosition)
+        recyclerViewItemClickListener.onItemClick(binding.ivFavorite, adapterPosition)
       }
     }
 
@@ -74,6 +75,14 @@ class SessionRecyclerViewAdapter(
       } else {
         binding.tvTime.visibility = View.INVISIBLE
       }
+
+      val favoriteDrawable = if (item.isFavorite) {
+        ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_accent_24dp)
+      } else {
+        ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_outline_accent_24dp)
+      }
+
+      binding.ivFavorite.setImageDrawable(favoriteDrawable)
 
       binding.tvRoom.text = item.roomName
       binding.tvSessionTitle.text = item.sessionTitle

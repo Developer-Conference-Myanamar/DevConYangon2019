@@ -1,7 +1,7 @@
 package org.devconmyanmar.devconyangon.data.datasource
 
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
-import org.threeten.bp.Instant
+import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.threeten.bp.LocalDate
 
 /**
@@ -12,4 +12,8 @@ interface SessionCacheDataSource {
   fun putSessionEntities(sessionEntities: List<SessionEntity>)
 
   fun getSessionEntities(date: LocalDate): List<SessionEntity>
+
+  fun getFavoriteStatus(sessionId: SessionId): Boolean
+
+  fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean)
 }
