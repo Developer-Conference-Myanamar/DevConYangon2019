@@ -25,6 +25,9 @@ class SessionTableMapper @Inject constructor(
 
     val dateTime = ZonedDateTime.of(item.date, item.time, clock.zone)
 
+    val favoriteQuery =
+      db.favoriteSessionTableQueries.select_with_session_id(item.session_id).executeAsOneOrNull()
+
     return SessionEntity(
       sessionId = item.session_id,
       sessionTitle = item.session_title,
@@ -39,7 +42,7 @@ class SessionTableMapper @Inject constructor(
           name = it.speaker_title
         )
       },
-      isFavorite = item.is_favourite
+      isFavorite = favoriteQuery != null
     )
   }
 }

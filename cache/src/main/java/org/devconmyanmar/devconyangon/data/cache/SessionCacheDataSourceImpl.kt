@@ -27,7 +27,7 @@ class SessionCacheDataSourceImpl @Inject constructor(
 
         val dateTime = sessionEntity.dateTimeInInstant.atZone(Zones.YANGON)
 
-        db.sessionTableQueries.insert(
+        db.sessionTableQueries.insert_or_replace(
           sessionEntity.sessionId,
           sessionEntity.sessionTitle,
           dateTime.toLocalDate(),
@@ -51,11 +51,18 @@ class SessionCacheDataSourceImpl @Inject constructor(
   }
 
   override fun getFavoriteStatus(sessionId: SessionId): Boolean {
-    return db.sessionTableQueries.select_favorite_with_id(sessionId).executeAsOne()
+    val queryResult =
+      db.favoriteSessionTableQueries.select_with_session_id(sessionId).executeAsOneOrNull()
+    return queryResult != null
   }
 
   override fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean) {
-    db.sessionTableQueries.update_favourite(favoriteStatus, sessionId)
+
+    if (favoriteStatus) {
+      db.favoriteSessionTableQueries.insert_or_replace(sessionId)
+    } else {
+      db.favoriteSessionTableQueries.delete_with_session_id(sessionId)
+    }
   }
 }
 

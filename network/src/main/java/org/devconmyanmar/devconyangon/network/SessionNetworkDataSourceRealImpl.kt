@@ -40,12 +40,12 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
         sessionTitle = "Android X and Y",
         dateTimeInInstant = ZonedDateTime.of(2019, 12, 21, 9, 0, 0, 0, Zones.YANGON).toInstant(),
         room = RoomEntity(
-          roomId = RoomId(0),
+          roomId = RoomId(1),
           roomName = "203"
         ),
         speakers = listOf(
           SpeakerEntity(
-            speakerId = SpeakerId(0),
+            speakerId = SpeakerId(1),
             name = "John Doe"
           )
         ),
@@ -61,7 +61,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
         ),
         speakers = listOf(
           SpeakerEntity(
-            speakerId = SpeakerId(0),
+            speakerId = SpeakerId(2),
             name = "Walter White"
           )
         ),

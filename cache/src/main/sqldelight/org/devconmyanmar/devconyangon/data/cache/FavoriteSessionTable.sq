@@ -1,0 +1,16 @@
+import org.devconmyanmar.devconyangon.domain.model.SessionId;
+
+CREATE TABLE FavoriteSessionTable(
+  session_id INTEGER AS SessionId NOT NULL PRIMARY KEY,
+  FOREIGN KEY (session_id) REFERENCES SessionTable(session_id)
+);
+
+select_with_session_id:
+SELECT * FROM FavoriteSessionTable
+WHERE session_id = :session_id;
+
+insert_or_replace:
+INSERT OR REPLACE INTO FavoriteSessionTable VALUES (:session_id);
+
+delete_with_session_id:
+DELETE FROM FavoriteSessionTable WHERE session_id = :session_id;

@@ -13,4 +13,5 @@ SELECT * FROM SpeakerTable WHERE speaker_id =?;
 
 select_by_session:
 SELECT SpeakerTable.speaker_id,SpeakerTable.speaker_title FROM SpeakerTable
-JOIN SessionSpeakerTable ON SessionSpeakerTable.session = :sessionId;
+JOIN SessionSpeakerTable ON SessionSpeakerTable.session = :sessionId
+AND SessionSpeakerTable.speaker = SpeakerTable.speaker_id;

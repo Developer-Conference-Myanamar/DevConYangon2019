@@ -9,6 +9,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import org.devconmyanmar.devconyangon.DevConYangonDb
+import org.devconmyanmar.devconyangon.data.cache.FavoriteSessionTable
 import org.devconmyanmar.devconyangon.data.cache.RoomTable
 import org.devconmyanmar.devconyangon.data.cache.SessionCacheDataSourceImpl
 import org.devconmyanmar.devconyangon.data.cache.SessionSpeakerTable
@@ -58,8 +59,11 @@ abstract class CacheModule {
       val sessionSpeakerTableAdapter =
         SessionSpeakerTable.Adapter(SessionIdColumnAdapter, SpeakerIdColumnAdapter)
 
+      val favoriteSessionTableAdapter = FavoriteSessionTable.Adapter(SessionIdColumnAdapter)
+
       return DevConYangonDb(
         sqlDriver,
+        favoriteSessionTableAdapter,
         roomTableAdapter,
         sessionSpeakerTableAdapter,
         sessionTableAdapter,
