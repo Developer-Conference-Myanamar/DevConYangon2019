@@ -7,15 +7,13 @@ import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
-import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaBinding
-import org.devconmyanmar.devconyangon.domain.model.SessionId
 
 /**
  * Created by Vincent on 2019-11-02
  */
-class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgendaView,
-  MyAgendaItemClickListener {
+class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgendaView {
+
   override val viewModel: MyAgendaViewModel by contractedViewModel()
 
   override val layoutId: Int
@@ -40,21 +38,19 @@ class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgend
     }.attach()
 
     viewModel.loadSessions()
+    viewModel.getIndexToScrollTo()
   }
 
   override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaViewItem>>) {
     viewItemListLiveData.observe(viewLifecycleOwner, Observer {
-      myAgendaPagerAdapter.submitList(it)
+      myAgendaPagerAdapter.setItems(it)
     })
   }
-
-  override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    showShortToast("clicked")
-    //TODO: Show Session Detail
-  }
-
-  override fun onFavoriteClick(sessionId: SessionId, position: Int) {
-    viewModel.toggleFavoriteStatus(sessionId)
+  
+  override fun scrollToIndex(first: Int, second: Int) {
+    if (first >= myAgendaPagerAdapter.itemCount - 1) {
+      binding.viewPager.setCurrentItem(first, false)
+    }
   }
 
 }

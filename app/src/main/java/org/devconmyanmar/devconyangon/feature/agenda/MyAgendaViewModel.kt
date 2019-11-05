@@ -3,10 +3,7 @@ package org.devconmyanmar.devconyangon.feature.agenda
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import org.devconmyanmar.devconyangon.base.core.mvp.BaseViewModel
-import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.usecase.GetConferenceDates
-import org.devconmyanmar.devconyangon.domain.usecase.GetFavoriteSessions
-import org.devconmyanmar.devconyangon.domain.usecase.ToggleSessionFavorite
 import javax.inject.Inject
 
 /**
@@ -14,9 +11,8 @@ import javax.inject.Inject
  */
 class MyAgendaViewModel @Inject constructor(
   private val getConferenceDates: GetConferenceDates,
-  private val getFavoriteSessions: GetFavoriteSessions,
-  private val toggleSessionFavorite: ToggleSessionFavorite,
   private val myAgendaViewItemMapper: MyAgendaViewItemMapper
+//  private val firstTimeListPositionFinder: FirstTimeListPositionFinder
 ) : BaseViewModel<MyAgendaView>() {
 
   private val viewItemListLiveData = MutableLiveData<List<MyAgendaViewItem>>()
@@ -31,22 +27,20 @@ class MyAgendaViewModel @Inject constructor(
     scope.launch {
 
       val dates = getConferenceDates.execute(Unit)
+      //Find which index to scroll first to
 
-      val viewItemList = dates.map {
-        val sessionList = getFavoriteSessions.execute(GetFavoriteSessions.Params(it))
-        val params = MyAgendaViewItemMapper.Params(it, sessionList)
-
-        myAgendaViewItemMapper.map(params)
-      }
-
-      viewItemListLiveData.postValue(viewItemList)
+      viewItemListLiveData.postValue(dates.map(myAgendaViewItemMapper::map))
     }
   }
 
-  fun toggleFavoriteStatus(sessionId: SessionId) {
+  fun getIndexToScrollTo() {
     scope.launch {
-      toggleSessionFavorite.execute(ToggleSessionFavorite.Params(sessionId))
-      loadSessions()
+//      val lastValue = viewItemListLiveData.value
+//      if (lastValue != null) {
+//        val indexPairToScrollTo = firstTimeListPositionFinder.findIndexToScrollTo(lastValue)
+//        view?.scrollToIndex(indexPairToScrollTo.first, indexPairToScrollTo.second)
+//
+//      }
     }
   }
 
