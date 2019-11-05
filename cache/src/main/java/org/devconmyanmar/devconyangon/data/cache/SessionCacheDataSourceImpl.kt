@@ -50,6 +50,11 @@ class SessionCacheDataSourceImpl @Inject constructor(
       .map(sessionTableMapper::map)
   }
 
+  override fun getFavoriteSessionEntities(date: LocalDate): List<SessionEntity> {
+    return db.sessionTableQueries.select_favorite_at_date(date).executeAsList()
+      .map(sessionTableMapper::map)
+  }
+
   override fun getFavoriteStatus(sessionId: SessionId): Boolean {
     val queryResult =
       db.favoriteSessionTableQueries.select_with_session_id(sessionId).executeAsOneOrNull()

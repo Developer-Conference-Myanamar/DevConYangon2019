@@ -18,6 +18,11 @@ select_all_at_date:
 SELECT * FROM SessionTable
 WHERE date = :date;
 
+select_favorite_at_date:
+SELECT * FROM SessionTable
+WHERE SessionTable.date = :date
+AND SessionTable.session_id IN (SELECT session_id FROM FavoriteSessionTable);
+
 insert:
 INSERT INTO SessionTable(session_id, session_title, date, time, room) VALUES(:session_id, :session_title, :date, :time, :room);
 

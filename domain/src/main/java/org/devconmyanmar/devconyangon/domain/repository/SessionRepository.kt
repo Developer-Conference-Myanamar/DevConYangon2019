@@ -11,6 +11,8 @@ interface SessionRepository {
 
   suspend fun getSessionListing(date: LocalDate): List<SessionListing>
 
+  suspend fun getFavoriteSessions(date: LocalDate): List<SessionListing>
+
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 
 }

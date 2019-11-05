@@ -41,6 +41,15 @@ class SessionRepositoryRealImpl @Inject constructor(
     return dataFromCache.map(sessionEntityToListingMapper::map)
   }
 
+  override suspend fun getFavoriteSessions(date: LocalDate): List<SessionListing> {
+    val dataFromCache = sessionCacheDataSource.getFavoriteSessionEntities(date)
+
+//    if (dataFromCache.isEmpty()) {
+//      throw EmptyDataException()
+//    }
+    return dataFromCache.map(sessionEntityToListingMapper::map)
+  }
+
   override suspend fun toggleFavoriteStatus(sessionId: SessionId) {
     val currentStatus = sessionCacheDataSource.getFavoriteStatus(sessionId)
     sessionCacheDataSource.updateFavoriteStatus(sessionId, currentStatus.not())
