@@ -72,8 +72,10 @@ class SessionRecyclerViewAdapter(
         binding.tvTime.text = item.timeInString
         binding.tvAmPm.text = item.amPmOfTime
         binding.tvTime.visibility = View.VISIBLE
+        binding.tvAmPm.visibility = View.VISIBLE
       } else {
         binding.tvTime.visibility = View.INVISIBLE
+        binding.tvAmPm.visibility = View.INVISIBLE
       }
 
       val favoriteDrawable = if (item.isFavorite) {
