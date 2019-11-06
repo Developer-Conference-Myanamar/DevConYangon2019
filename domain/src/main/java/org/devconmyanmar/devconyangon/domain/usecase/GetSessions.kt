@@ -16,7 +16,9 @@ class GetSessions @Inject constructor(
 
   override suspend fun provide(params: Params): List<SessionListing> {
 
-    return sessionRepository.getSessionListing(params.date)
+    return sessionRepository.getSessionListing(params.date) +
+        sessionRepository.getSessionListing(params.date) +
+        sessionRepository.getSessionListing(params.date)
   }
 
   data class Params(
