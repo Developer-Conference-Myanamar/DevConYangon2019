@@ -34,10 +34,19 @@ class SessionRepositoryRealImpl @Inject constructor(
       if (networkException != null) {
         throw networkException
       } else {
-        throw EmptyDataException()
+//        throw EmptyDataException()
       }
     }
 
+    return dataFromCache.map(sessionEntityToListingMapper::map)
+  }
+
+  override suspend fun getFavoriteSessions(date: LocalDate): List<SessionListing> {
+    val dataFromCache = sessionCacheDataSource.getFavoriteSessionEntities(date)
+
+//    if (dataFromCache.isEmpty()) {
+//      throw EmptyDataException()
+//    }
     return dataFromCache.map(sessionEntityToListingMapper::map)
   }
 
