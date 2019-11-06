@@ -9,4 +9,6 @@ import org.devconmyanmar.devconyangon.base.core.mvp.Viewable
 interface MyAgendaSessionView : Viewable {
   fun subscribeToMyAgendaSessionViewItemListLiveData(myAgendaSessionViewItemListLiveData: LiveData<List<MyAgendaSessionViewItem>>)
 
+  fun scrollToIndex(indexToScrollTo: Int)
+
 }

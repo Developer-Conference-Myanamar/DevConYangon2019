@@ -51,6 +51,13 @@ class MyAgendaSessionFragment(private val date: LocalDate) :
     })
   }
 
+  override fun scrollToIndex(indexToScrollTo: Int) {
+    if (indexToScrollTo <= myAgendaSessionAdapter.itemCount - 1) {
+      binding.rvSession.scrollToPosition(indexToScrollTo)
+    }
+
+  }
+
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
     showShortToast("Clicked")
     //TODO: Show Session Detail

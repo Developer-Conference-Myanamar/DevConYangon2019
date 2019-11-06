@@ -1,58 +1,61 @@
-//package org.devconmyanmar.devconyangon.feature.agenda
-//
-//import org.devconmyanmar.devconyangon.feature.agenda.MyAgendaListViewItem.MyAgendaListViewItemHeader
-//import org.threeten.bp.Clock
-//import org.threeten.bp.LocalTime
-//import org.threeten.bp.ZonedDateTime
-//import javax.inject.Inject
-//
-///**
-// * Created by Vincent on 11/5/19
-// */
-//class FirstTimeListPositionFinder @Inject constructor(private val clock: Clock) {
-//
-//  companion object {
-//    private const val NO_POSITION = -1
-//  }
-//
-//  /**
-//   * Assume the header is already sorted in ascending order
-//   */
-//  fun findIndexToScrollTo(viewItemList: List<MyAgendaViewItem>): Pair<Int, Int> {
-//
-//    val currentDateTime = ZonedDateTime.now(clock)
-//
-//    var firstListIndexToScrollTo = NO_POSITION
-//    var secondListIndexToScrollTo = NO_POSITION
-//    val currentDate = currentDateTime.toLocalDate()
-//    viewItemList.forEachIndexed { index, myAgendaViewItem ->
-//      if (myAgendaViewItem.date == currentDate) {
-//        firstListIndexToScrollTo = index
-//      }
-//
-//      val currentTime = currentDateTime.toLocalTime()
-//
-//      val headerTimeWithIndexSet = mutableSetOf<Pair<LocalTime, Int>>()
-//      myAgendaViewItem.listItems.forEachIndexed { index, myAgendaListViewItem ->
-//        if (myAgendaListViewItem is MyAgendaListViewItemHeader) {
-//          headerTimeWithIndexSet.add(Pair(myAgendaListViewItem.time, index))
-//        }
-//      }
-//
-//      headerTimeWithIndexSet.toSet().forEachIndexed { index, pair ->
-//        if (pair.first <= currentTime) {
-//          val itemAtNextIndex = headerTimeWithIndexSet.elementAtOrNull(index + 1)
-//
-//          if (itemAtNextIndex != null && itemAtNextIndex.first >= currentTime) {
-//            secondListIndexToScrollTo = pair.second
-//          } else if (itemAtNextIndex == null) {
-//            secondListIndexToScrollTo = pair.second
-//          }
-//
-//        }
-//      }
-//    }
-//
-//    return Pair(firstListIndexToScrollTo, secondListIndexToScrollTo)
-//  }
-//}
+package org.devconmyanmar.devconyangon.feature.agenda
+
+import org.devconmyanmar.devconyangon.feature.agenda.session.MyAgendaSessionViewItem
+import org.devconmyanmar.devconyangon.feature.agenda.session.MyAgendaSessionViewItem.MyAgendaSessionViewItemHeader
+import org.threeten.bp.Clock
+import org.threeten.bp.ZonedDateTime
+import javax.inject.Inject
+
+/**
+ * Created by Vincent on 11/5/19
+ */
+class FirstTimeListPositionFinder @Inject constructor(private val clock: Clock) {
+
+  companion object {
+    private const val NO_POSITION = -1
+  }
+
+  fun findDateIndexToScrollTo(viewItemList: List<MyAgendaDateViewItem>): Int {
+    val currentDate = ZonedDateTime.now(clock).toLocalDate()
+    var indexToScrollTo = NO_POSITION
+    viewItemList.forEachIndexed { index, myAgendaDateViewItem ->
+      if (myAgendaDateViewItem.date == currentDate) {
+        indexToScrollTo = index
+      }
+    }
+    return indexToScrollTo
+  }
+
+  /**
+   * Assume the header is already sorted in ascending order
+   */
+  fun findTimeIndexToScrollTo(viewItemList: List<MyAgendaSessionViewItem>): Int {
+
+    val currentDateTime = ZonedDateTime.now(clock)
+    var indexToScrollTo = NO_POSITION
+    val currentTime = currentDateTime.toLocalTime()
+
+    val headerItemsMutableList = mutableListOf<MyAgendaSessionViewItemHeader>()
+
+    viewItemList.forEach {
+      if (it is MyAgendaSessionViewItemHeader) {
+        headerItemsMutableList.add(it)
+      }
+    }
+    val headerItemList = headerItemsMutableList.toList()
+
+    headerItemList.toList().forEachIndexed { index, headerItem ->
+      if (headerItem.time <= currentTime) {
+        val itemAtNextIndex = headerItemList.getOrNull(index + 1)
+
+        if (itemAtNextIndex != null && itemAtNextIndex.time >= currentTime) {
+          indexToScrollTo = viewItemList.indexOf(headerItem)
+        } else if (itemAtNextIndex == null) {
+          indexToScrollTo = viewItemList.indexOf(headerItem)
+        }
+      }
+    }
+    return indexToScrollTo
+
+  }
+}

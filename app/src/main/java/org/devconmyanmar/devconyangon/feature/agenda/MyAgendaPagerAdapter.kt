@@ -9,14 +9,14 @@ import org.devconmyanmar.devconyangon.feature.agenda.session.MyAgendaSessionFrag
  */
 class MyAgendaPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-  private var listItems = listOf<MyAgendaViewItem>()
+  private var listItems = listOf<MyAgendaDateViewItem>()
 
-  fun setItems(listItems: List<MyAgendaViewItem>) {
+  fun setItems(listItems: List<MyAgendaDateViewItem>) {
     this.listItems = listItems
     notifyDataSetChanged()
   }
 
-  fun getItemAtPosition(position: Int): MyAgendaViewItem {
+  fun getItemAtPosition(position: Int): MyAgendaDateViewItem {
     return listItems[position]
   }
 

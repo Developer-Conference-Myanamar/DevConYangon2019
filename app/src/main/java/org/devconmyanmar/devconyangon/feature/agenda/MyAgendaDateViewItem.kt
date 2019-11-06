@@ -9,18 +9,18 @@ import javax.inject.Inject
 /**
  * Created by Vincent on 11/5/19
  */
-data class MyAgendaViewItem(
+data class MyAgendaDateViewItem(
   val date: LocalDate,
   val dateAsString: String
 )
 
 class MyAgendaViewItemMapper @Inject constructor() :
-  UnidirectionalMap<LocalDate, MyAgendaViewItem> {
+  UnidirectionalMap<LocalDate, MyAgendaDateViewItem> {
 
   private val dateFormatter = DateTimeFormatter.ofPattern("dd MMM", Locale.ENGLISH)
 
-  override fun map(item: LocalDate): MyAgendaViewItem {
-    return MyAgendaViewItem(
+  override fun map(item: LocalDate): MyAgendaDateViewItem {
+    return MyAgendaDateViewItem(
       date = item,
       dateAsString = item.format(dateFormatter)
     )

@@ -38,18 +38,17 @@ class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgend
     }.attach()
 
     viewModel.loadSessions()
-    viewModel.getIndexToScrollTo()
   }
 
-  override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaViewItem>>) {
+  override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaDateViewItem>>) {
     viewItemListLiveData.observe(viewLifecycleOwner, Observer {
       myAgendaPagerAdapter.setItems(it)
     })
   }
-  
-  override fun scrollToIndex(first: Int, second: Int) {
-    if (first >= myAgendaPagerAdapter.itemCount - 1) {
-      binding.viewPager.setCurrentItem(first, false)
+
+  override fun scrollToIndex(indexToScrollTo: Int) {
+    if (indexToScrollTo >= myAgendaPagerAdapter.itemCount - 1) {
+      binding.viewPager.setCurrentItem(indexToScrollTo, false)
     }
   }
 

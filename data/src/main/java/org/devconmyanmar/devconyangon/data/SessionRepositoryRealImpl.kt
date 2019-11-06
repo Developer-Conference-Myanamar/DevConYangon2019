@@ -34,7 +34,7 @@ class SessionRepositoryRealImpl @Inject constructor(
       if (networkException != null) {
         throw networkException
       } else {
-        throw EmptyDataException()
+//        throw EmptyDataException()
       }
     }
 

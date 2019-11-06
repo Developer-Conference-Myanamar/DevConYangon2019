@@ -6,6 +6,7 @@ import org.devconmyanmar.devconyangon.base.core.mvp.BaseViewModel
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.usecase.GetFavoriteSessions
 import org.devconmyanmar.devconyangon.domain.usecase.ToggleSessionFavorite
+import org.devconmyanmar.devconyangon.feature.agenda.FirstTimeListPositionFinder
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
@@ -15,12 +16,15 @@ import javax.inject.Inject
 class MyAgendaSessionViewModel @Inject constructor(
   private val getFavoriteSessions: GetFavoriteSessions,
   private val toggleSessionFavorite: ToggleSessionFavorite,
-  private val myAgendaSessionViewItemMapper: MyAgendaSessionViewItemMapper
+  private val myAgendaSessionViewItemMapper: MyAgendaSessionViewItemMapper,
+  private val firstTimeListPositionFinder: FirstTimeListPositionFinder
 ) : BaseViewModel<MyAgendaSessionView>() {
 
   private val myAgendaSessionViewItemListLiveData = MutableLiveData<List<MyAgendaSessionViewItem>>()
 
   private var date = LocalDate.now()
+
+  private var hasInitiallyScrolled = false
 
   override fun attachView(viewable: MyAgendaSessionView) {
     super.attachView(viewable)
@@ -40,18 +44,24 @@ class MyAgendaSessionViewModel @Inject constructor(
 
       val viewItemList = myAgendaSessionViewItemMapper.map(sessionList)
       myAgendaSessionViewItemListLiveData.postValue(viewItemList)
+
+      if (!hasInitiallyScrolled) {
+        getIndexToScrollTo()
+      }
+
     }
   }
 
   fun getIndexToScrollTo() {
-//    scope.launch {
-//      val lastValue = viewItemListLiveData.value
-//      if (lastValue != null) {
-//        val indexPairToScrollTo = firstTimeListPositionFinder.findIndexToScrollTo(lastValue)
-//        view?.scrollToIndex(indexPairToScrollTo.first, indexPairToScrollTo.second)
-//
-//      }
-//    }
+    scope.launch {
+      val lastValue = myAgendaSessionViewItemListLiveData.value
+      if (lastValue != null && date == LocalDate.now()) {
+        val indexToScrollTo = firstTimeListPositionFinder.findTimeIndexToScrollTo(lastValue)
+        view?.scrollToIndex(indexToScrollTo)
+        hasInitiallyScrolled = true
+
+      }
+    }
   }
 
   fun toggleFavoriteStatus(sessionId: SessionId) {

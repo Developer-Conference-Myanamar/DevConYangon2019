@@ -8,8 +8,8 @@ import org.devconmyanmar.devconyangon.base.core.mvp.Viewable
  */
 interface MyAgendaView : Viewable {
 
-  fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaViewItem>>)
-  
-  fun scrollToIndex(first: Int, second: Int)
+  fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaDateViewItem>>)
+
+  fun scrollToIndex(indexToScrollTo: Int)
 
 }
