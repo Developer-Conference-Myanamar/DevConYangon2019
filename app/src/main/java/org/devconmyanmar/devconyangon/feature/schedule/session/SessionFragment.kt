@@ -2,6 +2,7 @@ package org.devconmyanmar.devconyangon.feature.schedule.session
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,16 +10,35 @@ import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentSessionBinding
+import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 
 /**
  * Created by Vincent on 2019-11-02
  */
-class SessionFragment(
-  private val date: LocalDate
-) : MvpFragment<SessionView, SessionViewModel>(),
+class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
   SessionView, OnSessionItemClickListener {
+
+  companion object {
+
+    private const val ARG_DATE = "date"
+
+    fun newInstance(localDate: LocalDate): SessionFragment {
+      val fragment = SessionFragment()
+      val bundle = bundleOf(
+        ARG_DATE to localDate.atStartOfDay().atZone(Zones.YANGON).toInstant().toEpochMilli()
+      )
+      fragment.arguments = bundle
+      return fragment
+    }
+  }
+
+  private val date by lazy {
+    val timestamp = requireArguments().getLong(ARG_DATE)
+    Instant.ofEpochMilli(timestamp).atZone(Zones.YANGON).toLocalDate()
+  }
 
   override val viewModel: SessionViewModel by contractedViewModel()
 

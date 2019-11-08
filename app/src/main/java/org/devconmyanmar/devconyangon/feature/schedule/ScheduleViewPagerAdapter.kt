@@ -29,7 +29,7 @@ class ScheduleViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
   }
 
   override fun createFragment(position: Int): Fragment {
-    return SessionFragment(listItems[position].date)
+    return SessionFragment.newInstance(listItems[position].date)
   }
 
 }
