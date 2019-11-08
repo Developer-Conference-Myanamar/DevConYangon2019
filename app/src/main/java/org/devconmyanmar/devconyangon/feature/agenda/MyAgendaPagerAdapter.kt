@@ -25,7 +25,7 @@ class MyAgendaPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) 
   }
 
   override fun createFragment(position: Int): Fragment {
-    return MyAgendaSessionFragment(listItems[position].date)
+    return MyAgendaSessionFragment.newInstance(listItems[position].date)
   }
 
 }

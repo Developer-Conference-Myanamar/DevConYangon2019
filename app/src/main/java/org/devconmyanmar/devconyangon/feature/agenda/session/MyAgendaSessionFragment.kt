@@ -2,6 +2,7 @@ package org.devconmyanmar.devconyangon.feature.agenda.session
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,15 +11,37 @@ import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaSessionBinding
+import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.feature.schedule.session.SessionFragment
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 
 /**
  * Created by Vincent on 11/6/19
  */
-class MyAgendaSessionFragment(private val date: LocalDate) :
+class MyAgendaSessionFragment() :
   MvpFragment<MyAgendaSessionView, MyAgendaSessionViewModel>(),
   MyAgendaSessionView, MyAgendaItemClickListener {
+
+  companion object {
+
+    private const val ARG_DATE = "date"
+
+    fun newInstance(localDate: LocalDate): SessionFragment {
+      val fragment = SessionFragment()
+      val bundle = bundleOf(
+        ARG_DATE to localDate.atStartOfDay().atZone(Zones.YANGON).toInstant().toEpochMilli()
+      )
+      fragment.arguments = bundle
+      return fragment
+    }
+  }
+
+  private val date by lazy {
+    val timestamp = requireArguments().getLong(MyAgendaSessionFragment.ARG_DATE)
+    Instant.ofEpochMilli(timestamp).atZone(Zones.YANGON).toLocalDate()
+  }
 
   override val viewModel: MyAgendaSessionViewModel by contractedViewModel()
 
