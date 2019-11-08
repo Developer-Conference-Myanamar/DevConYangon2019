@@ -10,7 +10,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolBar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
@@ -22,6 +22,7 @@
       android:id="@+id/tabLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      app:tabBackground="@color/colorPrimary"
       app:tabGravity="fill"
       app:tabIndicatorColor="@color/colorAccent"
       app:tabIndicatorHeight="4dp"
