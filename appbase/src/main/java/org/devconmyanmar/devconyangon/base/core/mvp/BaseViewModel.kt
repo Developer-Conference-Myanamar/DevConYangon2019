@@ -1,7 +1,6 @@
 package org.devconmyanmar.devconyangon.base.core.mvp
 
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,10 +15,8 @@ abstract class BaseViewModel<viewable : Viewable> : ViewModel(), Presentable<vie
 
   protected var view: viewable? = null
 
-  protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
   val loggingExceptionHandler = CoroutineExceptionHandler { _, t ->
-    Timber.i(t)
+    Timber.e(t)
   }
   protected open var scope = CoroutineScope(Dispatchers.Main) + loggingExceptionHandler
 
@@ -36,7 +33,6 @@ abstract class BaseViewModel<viewable : Viewable> : ViewModel(), Presentable<vie
 
   override fun onCleared() {
     scope.cancel()
-    compositeDisposable.dispose()
     super.onCleared()
   }
 

@@ -10,13 +10,22 @@
     android:id="@+id/navigation_schedule"
     android:name="org.devconmyanmar.devconyangon.feature.schedule.ScheduleFragment"
     android:label="ScheduleFragment"
-    tools:layout="@layout/fragment_my_agenda" />
+    tools:layout="@layout/fragment_my_agenda">
+
+    <action
+      android:id="@+id/action_to_session_detail"
+      app:destination="@id/sessionDetailActivity" />
+  </fragment>
 
   <fragment
     android:id="@+id/navigation_my_agenda"
     android:name="org.devconmyanmar.devconyangon.feature.agenda.MyAgendaFragment"
     android:label="MyAgendaFragment"
-    tools:layout="@layout/fragment_schedule" />
+    tools:layout="@layout/fragment_schedule">
+    <action
+      android:id="@+id/action_to_session_detail"
+      app:destination="@id/sessionDetailActivity" />
+  </fragment>
 
 
   <fragment
@@ -24,4 +33,15 @@
     android:name="org.devconmyanmar.devconyangon.feature.about.InfoFragment"
     android:label="InfoFragment"
     tools:layout="@layout/fragment_info" />
+
+  <activity
+    android:id="@+id/sessionDetailActivity"
+    android:name="org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailActivity"
+    android:label="SessionDetailActivity">
+    <argument
+      android:name="sessionId"
+      app:argType="long" />
+  </activity>
+
+
 </navigation>

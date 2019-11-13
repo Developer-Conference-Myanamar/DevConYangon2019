@@ -3,7 +3,7 @@
  */
 object BuildConfig {
   const val compileSdk = 28
-  const val minSdk = 16
+  const val minSdk = 21
   const val targetSdk = 28
 
   private const val versionMajor = 0
@@ -19,7 +19,7 @@ object BuildConfig {
 }
 
 object CommonLibs {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-beta02"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-beta03"
 
   const val dexter = "com.karumi:dexter:5.0.0"
 
@@ -201,7 +201,7 @@ object Material {
 }
 
 object Coil {
-  const val coil = "io.coil-kt:coil:0.6.1"
+  const val coil = "io.coil-kt:coil:0.8.0"
 }
 
 object Dagger {
@@ -287,7 +287,7 @@ object Kotlin {
 }
 
 object KotlinCoroutine {
-  private const val version = "1.3.0"
+  private const val version = "1.3.2"
 
   const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
   const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
@@ -321,51 +321,15 @@ object MPAndroidChart {
 }
 
 object OkHttp {
-  private const val version = "3.12.0"
+  private const val version = "4.2.2"
 
   const val client = "com.squareup.okhttp3:okhttp:$version"
   const val logger = "com.squareup.okhttp3:logging-interceptor:$version"
   const val mock_web_server = "com.squareup.okhttp3:mockwebserver:$version"
 }
 
-object ReactiveX {
-  const val rxjava = "io.reactivex.rxjava2:rxjava:2.2.8"
-  const val rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
-  const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:2.3.0"
-  const val rxComprehension = "com.github.pakoito.RxComprehensions:rxcomprehensions2:1.3.0"
-}
-
-object AutoDipsose {
-  private const val version = "1.3.0"
-
-  const val autoDispose = "com.uber.autodispose:autodispose:$version"
-  const val autoDisposeAndroid = "com.uber.autodispose:autodispose-android:$version"
-  const val autoDisposeAndroidArch =
-    "com.uber.autodispose:autodispose-android-archcomponents:$version"
-}
-
-object OpenStreetMap {
-  private const val osmdroid = "org.osmdroid:osmdroid-android:6.1.0"
-  private const val osmbonuspack = "com.github.MKergall:osmbonuspack:6.6.0"
-}
-
-object RxDogTag {
-  private const val version = "0.2.0"
-
-  const val rxDogTag = "com.uber.rxdogtag:rxdogtag:$version"
-  const val rxDogTagAutoDispose = "com.uber.rxdogtag:rxdogtag-autodispose:$version"
-
-}
-
-object RxBinding {
-  private const val version = "3.0.0-alpha2"
-
-  const val platform = "com.jakewharton.rxbinding3:rxbinding:$version"
-  const val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:$version"
-}
-
 object Retrofit {
-  private const val version = "2.6.1"
+  private const val version = "2.6.2"
 
   const val core = "com.squareup.retrofit2:retrofit:$version"
   const val moshi_converter = "com.squareup.retrofit2:converter-moshi:$version"

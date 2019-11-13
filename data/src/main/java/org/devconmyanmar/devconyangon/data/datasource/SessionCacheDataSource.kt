@@ -13,6 +13,8 @@ interface SessionCacheDataSource {
 
   fun getSessionEntities(date: LocalDate): List<SessionEntity>
 
+  fun getSessionEntity(sessionId: SessionId): SessionEntity
+
   fun getFavoriteSessionEntities(date: LocalDate): List<SessionEntity>
 
   fun getFavoriteStatus(sessionId: SessionId): Boolean

@@ -2,8 +2,8 @@ package org.devconmyanmar.devconyangon.feature.schedule.session
 
 import org.devconmyanmar.devconyangon.domain.helper.asDelimitedString
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
+import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
-import org.devconmyanmar.devconyangon.domain.model.SessionListing
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
@@ -24,7 +24,7 @@ data class SessionViewItem(
 )
 
 class SessionViewItemListMapper @Inject constructor() :
-  UnidirectionalMap<List<SessionListing>, List<SessionViewItem>> {
+  UnidirectionalMap<List<Session>, List<SessionViewItem>> {
 
   /**
    * This set controls whether shouldShowTime has already set to true
@@ -34,15 +34,15 @@ class SessionViewItemListMapper @Inject constructor() :
   private val timeFormatter = DateTimeFormatter.ofPattern("hh:mm", Locale.ENGLISH)
   private val amPmFormatter = DateTimeFormatter.ofPattern("a", Locale.ENGLISH)
 
-  override fun map(item: List<SessionListing>): List<SessionViewItem> {
+  override fun map(item: List<Session>): List<SessionViewItem> {
     timeSet.clear()
 
     val sortedList = item.sortedBy {
-      it.dateTime
+      it.startTime
     }
 
     return sortedList.map {
-      val sessionTime = it.dateTime.toLocalTime()
+      val sessionTime = it.startTime
       val shouldShowTime = timeSet.add(sessionTime)
 
       SessionViewItem(

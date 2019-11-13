@@ -1,7 +1,7 @@
 package org.devconmyanmar.devconyangon.domain.usecase
 
 import org.devconmyanmar.devconyangon.domain.CoroutineUseCase
-import org.devconmyanmar.devconyangon.domain.model.SessionListing
+import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.repository.SessionRepository
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -12,9 +12,9 @@ import javax.inject.Inject
 
 class GetFavoriteSessions @Inject constructor(
   private val sessionRepository: SessionRepository
-) : CoroutineUseCase<GetFavoriteSessions.Params, List<SessionListing>>() {
+) : CoroutineUseCase<GetFavoriteSessions.Params, List<Session>>() {
 
-  override suspend fun provide(params: Params): List<SessionListing> {
+  override suspend fun provide(params: Params): List<Session> {
     return sessionRepository.getFavoriteSessions(params.date)
   }
 

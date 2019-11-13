@@ -67,9 +67,6 @@ dependencies {
   implementation Moshi.core
   kapt Moshi.code_gen
 
-  //Rx
-  implementation ReactiveX.rxandroid
-
   //Kotlin
   implementation Kotlin.stdblib_jdk
   api KotlinCoroutine.android

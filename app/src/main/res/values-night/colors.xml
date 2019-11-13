@@ -3,6 +3,7 @@
   <color name="colorPrimary">#434343</color>
   <color name="colorSecondary">#434343</color>
   <color name="colorAccent">#E91B1A</color>
+  <color name="statusBarColor">#FFFFFF</color>
 
   <color name="textColorPrimary">#FFFFFF</color>
   <color name="textColorSecondary">#EBEBEB</color>

@@ -21,10 +21,19 @@ class HomeActivity : MvpActivity<HomeView, HomeViewModel>(), HomeView {
     findViewById<BottomNavigationView>(R.id.bottomNavigationView)
   }
 
+  private val navController by lazy {
+    findNavController(R.id.navFragment)
+  }
+
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    val navController = findNavController(R.id.navFragment)
     bottomNavigationView.setupWithNavController(navController)
+  }
+
+  override fun onBackPressed() {
+    if (!navController.popBackStack()) {
+      super.onBackPressed()
+    }
   }
 
 }

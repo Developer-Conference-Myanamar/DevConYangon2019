@@ -1,7 +1,7 @@
 package org.devconmyanmar.devconyangon
 
+import android.app.Application
 import android.os.Build
-import androidx.multidex.MultiDexApplication
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by Vincent on 2019-11-01
  */
-class DevConApp : MultiDexApplication(), HasAndroidInjector {
+class DevConApp : Application(), HasAndroidInjector {
 
   @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 

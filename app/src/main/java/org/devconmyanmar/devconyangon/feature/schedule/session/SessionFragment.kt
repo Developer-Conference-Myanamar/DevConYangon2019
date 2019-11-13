@@ -5,13 +5,14 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
-import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentSessionBinding
 import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.feature.schedule.ScheduleFragmentDirections
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 
@@ -70,8 +71,8 @@ class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    showShortToast("clicked")
-    //TODO: Show Session Detail
+    val action = ScheduleFragmentDirections.actionToSessionDetail(sessionId.value)
+    findNavController().navigate(action)
   }
 
   override fun onFavoriteClick(sessionId: SessionId, position: Int) {

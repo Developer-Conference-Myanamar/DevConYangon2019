@@ -2,8 +2,8 @@ package org.devconmyanmar.devconyangon.feature.agenda.session
 
 import org.devconmyanmar.devconyangon.domain.helper.asDelimitedString
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
+import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
-import org.devconmyanmar.devconyangon.domain.model.SessionListing
 import org.devconmyanmar.devconyangon.feature.agenda.session.MyAgendaSessionViewItem.MyAgendaSessionViewItemHeader
 import org.devconmyanmar.devconyangon.feature.agenda.session.MyAgendaSessionViewItem.MyAgendaSessionViewItemSession
 import org.threeten.bp.LocalTime
@@ -32,19 +32,19 @@ sealed class MyAgendaSessionViewItem {
 }
 
 class MyAgendaSessionViewItemMapper @Inject constructor() :
-  UnidirectionalMap<List<SessionListing>, List<MyAgendaSessionViewItem>> {
+  UnidirectionalMap<List<Session>, List<MyAgendaSessionViewItem>> {
   private val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH)
 
   private val timeSet = mutableSetOf<LocalTime>()
 
-  override fun map(item: List<SessionListing>): List<MyAgendaSessionViewItem> {
+  override fun map(item: List<Session>): List<MyAgendaSessionViewItem> {
     val listViewItems = mutableListOf<MyAgendaSessionViewItem>()
     val sortedSession = item.sortedBy {
-      it.dateTime
+      it.date.atTime(it.startTime)
     }
     timeSet.clear()
     sortedSession.forEach {
-      val time = it.dateTime.toLocalTime()
+      val time = it.startTime
       val shouldAddHeader = timeSet.add(time)
       if (shouldAddHeader) {
         val headerItem = MyAgendaSessionViewItemHeader(

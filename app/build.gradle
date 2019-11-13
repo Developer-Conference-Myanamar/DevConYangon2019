@@ -23,7 +23,6 @@ android {
     versionCode BuildConfig.versionCode
     versionName BuildConfig.versionName
     resConfigs "en", "mm"
-    multiDexEnabled true
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -87,9 +86,6 @@ dependencies {
 
   //View
   implementation MPAndroidChart.base
-
-  //RX
-  api ReactiveX.rxandroid
 
   //Arch
   kapt AndroidArchLifeCycle.lifecycle_compiler

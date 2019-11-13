@@ -7,7 +7,6 @@ import org.devconmyanmar.devconyangon.data.entity.SessionEntity
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
 import org.threeten.bp.Clock
-import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 /**
@@ -23,15 +22,16 @@ class SessionTableMapper @Inject constructor(
     val roomQuery = db.roomTableQueries.select_by_id(item.room).executeAsOne()
     val speakerQuery = db.speakerTableQueries.select_by_session(item.session_id).executeAsList()
 
-    val dateTime = ZonedDateTime.of(item.date, item.time, clock.zone)
-
     val favoriteQuery =
       db.favoriteSessionTableQueries.select_with_session_id(item.session_id).executeAsOneOrNull()
 
     return SessionEntity(
       sessionId = item.session_id,
       sessionTitle = item.session_title,
-      dateTimeInInstant = dateTime.toInstant(),
+      abstract = item.abstract,
+      date = item.date,
+      startTime = item.start_time,
+      endTime = item.end_time,
       room = RoomEntity(
         roomQuery.room_id,
         roomQuery.room_name
@@ -39,7 +39,10 @@ class SessionTableMapper @Inject constructor(
       speakers = speakerQuery.map {
         SpeakerEntity(
           speakerId = it.speaker_id,
-          name = it.speaker_title
+          name = it.speaker_title,
+          biography = it.biography,
+          position = it.position,
+          imageUrl = it.imageUrl
         )
       },
       isFavorite = favoriteQuery != null

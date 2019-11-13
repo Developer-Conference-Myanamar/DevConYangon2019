@@ -1,7 +1,7 @@
 package org.devconmyanmar.devconyangon.domain.repository
 
+import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
-import org.devconmyanmar.devconyangon.domain.model.SessionListing
 import org.threeten.bp.LocalDate
 
 /**
@@ -9,9 +9,11 @@ import org.threeten.bp.LocalDate
  */
 interface SessionRepository {
 
-  suspend fun getSessionListing(date: LocalDate): List<SessionListing>
+  suspend fun getSessionListing(date: LocalDate): List<Session>
 
-  suspend fun getFavoriteSessions(date: LocalDate): List<SessionListing>
+  suspend fun getSession(sessionId: SessionId): Session
+
+  suspend fun getFavoriteSessions(date: LocalDate): List<Session>
 
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 

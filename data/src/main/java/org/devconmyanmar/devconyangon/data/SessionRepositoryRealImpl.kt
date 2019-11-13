@@ -2,10 +2,9 @@ package org.devconmyanmar.devconyangon.data
 
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
 import org.devconmyanmar.devconyangon.data.datasource.SessionNetworkDataSource
-import org.devconmyanmar.devconyangon.data.entity.SessionEntityToListingMapper
-import org.devconmyanmar.devconyangon.data.exception.EmptyDataException
+import org.devconmyanmar.devconyangon.data.entity.SessionEntityMapper
+import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
-import org.devconmyanmar.devconyangon.domain.model.SessionListing
 import org.devconmyanmar.devconyangon.domain.repository.SessionRepository
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -16,9 +15,17 @@ import javax.inject.Inject
 class SessionRepositoryRealImpl @Inject constructor(
   private val sessionNetworkDataSource: SessionNetworkDataSource,
   private val sessionCacheDataSource: SessionCacheDataSource,
-  private val sessionEntityToListingMapper: SessionEntityToListingMapper
+  private val sessionEntityMapper: SessionEntityMapper
 ) : SessionRepository {
-  override suspend fun getSessionListing(date: LocalDate): List<SessionListing> {
+
+  override suspend fun getSession(sessionId: SessionId): Session {
+
+    val data = sessionCacheDataSource.getSessionEntity(sessionId)
+
+    return sessionEntityMapper.map(data)
+  }
+
+  override suspend fun getSessionListing(date: LocalDate): List<Session> {
 
     var networkException: Exception? = null
     try {
@@ -38,16 +45,16 @@ class SessionRepositoryRealImpl @Inject constructor(
       }
     }
 
-    return dataFromCache.map(sessionEntityToListingMapper::map)
+    return dataFromCache.map(sessionEntityMapper::map)
   }
 
-  override suspend fun getFavoriteSessions(date: LocalDate): List<SessionListing> {
+  override suspend fun getFavoriteSessions(date: LocalDate): List<Session> {
     val dataFromCache = sessionCacheDataSource.getFavoriteSessionEntities(date)
 
 //    if (dataFromCache.isEmpty()) {
 //      throw EmptyDataException()
 //    }
-    return dataFromCache.map(sessionEntityToListingMapper::map)
+    return dataFromCache.map(sessionEntityMapper::map)
   }
 
   override suspend fun toggleFavoriteStatus(sessionId: SessionId) {

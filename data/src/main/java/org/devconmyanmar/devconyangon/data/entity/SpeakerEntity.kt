@@ -10,7 +10,10 @@ import javax.inject.Inject
  */
 data class SpeakerEntity(
   val speakerId: SpeakerId,
-  val name: String
+  val name: String,
+  val biography: String,
+  val position: String,
+  val imageUrl: String
 )
 
 class SpeakerEntityMapper @Inject constructor() : UnidirectionalMap<SpeakerEntity, Speaker> {
@@ -18,7 +21,10 @@ class SpeakerEntityMapper @Inject constructor() : UnidirectionalMap<SpeakerEntit
   override fun map(item: SpeakerEntity): Speaker {
     return Speaker(
       item.speakerId,
-      item.name
+      item.name,
+      item.biography,
+      item.position,
+      item.imageUrl
     )
   }
 

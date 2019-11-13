@@ -53,6 +53,7 @@ abstract class CacheModule {
         SessionIdColumnAdapter,
         LocalDateColumnAdapter,
         LocalTimeColumnAdapter,
+        LocalTimeColumnAdapter,
         RoomIdColumnAdapter
       )
 

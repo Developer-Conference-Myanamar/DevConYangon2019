@@ -13,8 +13,8 @@ interface RecyclerViewItemClickListener {
 }
 
 inline fun recyclerViewItemClickListener(
-  crossinline onItemLongClick: ((View, Int) -> Unit) = { _, _ -> },
-  crossinline onItemClick: ((View, Int) -> Unit) = { _, _ -> }
+  crossinline onItemLongClick: ((@ParameterName("view") View, @ParameterName("position") Int) -> Unit) = { _, _ -> },
+  crossinline onItemClick: ((@ParameterName("view") View, @ParameterName("position") Int) -> Unit) = { _, _ -> }
 ): RecyclerViewItemClickListener {
   return object : RecyclerViewItemClickListener {
     override fun onItemClick(view: View, position: Int) {

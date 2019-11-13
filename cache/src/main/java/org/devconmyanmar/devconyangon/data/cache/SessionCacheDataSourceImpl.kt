@@ -4,7 +4,6 @@ import org.devconmyanmar.devconyangon.DevConYangonDb
 import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
-import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -25,17 +24,23 @@ class SessionCacheDataSourceImpl @Inject constructor(
           sessionEntity.room.roomName
         )
 
-        val dateTime = sessionEntity.dateTimeInInstant.atZone(Zones.YANGON)
-
         db.sessionTableQueries.insert_or_replace(
           sessionEntity.sessionId,
           sessionEntity.sessionTitle,
-          dateTime.toLocalDate(),
-          dateTime.toLocalTime(),
+          sessionEntity.abstract,
+          sessionEntity.date,
+          sessionEntity.startTime,
+          sessionEntity.endTime,
           sessionEntity.room.roomId
         )
         sessionEntity.speakers.forEach { speakerEntity ->
-          db.speakerTableQueries.insert_or_replace(speakerEntity.speakerId, speakerEntity.name)
+          db.speakerTableQueries.insert_or_replace(
+            speaker_id = speakerEntity.speakerId,
+            speaker_title = speakerEntity.name,
+            biography = speakerEntity.biography,
+            position = speakerEntity.position,
+            imageUrl = speakerEntity.imageUrl
+          )
           db.sessionSpeakerTableQueries.insert_or_replace(
             sessionEntity.sessionId,
             speakerEntity.speakerId
@@ -48,6 +53,12 @@ class SessionCacheDataSourceImpl @Inject constructor(
   override fun getSessionEntities(date: LocalDate): List<SessionEntity> {
     return db.sessionTableQueries.select_all_at_date(date).executeAsList()
       .map(sessionTableMapper::map)
+  }
+
+  override fun getSessionEntity(sessionId: SessionId): SessionEntity {
+    val queryResult = db.sessionTableQueries.select_by_id(sessionId).executeAsOne()
+
+    return sessionTableMapper.map(queryResult)
   }
 
   override fun getFavoriteSessionEntities(date: LocalDate): List<SessionEntity> {
