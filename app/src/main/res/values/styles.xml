@@ -4,10 +4,16 @@
   <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorBlack</item>
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:fontFamily">@font/raleway_medium</item>
-    <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
+    <item name="android:navigationBarColor" tools:targetApi="lollipop">@color/colorBlack</item>
+  </style>
+
+  <style name="CustomTextAppearance" parent="TextAppearance.Design.Tab">
+    <item name="textAllCaps">false</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:textSize">16sp</item>
   </style>
 
 </resources>

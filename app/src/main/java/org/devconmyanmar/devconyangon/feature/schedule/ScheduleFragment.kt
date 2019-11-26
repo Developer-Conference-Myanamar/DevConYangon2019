@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentScheduleBinding
+import org.devconmyanmar.devconyangon.feature.schedule.filter.FilterModalBottomSheet
 
 /**
  * Created by Vincent on 2019-11-01
@@ -37,12 +38,21 @@ class ScheduleFragment : MvpFragment<ScheduleView, ScheduleViewModel>(), Schedul
       tab.text = itemAtIndex.dateAsString
     }.attach()
     viewModel.loadConferenceDates()
+
+    binding.fabFilter.setOnClickListener{
+      showBottomSheetDialog()
+    }
   }
 
   override fun subscribeToScheduleDateViewItemLiveData(scheduleDateViewItemLiveData: LiveData<List<ScheduleDateViewItem>>) {
     scheduleDateViewItemLiveData.observe(viewLifecycleOwner, Observer {
       scheduleViewPagerAdapter.setItems(it)
     })
+  }
+
+  private fun showBottomSheetDialog() {
+    val fragment = FilterModalBottomSheet()
+    fragment.show(childFragmentManager, "TAG")
   }
 
 }
