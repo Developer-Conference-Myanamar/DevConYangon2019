@@ -42,7 +42,12 @@ class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgend
 
   override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaDateViewItem>>) {
     viewItemListLiveData.observe(viewLifecycleOwner, Observer {
-      myAgendaPagerAdapter.setItems(it)
+      if(it.isNotEmpty()){
+        myAgendaPagerAdapter.setItems(it)
+      }else{
+
+      }
+
     })
   }
 
