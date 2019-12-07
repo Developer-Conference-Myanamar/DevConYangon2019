@@ -23,6 +23,14 @@ SELECT * FROM SessionTable
 WHERE SessionTable.date = :date
 AND SessionTable.session_id IN (SELECT session_id FROM FavoriteSessionTable);
 
+-- select_filter_by_type:
+-- SELECT * FROM SessionTable
+-- WHERE SessionTable.session_id = :session_id
+
+-- select_session_detail:
+-- SELECT * FROM SessionTable
+-- WHERE SessionTable.session_id = :session_id
+
 insert:
 INSERT INTO SessionTable(session_id, session_title, date, time, room) VALUES(:session_id, :session_title, :date, :time, :room);
 

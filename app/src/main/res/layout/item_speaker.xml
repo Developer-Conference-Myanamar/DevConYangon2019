@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/speakerContentInfo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/speakerContentImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/ic_account_circle"
+        android:transitionName="@string/transition_speaker_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/speakerContentName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="Willan Lich"
+        android:transitionName="@string/transition_speaker_name"
+        android:textColor="@color/primary_text_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/speakerContentImage"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="24dp" />
+
+    <TextView
+        android:id="@+id/speakerContentCompany"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:transitionName="@string/transition_speaker_company"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/raleway"
+        android:text="Google"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/speakerContentImage"
+        app:layout_constraintTop_toBottomOf="@+id/speakerContentName"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

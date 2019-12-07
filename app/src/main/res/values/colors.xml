@@ -16,7 +16,16 @@
 
   <color name="transparent_black">#CC000000</color>
   <color name="transparent">#00000000</color>
+  <color name="blue">#132FEC</color>
 
   <color name="colorPlaceHolder">#BDBDBD</color>
+  <color name="primary_text_color">#000000</color>
+  <color name="secondary_text_color">#808080</color>
+  <color name="primary_icon_color">#000000</color>
+  <color name="primary_main_bg">#ffffff</color>
+  <color name="secondary_icon_tint">#132FEC</color>
+  <color name="darkmode_blue">#FFFFFF</color>
+
+  <color name="floating_color">#FFFFFF</color>
 
 </resources>

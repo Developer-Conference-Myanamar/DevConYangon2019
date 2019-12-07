@@ -3,10 +3,16 @@ package org.devconmyanmar.devconyangon.data.cache
 import org.devconmyanmar.devconyangon.DevConYangonDb
 import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
+import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
+import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.domain.helper.Zones
+import org.devconmyanmar.devconyangon.domain.model.RoomId
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
+import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 /**
@@ -16,6 +22,7 @@ class SessionCacheDataSourceImpl @Inject constructor(
   private val db: DevConYangonDb,
   private val sessionTableMapper: SessionTableMapper
 ) : SessionCacheDataSource {
+
 
   override fun putSessionEntities(sessionEntities: List<SessionEntity>) {
     db.transaction {
@@ -68,6 +75,34 @@ class SessionCacheDataSourceImpl @Inject constructor(
     } else {
       db.favoriteSessionTableQueries.delete_with_session_id(sessionId)
     }
+  }
+
+  override fun getSessionDetail(sessionId: SessionId): SessionEntity {
+     return SessionEntity(
+       sessionId = SessionId(0),
+       sessionTitle = "Building a robust web System",
+       dateTimeInInstant = ZonedDateTime.of(
+         2019,
+         Month.DECEMBER.value,
+         21,
+         9,
+         0,
+         0,
+         0,
+         Zones.YANGON
+       ).toInstant(),
+       room = RoomEntity(
+         roomId = RoomId(0),
+         roomName = "Main Hall"
+       ),
+       speakers = listOf(
+         SpeakerEntity(
+           speakerId = SpeakerId(0),
+           name = "Fake Wharton"
+         )
+       ),
+       isFavorite = false
+     )
   }
 }
 
