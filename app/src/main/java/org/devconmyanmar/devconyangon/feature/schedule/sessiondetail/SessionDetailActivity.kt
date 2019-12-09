@@ -17,6 +17,7 @@ import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
 import org.devconmyanmar.devconyangon.databinding.ActivityScheduleDetailBinding
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
+import org.devconmyanmar.devconyangon.feature.speaker.SpeakerInfoActivity
 import org.devconmyanmar.devconyangon.utils.Notification.AlarmReceiver
 import org.devconmyanmar.devconyangon.utils.convertMillisecond
 import org.devconmyanmar.devconyangon.utils.setUpRecycler
@@ -74,13 +75,8 @@ class SessionDetailActivity : MvpActivity<SessionDetailView, SessionDetailViewMo
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     override fun onSessionSpeakerItemClick(speakerId: SpeakerId, position: Int) {
-
+        startActivity(SpeakerInfoActivity.newInstance(this,speakerId.value))
     }
 
 

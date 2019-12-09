@@ -5,5 +5,5 @@ import org.devconmyanmar.devconyangon.base.core.mvp.Viewable
 import org.devconmyanmar.devconyangon.domain.model.Speaker
 
 interface SpeakerInfoView :Viewable{
-    fun subscribeSpeakerInfo(speakerInfoListLD: LiveData<List<Speaker>>)
+    fun subscribeSpeakerInfo(speakerInfoListLD: LiveData<SpeakerInfo>)
 }

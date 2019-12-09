@@ -2,6 +2,8 @@ package org.devconmyanmar.devconyangon.domain.repository
 
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SessionListing
+import org.devconmyanmar.devconyangon.domain.model.Speaker
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 
 /**
@@ -16,4 +18,6 @@ interface SessionRepository {
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 
   suspend fun getSessionDetail(sessionId: SessionId):SessionListing
+
+  suspend fun getSpeakerDetail(speakerId: SpeakerId):Speaker
 }

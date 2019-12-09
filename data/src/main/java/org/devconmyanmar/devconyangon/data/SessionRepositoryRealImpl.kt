@@ -8,6 +8,8 @@ import org.devconmyanmar.devconyangon.data.entity.SessionEntityToListingMapper
 import org.devconmyanmar.devconyangon.data.exception.EmptyDataException
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SessionListing
+import org.devconmyanmar.devconyangon.domain.model.Speaker
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.devconmyanmar.devconyangon.domain.repository.SessionRepository
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -20,6 +22,7 @@ class SessionRepositoryRealImpl @Inject constructor(
   private val sessionCacheDataSource: SessionCacheDataSource,
   private val sessionEntityToListingMapper: SessionEntityToListingMapper
 ) : SessionRepository {
+
 
 
   override suspend fun getSessionListing(date: LocalDate): List<SessionListing> {
@@ -62,6 +65,10 @@ class SessionRepositoryRealImpl @Inject constructor(
   override suspend fun getSessionDetail(sessionId: SessionId): SessionListing {
     val currentSessionDetail =sessionCacheDataSource.getSessionDetail(sessionId)
     return sessionEntityToListingMapper.map(currentSessionDetail)
+  }
+
+  override suspend fun getSpeakerDetail(speakerId: SpeakerId): Speaker {
+    return sessionCacheDataSource.getSpeakerDetail(speakerId)
   }
 
 }

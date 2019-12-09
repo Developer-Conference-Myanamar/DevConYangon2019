@@ -28,6 +28,7 @@
         <activity android:name=".feature.home.HomeActivity" />
         <activity android:name=".feature.GettingStartActivity" />
         <activity android:name=".feature.schedule.sessiondetail.SessionDetailActivity" />
+        <activity android:name=".feature.speaker.SpeakerInfoActivity"/>
 
     </application>
 

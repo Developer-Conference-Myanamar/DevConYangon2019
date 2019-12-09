@@ -12,6 +12,7 @@ import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.feature.home.HomeFeatureModule
 import org.devconmyanmar.devconyangon.feature.schedule.sessiondetail.SessionDetailFeatureModule
 import org.devconmyanmar.devconyangon.feature.schedule.sessiondetail.SessionDetailViewModel
+import org.devconmyanmar.devconyangon.feature.speaker.SpeakerFeatureModule
 import org.threeten.bp.Clock
 import javax.inject.Singleton
 
@@ -23,7 +24,8 @@ import javax.inject.Singleton
     Provider::class,
     BaseAppModule::class,
     HomeFeatureModule::class,
-    SessionDetailFeatureModule::class
+    SessionDetailFeatureModule::class,
+    SpeakerFeatureModule::class
   ]
 )
 abstract class AppModule {

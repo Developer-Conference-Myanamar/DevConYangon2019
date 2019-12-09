@@ -2,19 +2,15 @@ package org.devconmyanmar.devconyangon.data.cache
 
 import org.devconmyanmar.devconyangon.DevConYangonDb
 import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
+import org.devconmyanmar.devconyangon.data.cache.mapper.SpeakerTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
-import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
-import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntityMapper
 import org.devconmyanmar.devconyangon.domain.helper.Zones
-import org.devconmyanmar.devconyangon.domain.model.RoomId
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.Speaker
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
-import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 /**
@@ -22,7 +18,8 @@ import javax.inject.Inject
  */
 class SessionCacheDataSourceImpl @Inject constructor(
     private val db: DevConYangonDb,
-    private val sessionTableMapper: SessionTableMapper
+    private val sessionTableMapper: SessionTableMapper,
+    private val speakerTableMapper: SpeakerTableMapper
 ) : SessionCacheDataSource {
 
 
@@ -96,9 +93,9 @@ class SessionCacheDataSourceImpl @Inject constructor(
     override fun getSpeakerDetail(speakerId: SpeakerId): Speaker {
         var speaker:Speaker?=null
         val queryResult=db.speakerTableQueries.select_speaker_detail(speakerId).executeAsList()
-
+            .map(speakerTableMapper::map)
         for(speakerEntity in queryResult){
-
+            speaker=speakerEntity
         }
         return speaker!!
     }
