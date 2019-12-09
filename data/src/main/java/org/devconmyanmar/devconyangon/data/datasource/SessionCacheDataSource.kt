@@ -1,7 +1,10 @@
 package org.devconmyanmar.devconyangon.data.datasource
 
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
+import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.Speaker
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 
 /**
@@ -20,4 +23,6 @@ interface SessionCacheDataSource {
   fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean)
 
   fun getSessionDetail(sessionId: SessionId):SessionEntity
+
+  fun getSpeakerDetail(speakerId: SpeakerId): Speaker
 }

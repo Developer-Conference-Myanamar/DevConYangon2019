@@ -53,9 +53,7 @@ class SessionFragment(
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
     showShortToast("clicked")
-
-    val intent=Intent(context,SessionDetailActivity::class.java)
-    startActivity(intent)
+    startActivity(SessionDetailActivity.newInstance(context!!,sessionId.value))
   }
 
   override fun onFavoriteClick(sessionId: SessionId, position: Int) {

@@ -15,6 +15,5 @@ interface SessionRepository {
 
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 
-
-
+  suspend fun getSessionDetail(sessionId: SessionId):SessionListing
 }

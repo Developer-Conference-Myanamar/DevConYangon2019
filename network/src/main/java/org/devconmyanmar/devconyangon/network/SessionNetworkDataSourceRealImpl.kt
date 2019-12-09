@@ -164,6 +164,60 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           )
         ),
         isFavorite = false
+      ),
+      SessionEntity(
+        sessionId = SessionId(7),
+        sessionTitle = "Firebase Distribution",
+        dateTimeInInstant = ZonedDateTime.of(
+          2019,
+          Month.DECEMBER.value,
+          22,
+          11,
+          59,
+          0,
+          0,
+          Zones.YANGON
+        ).toInstant(),
+        room = RoomEntity(
+          roomId = RoomId(2),
+          roomName = "203"
+        ),
+        speakers = listOf(
+          SpeakerEntity(
+            speakerId = SpeakerId(1001),
+            name = "Nice Person"
+          ),
+          SpeakerEntity(
+            speakerId = SpeakerId(1002),
+            name = "Good Person"
+          )
+        ),
+        isFavorite = false
+      ),
+      SessionEntity(
+        sessionId = SessionId(8),
+        sessionTitle = "Deep Dive Into Constraint Layout",
+        dateTimeInInstant = ZonedDateTime.of(
+          2019,
+          Month.DECEMBER.value,
+          22,
+          16,
+          23,
+          0,
+          0,
+          Zones.YANGON
+        ).toInstant(),
+        room = RoomEntity(
+          roomId = RoomId(3),
+          roomName = "Conference Hall"
+        ),
+        speakers = listOf(
+          SpeakerEntity(
+            speakerId = SpeakerId(1004),
+            name = "Nice Person"
+          )
+        ),
+        isFavorite = false
       )
     )
   }

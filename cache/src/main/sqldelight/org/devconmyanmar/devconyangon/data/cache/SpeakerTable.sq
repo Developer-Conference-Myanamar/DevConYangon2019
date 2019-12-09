@@ -11,6 +11,9 @@ INSERT OR REPLACE INTO SpeakerTable VALUES(:speaker_id, :speaker_title);
 select_by_id:
 SELECT * FROM SpeakerTable WHERE speaker_id =?;
 
+select_speaker_detail:
+SELECT * FROM SpeakerTable WHERE speaker_id = :speaker_id;
+
 select_by_session:
 SELECT SpeakerTable.speaker_id,SpeakerTable.speaker_title FROM SpeakerTable
 JOIN SessionSpeakerTable ON SessionSpeakerTable.session = :sessionId

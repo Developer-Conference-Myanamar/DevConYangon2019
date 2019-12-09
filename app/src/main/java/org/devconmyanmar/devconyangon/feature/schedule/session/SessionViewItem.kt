@@ -45,6 +45,7 @@ class SessionViewItemListMapper @Inject constructor() :
       val sessionTime = it.dateTime.toLocalTime()
       val shouldShowTime = timeSet.add(sessionTime)
 
+
       SessionViewItem(
         sessionId = it.sessionId,
         sessionTitle = it.sessionTitle,

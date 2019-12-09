@@ -33,9 +33,7 @@ class SessionViewModel @Inject constructor(
   fun loadSessions() {
     scope.launch {
       val sessionList = getSessions.execute(GetSessions.Params(date))
-
       val sessionViewItemList = sessionViewItemListMapper.map(sessionList)
-
       sessionListLiveData.postValue(sessionViewItemList)
     }
   }
