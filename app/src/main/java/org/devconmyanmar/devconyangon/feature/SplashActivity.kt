@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import org.devconmyanmar.devconyangon.R
-import org.devconmyanmar.devconyangon.utils.openActivity
+import org.devconmyanmar.devconyangon.base.helper.openActivity
 
 class SplashActivity:AppCompatActivity() {
     private val splashTime=3000L

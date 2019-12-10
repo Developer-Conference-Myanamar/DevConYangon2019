@@ -28,6 +28,14 @@ class SpeakerInfoActivity:MvpActivity<SpeakerInfoView,SpeakerViewModel>(),Speake
         binding= ActivitySpeakerInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.speakerInfoToolbar)
+        binding.speakerInfoToolbar.title=""
+        supportActionBar!!.title=""
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        binding.speakerInfoToolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         val speakerID= intent.getLongExtra(SPEAKER_ID,-1)
         viewModel.loadSpeaker(speakerID)
     }

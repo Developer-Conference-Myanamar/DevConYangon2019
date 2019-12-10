@@ -7,12 +7,14 @@ import kotlinx.coroutines.launch
 import org.devconmyanmar.devconyangon.base.core.mvp.BaseViewModel
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.usecase.GetSessionDetail
+import org.devconmyanmar.devconyangon.domain.usecase.ToggleSessionFavorite
 import java.util.*
 import javax.inject.Inject
 
 
 
 class SessionDetailViewModel @Inject constructor(
+    private val toggleSessionFavorite: ToggleSessionFavorite,
     private val getSessionDetail: GetSessionDetail,
     private val sessionViewItemMapper: SessionViewItemMapper
 ):BaseViewModel<SessionDetailView>() {
@@ -33,5 +35,10 @@ class SessionDetailViewModel @Inject constructor(
         }
     }
 
-
+    fun toggleFavoriteStatus(sessionId: Long) {
+        scope.launch {
+            toggleSessionFavorite.execute(ToggleSessionFavorite.Params(SessionId(sessionId)))
+            loadSessionDetail(sessionId)
+        }
+    }
 }

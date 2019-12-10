@@ -1,6 +1,8 @@
 package org.devconmyanmar.devconyangon.base.helper
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,9 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar.Duration
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
@@ -125,4 +130,19 @@ fun Activity.hideKeyboard() {
   }
   imm.hideSoftInputFromWindow(view.windowToken, 0)
   view.clearFocus()
+}
+
+fun <T> Context.openActivity(it: Class<T>) {
+  val intent = Intent(this, it)
+  startActivity(intent)
+}
+
+fun RecyclerView.setUpRecycler(context: Context) {
+  hasFixedSize()
+  layoutManager = LinearLayoutManager(context)
+}
+
+fun RecyclerView.setUpGrid(context: Context, column: Int) {
+  hasFixedSize()
+  layoutManager = GridLayoutManager(context, column)
 }

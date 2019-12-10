@@ -11,6 +11,7 @@ import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.base.helper.showShortToast
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaSessionBinding
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.feature.schedule.sessiondetail.SessionDetailActivity
 import org.threeten.bp.LocalDate
 
 /**
@@ -59,8 +60,7 @@ class MyAgendaSessionFragment(private val date: LocalDate) :
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    showShortToast("Clicked")
-    //TODO: Show Session Detail
+    startActivity(SessionDetailActivity.newInstance(context!!,sessionId.value))
   }
 
   override fun onFavoriteClick(sessionId: SessionId, position: Int) {

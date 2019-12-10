@@ -30,4 +30,6 @@
 
     <string name="devcon_notification_channel">Developer Conference 2019</string>
     <string name="devcon_notification_title">DevCon 2019</string>
+
+    <string name="dev_con_share_text">Please Download Developer Conference 2019 and share with your teammates</string>
 </resources>

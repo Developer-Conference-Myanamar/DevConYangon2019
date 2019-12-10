@@ -2,9 +2,9 @@
  * Created by Vincent on 2019-05-22
  */
 object BuildConfig {
-  const val compileSdk = 28
+  const val compileSdk = 29
   const val minSdk = 16
-  const val targetSdk = 28
+  const val targetSdk = 29
 
   private const val versionMajor = 0
   private const val versionMinor = 0

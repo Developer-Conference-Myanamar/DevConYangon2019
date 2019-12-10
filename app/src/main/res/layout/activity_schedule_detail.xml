@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:background="@color/primary_main_bg"
             android:fitsSystemWindows="true"
+            app:contentScrim="@color/primary_main_bg"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="">
 
@@ -46,26 +47,9 @@
                 android:gravity="top"
                 app:elevation="4dp"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_left"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                <TextView
-                    android:id="@+id/scheduleTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginRight="22dp"
-                    android:fontFamily="@font/raleway_medium"
-                    android:padding="8dp"
-                    android:text="Keynote for Developer"
-                    android:textColor="@color/primary_text_color"
-                    android:textSize="18sp"
-                    android:transitionName="@string/transition_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -84,7 +68,22 @@
             android:layout_marginTop="16dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
+            <TextView
+                android:id="@+id/scheduleTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginRight="22dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Keynote for Developer"
+                android:textColor="@color/primary_text_color"
+                android:transitionName="@string/transition_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/contentTime"
@@ -92,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
                 android:layout_marginLeft="22dp"
+                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_marginTop="16dp"
                 android:drawableStart="@drawable/ic_access_time"
                 android:drawableLeft="@drawable/ic_access_time"
@@ -101,7 +101,7 @@
                 android:text="Tue, Sat 21,9:00-10:00AM"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scheduleTitle"
                 tools:targetApi="m" />
 
             <TextView
@@ -111,6 +111,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginTop="16dp"
+                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:drawableStart="@drawable/ic_room"
                 android:drawableLeft="@drawable/ic_room"
                 android:drawablePadding="16dp"
@@ -130,6 +131,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginTop="16dp"
+                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:drawableStart="@drawable/ic_face"
                 android:drawableLeft="@drawable/ic_face"
                 android:drawablePadding="16dp"
@@ -144,6 +146,7 @@
             <TextView
                 android:id="@+id/contentDescription"
                 android:layout_width="0dp"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="24dp"
@@ -166,8 +169,8 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/raleway_medium"
                 android:text="Speaker"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textColor="@color/primary_text_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/contentDescription" />
 
@@ -200,33 +203,32 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <FrameLayout
-        android:id="@+id/clapCountLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:alpha="0"
-        app:layout_anchor="@+id/clapFab"
-        app:layout_anchorGravity="center|top">
+<!--    <FrameLayout-->
+<!--        android:id="@+id/clapCountLayout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:alpha="0"-->
+<!--        app:layout_anchor="@+id/clapFab"-->
+<!--        app:layout_anchorGravity="center|top">-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:backgroundTint="@color/colorBlack"
-            app:elevation="4dp"
-            app:srcCompat="@drawable/ic_favorite_outline_black_24dp"
-            app:tint="@color/colorBlack" />
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:elevation="4dp"-->
+<!--            style="@style/Widget.MaterialComponents.FloatingActionButton"-->
+<!--            app:srcCompat="@drawable/ic_favorite_outline_black_24dp" />-->
 
-        <TextView
-            android:id="@+id/tvClapCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/darkmode_blue" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvClapCount"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:textColor="@color/darkmode_blue" />-->
 
-    </FrameLayout>
+<!--    </FrameLayout>-->
 
 
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -246,10 +248,11 @@
         android:id="@+id/clapFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         app:elevation="4dp"
         app:fabSize="normal"
+        app:tint="@color/colorAccent"
         app:layout_anchor="@id/contentBottomAppBar"
         app:srcCompat="@drawable/ic_favorite_outline_black_24dp" />
 

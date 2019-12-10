@@ -52,7 +52,6 @@ class SessionFragment(
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    showShortToast("clicked")
     startActivity(SessionDetailActivity.newInstance(context!!,sessionId.value))
   }
 

@@ -7,6 +7,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
 
+
+
 /**
  * Created by Vincent on 2019-11-01
  */
@@ -27,4 +29,9 @@ class HomeActivity : MvpActivity<HomeView, HomeViewModel>(), HomeView {
     bottomNavigationView.setupWithNavController(navController)
   }
 
+  override fun onRestart() {
+    super.onRestart()
+    finish()
+    startActivity(intent)
+  }
 }
