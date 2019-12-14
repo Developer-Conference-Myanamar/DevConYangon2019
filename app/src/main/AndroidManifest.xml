@@ -21,6 +21,8 @@
       </intent-filter>
     </activity>
 
+    <activity android:name=".feature.sessiondetail.SessionDetailActivity"/>
+
   </application>
 
 </manifest>

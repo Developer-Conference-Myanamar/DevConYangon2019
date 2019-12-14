@@ -21,7 +21,9 @@ class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>()
 //    findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 //  }
 
-  override val binding: ActivityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
+  override val binding: ActivityHomeBinding by lazy {
+    ActivityHomeBinding.inflate(layoutInflater)
+  }
 
   private val navController by lazy {
     findNavController(R.id.navFragment)

@@ -3,11 +3,12 @@ package org.devconmyanmar.devconyangon.base.core.recyclerview
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.viewbinding.ViewBinding
 
 /**
  * Created by Vincent on 12/6/18
  */
-abstract class BaseRecyclerViewAdapter<itemType, VH : BaseViewHolder<itemType>> :
+abstract class BaseRecyclerViewAdapter<itemType, VH : BaseViewHolder<*, itemType>> :
   ListAdapter<itemType, VH> {
 
   protected constructor(diffCallback: DiffUtil.ItemCallback<itemType>) : super(diffCallback)
