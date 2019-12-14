@@ -1,10 +1,11 @@
 package org.devconmyanmar.devconyangon.data
 
+import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
-import org.devconmyanmar.devconyangon.data.datasource.SessionNetworkDataSource
 import org.devconmyanmar.devconyangon.data.entity.SessionEntityMapper
 import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.devconmyanmar.devconyangon.domain.repository.SessionRepository
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
@@ -13,7 +14,7 @@ import javax.inject.Inject
  * Created by Vincent on 11/3/19
  */
 class SessionRepositoryRealImpl @Inject constructor(
-  private val sessionNetworkDataSource: SessionNetworkDataSource,
+  private val networkDataSource: NetworkDataSource,
   private val sessionCacheDataSource: SessionCacheDataSource,
   private val sessionEntityMapper: SessionEntityMapper
 ) : SessionRepository {
@@ -29,7 +30,7 @@ class SessionRepositoryRealImpl @Inject constructor(
 
     var networkException: Exception? = null
     try {
-      val networkData = sessionNetworkDataSource.getSessions(date)
+      val networkData = networkDataSource.getAllSession()
       sessionCacheDataSource.putSessionEntities(networkData)
     } catch (exception: Exception) {
       networkException = exception
@@ -62,6 +63,8 @@ class SessionRepositoryRealImpl @Inject constructor(
     sessionCacheDataSource.updateFavoriteStatus(sessionId, currentStatus.not())
   }
 
-
+  override suspend fun getSessionOfSpeaker(speakerId: SpeakerId): List<Session> {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 
 }

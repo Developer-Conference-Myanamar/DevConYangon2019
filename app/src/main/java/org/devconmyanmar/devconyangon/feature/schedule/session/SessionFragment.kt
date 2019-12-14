@@ -67,7 +67,7 @@ class SessionFragment() : MvpFragment<FragmentSessionBinding, SessionView, Sessi
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    val action = ScheduleFragmentDirections.actionToSessionDetail(sessionId.value)
+    val action = ScheduleFragmentDirections.actionNavigationScheduleToSessionDetailFragment(sessionId.value)
     findNavController().navigate(action)
   }
 

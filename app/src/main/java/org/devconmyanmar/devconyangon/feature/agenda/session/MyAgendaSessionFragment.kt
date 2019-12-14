@@ -29,8 +29,8 @@ class MyAgendaSessionFragment() :
 
     private const val ARG_DATE = "date"
 
-    fun newInstance(localDate: LocalDate): SessionFragment {
-      val fragment = SessionFragment()
+    fun newInstance(localDate: LocalDate): MyAgendaSessionFragment {
+      val fragment = MyAgendaSessionFragment()
       val bundle = bundleOf(
         ARG_DATE to localDate.atStartOfDay().atZone(Zones.YANGON).toInstant().toEpochMilli()
       )
@@ -79,7 +79,7 @@ class MyAgendaSessionFragment() :
   }
 
   override fun onSessionItemClick(sessionId: SessionId, position: Int) {
-    val action = MyAgendaFragmentDirections.actionToSessionDetail(sessionId.value)
+    val action = MyAgendaFragmentDirections.actionNavigationMyAgendaToSessionDetailFragment(sessionId.value)
     findNavController().navigate(action)
   }
 

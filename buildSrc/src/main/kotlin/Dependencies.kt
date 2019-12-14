@@ -336,7 +336,7 @@ object Retrofit {
 }
 
 object SqlDelight {
-  private const val version = "1.2.0"
+  private const val version = "1.2.1"
 
   const val gradle_plugin = "com.squareup.sqldelight:gradle-plugin:$version"
   const val android_driver = "com.squareup.sqldelight:android-driver:$version"

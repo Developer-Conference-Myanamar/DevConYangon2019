@@ -7,15 +7,15 @@
 
   <com.google.android.material.card.MaterialCardView
     style="@style/Widget.MaterialComponents.CardView"
-    android:layout_width="0dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     app:cardBackgroundColor="@color/colorAccent"
     app:cardCornerRadius="12dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_60_percent"
-    app:layout_constraintStart_toStartOf="@+id/guideline_vertical_40_percent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
@@ -30,19 +30,7 @@
 
   </com.google.android.material.card.MaterialCardView>
 
-  <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_vertical_40_percent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_percent="0.40" />
 
-  <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/guideline_vertical_60_percent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintGuide_percent="0.6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

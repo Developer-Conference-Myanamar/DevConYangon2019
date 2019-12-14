@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.devconmyanmar.devconyangon.data.datasource.SessionNetworkDataSource
+import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.network.BuildConfig
-import org.devconmyanmar.devconyangon.network.SessionNetworkDataSourceRealImpl
+import org.devconmyanmar.devconyangon.network.NetworkDataSourceImpl
 import org.devconmyanmar.devconyangon.network.di.NetworkModule.Provider
 import javax.inject.Singleton
 
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 abstract class NetworkModule {
 
   @Binds
-  abstract fun sessionNetworkDataSource(sessionNetworkDataSource: SessionNetworkDataSourceRealImpl): SessionNetworkDataSource
+  abstract fun networkDataSource(networkDataSource: NetworkDataSourceImpl): NetworkDataSource
 
   @Module
   object Provider {

@@ -13,8 +13,8 @@
     tools:layout="@layout/fragment_my_agenda">
 
     <action
-      android:id="@+id/action_to_session_detail"
-      app:destination="@id/sessionDetailActivity" />
+      android:id="@+id/action_navigation_schedule_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment" />
   </fragment>
 
   <fragment
@@ -23,10 +23,9 @@
     android:label="MyAgendaFragment"
     tools:layout="@layout/fragment_schedule">
     <action
-      android:id="@+id/action_to_session_detail"
-      app:destination="@id/sessionDetailActivity" />
+      android:id="@+id/action_navigation_my_agenda_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment" />
   </fragment>
-
 
   <fragment
     android:id="@+id/navigation_info"
@@ -34,14 +33,36 @@
     android:label="InfoFragment"
     tools:layout="@layout/fragment_info" />
 
-  <activity
-    android:id="@+id/sessionDetailActivity"
-    android:name="org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailActivity"
-    android:label="SessionDetailActivity">
+  <fragment
+    android:id="@+id/sessionDetailFragment"
+    android:name="org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFragment"
+    android:label="SessionDetailFragment"
+    tools:layout="@layout/fragment_session_detail">
+
     <argument
       android:name="sessionId"
       app:argType="long" />
-  </activity>
+
+    <action
+      android:id="@+id/action_sessionDetailFragment_to_speakerDetailFragment"
+      app:destination="@id/speakerDetailFragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/speakerDetailFragment"
+    android:name="org.devconmyanmar.devconyangon.feature.speakerdetail.SpeakerDetailFragment"
+    android:label="SpeakerDetailFragment"
+    tools:layout="@layout/fragment_speaker_detail">
+
+    <argument
+      android:name="speakerId"
+      app:argType="long" />
+
+    <action
+      android:id="@+id/action_speakerDetailFragment_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment" />
+
+  </fragment>
 
 
 </navigation>

@@ -1,6 +1,7 @@
 package org.devconmyanmar.devconyangon.data.entity
 
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
+import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.Speaker
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import javax.inject.Inject
@@ -13,7 +14,8 @@ data class SpeakerEntity(
   val name: String,
   val biography: String,
   val position: String,
-  val imageUrl: String
+  val imageUrl: String,
+  val sessionList : List<SessionId>
 )
 
 class SpeakerEntityMapper @Inject constructor() : UnidirectionalMap<SpeakerEntity, Speaker> {

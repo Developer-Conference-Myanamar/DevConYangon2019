@@ -1,8 +1,10 @@
 package org.devconmyanmar.devconyangon.data.entity
 
+import org.devconmyanmar.devconyangon.data.datasource.SpeakerCacheDataSource
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
 import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import javax.inject.Inject
@@ -18,13 +20,14 @@ data class SessionEntity(
   val startTime: LocalTime,
   val endTime: LocalTime,
   val room: RoomEntity,
-  val speakers: List<SpeakerEntity>,
+  val speakers: List<SpeakerId>,
   val isFavorite: Boolean
 )
 
 class SessionEntityMapper @Inject constructor(
   private val roomEntityMapper: RoomEntityMapper,
-  private val speakerEntityMapper: SpeakerEntityMapper
+  private val speakerEntityMapper: SpeakerEntityMapper,
+  private val speakerCacheDataSource: SpeakerCacheDataSource
 ) : UnidirectionalMap<SessionEntity, Session> {
 
   override fun map(item: SessionEntity): Session {
@@ -37,8 +40,8 @@ class SessionEntityMapper @Inject constructor(
       startTime = item.startTime,
       endTime = item.endTime,
       room = roomEntityMapper.map(item.room),
-      speakers = item.speakers.map(speakerEntityMapper::map),
-      isFavorite = item.isFavorite
+      isFavorite = item.isFavorite,
+      speakers =  speakerCacheDataSource.getSpeakerOfSession(item.sessionId).map(speakerEntityMapper::map)
     )
   }
 

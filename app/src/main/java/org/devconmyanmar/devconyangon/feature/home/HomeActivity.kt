@@ -12,7 +12,7 @@ import org.devconmyanmar.devconyangon.databinding.ActivityHomeBinding
  */
 class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>(), HomeView {
 
-  override val viewModel: HomeViewModel by contractedViewModels()
+  override val viewModel: HomeViewModel by contractedViewModel()
 
 //  override val layoutResId: Int
 //    get() = R.layout.activity_home

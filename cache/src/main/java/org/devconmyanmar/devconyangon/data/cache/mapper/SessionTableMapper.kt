@@ -13,8 +13,7 @@ import javax.inject.Inject
  * Created by Vincent on 11/3/19
  */
 class SessionTableMapper @Inject constructor(
-  private val db: DevConYangonDb,
-  private val clock: Clock
+  private val db: DevConYangonDb
 ) : UnidirectionalMap<SessionTable, SessionEntity> {
 
   override fun map(item: SessionTable): SessionEntity {
@@ -36,15 +35,7 @@ class SessionTableMapper @Inject constructor(
         roomQuery.room_id,
         roomQuery.room_name
       ),
-      speakers = speakerQuery.map {
-        SpeakerEntity(
-          speakerId = it.speaker_id,
-          name = it.speaker_title,
-          biography = it.biography,
-          position = it.position,
-          imageUrl = it.imageUrl
-        )
-      },
+      speakers = speakerQuery.map { it.speaker_id },
       isFavorite = favoriteQuery != null
     )
   }

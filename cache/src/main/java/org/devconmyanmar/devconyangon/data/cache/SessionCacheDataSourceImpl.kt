@@ -5,6 +5,7 @@ import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 import javax.inject.Inject
 
@@ -33,17 +34,10 @@ class SessionCacheDataSourceImpl @Inject constructor(
           sessionEntity.endTime,
           sessionEntity.room.roomId
         )
-        sessionEntity.speakers.forEach { speakerEntity ->
-          db.speakerTableQueries.insert_or_replace(
-            speaker_id = speakerEntity.speakerId,
-            speaker_title = speakerEntity.name,
-            biography = speakerEntity.biography,
-            position = speakerEntity.position,
-            imageUrl = speakerEntity.imageUrl
-          )
+        sessionEntity.speakers.forEach { speakerIds ->
           db.sessionSpeakerTableQueries.insert_or_replace(
             sessionEntity.sessionId,
-            speakerEntity.speakerId
+            speakerIds
           )
         }
       }
@@ -79,6 +73,10 @@ class SessionCacheDataSourceImpl @Inject constructor(
     } else {
       db.favoriteSessionTableQueries.delete_with_session_id(sessionId)
     }
+  }
+
+  override fun getSessionEntitiesOfSpeaker(speakerId: SpeakerId): List<SessionEntity> {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }
 

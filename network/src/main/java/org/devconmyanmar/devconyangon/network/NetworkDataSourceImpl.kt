@@ -1,6 +1,6 @@
 package org.devconmyanmar.devconyangon.network
 
-import org.devconmyanmar.devconyangon.data.datasource.SessionNetworkDataSource
+import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
@@ -13,11 +13,41 @@ import org.threeten.bp.Month
 import javax.inject.Inject
 
 /**
- * Created by Vincent on 11/3/19
+ * Created by Vincent on 12/14/19
  */
-class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDataSource {
 
-  override fun getSessions(date: LocalDate): List<SessionEntity> {
+class NetworkDataSourceImpl @Inject constructor() : NetworkDataSource {
+
+  override fun getAllSpeakers(): List<SpeakerEntity> {
+    return listOf(
+      SpeakerEntity(
+        speakerId = SpeakerId(0),
+        name = "John Doe",
+        position = "Networking Enginner",
+        biography = "Biography",
+        imageUrl = "lol",
+        sessionList = listOf()
+      ),
+      SpeakerEntity(
+        speakerId = SpeakerId(1),
+        name = "Walter White",
+        position = "Five Star Chef",
+        biography = "Biography",
+        imageUrl = "lol",
+        sessionList = listOf()
+      ),
+      SpeakerEntity(
+        speakerId = SpeakerId(2),
+        name = "Very Good Person",
+        position = "Very Good PM",
+        biography = "Biography",
+        imageUrl = "lol",
+        sessionList = listOf()
+      )
+    )
+  }
+
+  override fun getAllSession(): List<SessionEntity> {
     return listOf(
       SessionEntity(
         sessionId = SessionId(0),
@@ -34,15 +64,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(0),
           roomName = "Main Hall"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(0),
-            name = "Fake Wharton",
-            position = "Lead Dev",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(0)),
         isFavorite = false
       ),
       SessionEntity(
@@ -60,15 +82,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(1),
           roomName = "203"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(1),
-            name = "John Doe",
-            position = "Networking Enginner",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(1)),
         isFavorite = false
       ),
       SessionEntity(
@@ -86,15 +100,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(0),
           roomName = "Main Hall"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(2),
-            name = "Walter White",
-            position = "Five Star Chef",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(2)),
         isFavorite = false
       ),
       SessionEntity(
@@ -112,15 +118,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(2),
           roomName = "305"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(3),
-            name = "Very Good Person",
-            position = "Very Good PM",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(1), SpeakerId(2)),
         isFavorite = false
       ), SessionEntity(
         sessionId = SessionId(4),
@@ -137,15 +135,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(2),
           roomName = "305"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(3),
-            name = "Very Good Person",
-            position = "Very Good PM",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(0)),
         isFavorite = false
       ), SessionEntity(
         sessionId = SessionId(5),
@@ -162,15 +152,7 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(2),
           roomName = "305"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(3),
-            name = "Very Good Person",
-            position = "Very Good PM",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(2)),
         isFavorite = false
       ),
       SessionEntity(
@@ -188,17 +170,10 @@ class SessionNetworkDataSourceRealImpl @Inject constructor() : SessionNetworkDat
           roomId = RoomId(2),
           roomName = "305"
         ),
-        speakers = listOf(
-          SpeakerEntity(
-            speakerId = SpeakerId(3),
-            name = "Very Good Person",
-            position = "Very Good PM",
-            biography = "Biography",
-            imageUrl = "lol"
-          )
-        ),
+        speakers = listOf(SpeakerId(0)),
         isFavorite = false
       )
     )
   }
+
 }

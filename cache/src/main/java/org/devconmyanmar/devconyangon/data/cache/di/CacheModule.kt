@@ -14,6 +14,7 @@ import org.devconmyanmar.devconyangon.data.cache.RoomTable
 import org.devconmyanmar.devconyangon.data.cache.SessionCacheDataSourceImpl
 import org.devconmyanmar.devconyangon.data.cache.SessionSpeakerTable
 import org.devconmyanmar.devconyangon.data.cache.SessionTable
+import org.devconmyanmar.devconyangon.data.cache.SpeakerCacheDataSourceImpl
 import org.devconmyanmar.devconyangon.data.cache.SpeakerTable
 import org.devconmyanmar.devconyangon.data.cache.columnadapter.LocalDateColumnAdapter
 import org.devconmyanmar.devconyangon.data.cache.columnadapter.LocalTimeColumnAdapter
@@ -21,6 +22,7 @@ import org.devconmyanmar.devconyangon.data.cache.columnadapter.RoomIdColumnAdapt
 import org.devconmyanmar.devconyangon.data.cache.columnadapter.SessionIdColumnAdapter
 import org.devconmyanmar.devconyangon.data.cache.columnadapter.SpeakerIdColumnAdapter
 import org.devconmyanmar.devconyangon.data.datasource.SessionCacheDataSource
+import org.devconmyanmar.devconyangon.data.datasource.SpeakerCacheDataSource
 import javax.inject.Singleton
 
 /**
@@ -31,6 +33,9 @@ abstract class CacheModule {
 
   @Binds
   abstract fun sessionCacheDataSource(sessionCacheDataSource: SessionCacheDataSourceImpl): SessionCacheDataSource
+
+  @Binds
+  abstract fun speakerCacheDataSource(speakerCacheDataSource: SpeakerCacheDataSourceImpl) : SpeakerCacheDataSource
 
   @Module
   internal object Providers {

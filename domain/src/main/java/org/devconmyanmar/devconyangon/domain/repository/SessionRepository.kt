@@ -2,6 +2,7 @@ package org.devconmyanmar.devconyangon.domain.repository
 
 import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
+import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 
 /**
@@ -17,6 +18,6 @@ interface SessionRepository {
 
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 
-
+  suspend fun getSessionOfSpeaker(speakerId: SpeakerId) : List<Session>
 
 }

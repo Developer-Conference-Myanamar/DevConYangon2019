@@ -29,6 +29,11 @@ select_by_id:
 SELECT * FROM SessionTable
 WHERE session_id = :session_id;
 
+select_by_speaker:
+SELECT SessionTable.session_id,SessionTable.session_title,SessionTable.abstract,SessionTable.date,SessionTable.start_time, SessionTable.end_time, SessionTable.room  FROM SessionTable
+JOIN SessionSpeakerTable ON SessionSpeakerTable.speaker = :speakerId
+AND SessionSpeakerTable.session = SessionTable.session_id;
+
 insert:
 INSERT INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
 VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
@@ -36,3 +41,4 @@ VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :r
 insert_or_replace:
 INSERT OR REPLACE INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
 VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
+

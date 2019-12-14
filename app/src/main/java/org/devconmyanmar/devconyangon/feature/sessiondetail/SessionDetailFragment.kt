@@ -1,18 +1,19 @@
 package org.devconmyanmar.devconyangon.feature.sessiondetail
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.navArgs
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import org.devconmyanmar.devconyangon.R
-import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
-import org.devconmyanmar.devconyangon.databinding.ActivitySessionDetailBinding
+import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
+import org.devconmyanmar.devconyangon.databinding.FragmentSessionDetailBinding
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import javax.inject.Inject
@@ -20,28 +21,15 @@ import javax.inject.Inject
 /**
  * Created by Vincent on 11/11/19
  */
-class SessionDetailActivity :
-  MvpActivity<ActivitySessionDetailBinding, SessionDetailView, SessionDetailViewModel>(),
+class SessionDetailFragment :
+  MvpFragment<FragmentSessionDetailBinding, SessionDetailView, SessionDetailViewModel>(),
   SessionDetailView, SessionDetailSpeakerItemClickListener {
 
-  companion object {
+  override val viewModel: SessionDetailViewModel by contractedViewModel()
 
-    private const val IE_SESSION_ID = "SESSION_ID"
+  override fun bindView(inflater: LayoutInflater): FragmentSessionDetailBinding =  FragmentSessionDetailBinding.inflate(layoutInflater)
 
-    fun newIntent(context: Context, sessionId: SessionId): Intent {
-      val intent = Intent(context, SessionDetailActivity::class.java)
-      intent.putExtra(IE_SESSION_ID, sessionId.value)
-      return intent
-    }
-  }
-
-  override val viewModel: SessionDetailViewModel by contractedViewModels()
-
-  override val binding: ActivitySessionDetailBinding by lazy {
-    ActivitySessionDetailBinding.inflate(layoutInflater)
-  }
-
-  private val arguments: SessionDetailActivityArgs by navArgs()
+  private val arguments: SessionDetailFragmentArgs by navArgs()
 
   override fun getSessionId(): SessionId = SessionId(arguments.sessionId)
 
@@ -52,25 +40,20 @@ class SessionDetailActivity :
   @Inject
   lateinit var imageLoader: ImageLoader
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    //Override super class content View with binding's root
-    //Probably want to remove super class inflation method to reduce CPU cost
-    setContentView(binding.root)
-    setSupportActionBar(binding.toolBar)
-    supportActionBar?.title = ""
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-  }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-  override fun onPostCreate(savedInstanceState: Bundle?) {
-    super.onPostCreate(savedInstanceState)
-    setSupportActionBar(binding.toolBar)
-    supportActionBar?.title = ""
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    if (requireActivity() is AppCompatActivity) {
+      (requireActivity() as AppCompatActivity).apply {
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.title = ""
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+      }
+    }
 
     binding.rvSpeaker.apply {
       adapter = sessionDetailSpeakerRecyclerViewAdapter
-      layoutManager = LinearLayoutManager(this@SessionDetailActivity, RecyclerView.VERTICAL, false)
+      layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
     }
 
     binding.fabFavorite.setOnClickListener {
@@ -85,10 +68,9 @@ class SessionDetailActivity :
     viewItemLiveData.observe(this, Observer {
 
       val favoriteDrawable = if (it.isFavorite) {
-        ContextCompat.getDrawable(this@SessionDetailActivity, R.drawable.ic_favorite_accent_24dp)
+        ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_accent_24dp)
       } else {
-        ContextCompat.getDrawable(
-          this@SessionDetailActivity,
+        ContextCompat.getDrawable(requireContext(),
           R.drawable.ic_favorite_outline_accent_24dp
         )
       }

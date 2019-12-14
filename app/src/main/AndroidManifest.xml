@@ -22,6 +22,7 @@
     </activity>
 
     <activity android:name=".feature.sessiondetail.SessionDetailActivity"/>
+    <activity android:name=".feature.speakerdetail.SpeakerDetailActivity" />
 
   </application>
 

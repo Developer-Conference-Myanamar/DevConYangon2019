@@ -29,6 +29,7 @@ abstract class MvpActivity<VB : ViewBinding, V : Viewable, VM : BaseViewModel<V>
       Timber.e(exception)
       throw InvalidMvpImplementationException()
     }
+    setContentView(binding.root)
   }
 
   override fun onDestroy() {
@@ -39,7 +40,7 @@ abstract class MvpActivity<VB : ViewBinding, V : Viewable, VM : BaseViewModel<V>
   /**
    * Helper function for easily init of viewModel
    */
-  protected inline fun <reified VM : BaseViewModel<V>> contractedViewModels(): Lazy<VM> =
+  protected inline fun <reified VM : BaseViewModel<V>> contractedViewModel(): Lazy<VM> =
     ViewModelLazy(VM::class)
 
   inner class ViewModelLazy<VM : ViewModel>(

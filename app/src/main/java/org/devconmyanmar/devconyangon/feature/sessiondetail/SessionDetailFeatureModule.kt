@@ -14,7 +14,7 @@ import org.devconmyanmar.devconyangon.base.di.viewmodel.ViewModelKey
 abstract class SessionDetailFeatureModule {
 
   @ContributesAndroidInjector
-  abstract fun sessionDetailActivity(): SessionDetailActivity
+  abstract fun sessionDetailFragment(): SessionDetailFragment
 
   @Binds
   @IntoMap
