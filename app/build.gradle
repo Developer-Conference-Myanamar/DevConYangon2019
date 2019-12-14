@@ -7,6 +7,7 @@ buildscript {
     classpath AndroidArchNavigation.safe_args_plugin
   }
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -25,10 +26,10 @@ android {
     resConfigs "en", "mm"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
 
-  viewBinding {
-    enabled = true
+    viewBinding {
+      enabled = true
+    }
   }
 
   buildTypes {

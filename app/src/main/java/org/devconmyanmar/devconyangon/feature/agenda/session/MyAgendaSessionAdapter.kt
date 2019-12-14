@@ -3,6 +3,7 @@ package org.devconmyanmar.devconyangon.feature.agenda.session
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.viewbinding.ViewBinding
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseRecyclerViewAdapter
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseViewHolder
@@ -94,11 +95,11 @@ class MyAgendaSessionAdapter(private val myAgendaItemClickListener: MyAgendaItem
 
   //region: View Holder
   sealed class MyAgendaViewHolder(itemView: View) :
-    BaseViewHolder<MyAgendaSessionViewItem>(itemView) {
+    BaseViewHolder<ViewBinding, MyAgendaSessionViewItem>(itemView) {
 
     class MyAgendaViewHolderHeader(itemView: View) : MyAgendaViewHolder(itemView) {
 
-      private val binding = ItemAgendaHeaderBinding.bind(itemView)
+      override val binding = ItemAgendaHeaderBinding.bind(itemView)
 
       override fun bind(item: MyAgendaSessionViewItem) {
         if (item is MyAgendaSessionViewItemHeader) {
@@ -112,7 +113,7 @@ class MyAgendaSessionAdapter(private val myAgendaItemClickListener: MyAgendaItem
       private val recyclerViewItemClickListener: RecyclerViewItemClickListener
     ) : MyAgendaViewHolder(itemView) {
 
-      private val binding = ItemAgendaSessionBinding.bind(itemView)
+      override val binding = ItemAgendaSessionBinding.bind(itemView)
 
       init {
         binding.cardViewAgendaSession.setOnClickListener {

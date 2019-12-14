@@ -3,6 +3,7 @@ package org.devconmyanmar.devconyangon.base.core.mvp
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import org.devconmyanmar.devconyangon.base.core.BaseActivity
 import org.devconmyanmar.devconyangon.base.di.Injectable
 import timber.log.Timber
@@ -12,8 +13,8 @@ import kotlin.reflect.KClass
 /**
  * Created by Vincent on 12/6/18
  */
-abstract class MvpActivity<V : Viewable, VM : BaseViewModel<V>> :
-  BaseActivity(), Injectable {
+abstract class MvpActivity<VB : ViewBinding, V : Viewable, VM : BaseViewModel<V>> :
+  BaseActivity<VB>(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory

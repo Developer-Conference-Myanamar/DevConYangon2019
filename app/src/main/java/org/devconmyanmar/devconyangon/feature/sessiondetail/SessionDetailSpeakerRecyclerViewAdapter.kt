@@ -52,9 +52,9 @@ class SessionDetailSpeakerRecyclerViewAdapter(
     private val recyclerViewItemClickListener: RecyclerViewItemClickListener,
     private val imageLoader: ImageLoader
   ) :
-    BaseViewHolder<SessionDetailSpeakerViewItem>(itemView) {
+    BaseViewHolder<ItemSpeakerBinding, SessionDetailSpeakerViewItem>(itemView) {
 
-    private val binding = ItemSpeakerBinding.bind(itemView)
+    override val binding: ItemSpeakerBinding = ItemSpeakerBinding.bind(itemView)
 
     init {
       itemView.setOnClickListener {

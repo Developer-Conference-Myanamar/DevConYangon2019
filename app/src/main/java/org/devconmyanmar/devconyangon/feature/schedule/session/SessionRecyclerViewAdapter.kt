@@ -53,9 +53,9 @@ class SessionRecyclerViewAdapter(
   class SessionViewHolder(
     itemView: View,
     private val recyclerViewItemClickListener: RecyclerViewItemClickListener
-  ) : BaseViewHolder<SessionViewItem>(itemView) {
+  ) : BaseViewHolder<ItemSessionBinding, SessionViewItem>(itemView) {
 
-    private val binding = ItemSessionBinding.bind(itemView)
+    override val binding: ItemSessionBinding = ItemSessionBinding.bind(itemView)
 
     init {
       itemView.setOnClickListener {

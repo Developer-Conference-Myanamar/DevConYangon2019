@@ -3,23 +3,25 @@ package org.devconmyanmar.devconyangon.feature.home
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
+import org.devconmyanmar.devconyangon.databinding.ActivityHomeBinding
 
 /**
  * Created by Vincent on 2019-11-01
  */
-class HomeActivity : MvpActivity<HomeView, HomeViewModel>(), HomeView {
+class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>(), HomeView {
 
   override val viewModel: HomeViewModel by contractedViewModels()
 
-  override val layoutResId: Int
-    get() = R.layout.activity_home
+//  override val layoutResId: Int
+//    get() = R.layout.activity_home
 
-  private val bottomNavigationView by lazy {
-    findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-  }
+//  private val bottomNavigationView by lazy {
+//    findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+//  }
+
+  override val binding: ActivityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
 
   private val navController by lazy {
     findNavController(R.id.navFragment)
@@ -27,7 +29,7 @@ class HomeActivity : MvpActivity<HomeView, HomeViewModel>(), HomeView {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    bottomNavigationView.setupWithNavController(navController)
+    binding.bottomNavigationView.setupWithNavController(navController)
   }
 
   override fun onBackPressed() {

@@ -1,6 +1,7 @@
 package org.devconmyanmar.devconyangon.feature.agenda.session
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
@@ -8,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaSessionBinding
 import org.devconmyanmar.devconyangon.domain.helper.Zones
@@ -22,7 +22,7 @@ import org.threeten.bp.LocalDate
  * Created by Vincent on 11/6/19
  */
 class MyAgendaSessionFragment() :
-  MvpFragment<MyAgendaSessionView, MyAgendaSessionViewModel>(),
+  MvpFragment<FragmentMyAgendaSessionBinding, MyAgendaSessionView, MyAgendaSessionViewModel>(),
   MyAgendaSessionView, MyAgendaItemClickListener {
 
   companion object {
@@ -46,12 +46,8 @@ class MyAgendaSessionFragment() :
 
   override val viewModel: MyAgendaSessionViewModel by contractedViewModel()
 
-  override val layoutId: Int
-    get() = R.layout.fragment_my_agenda_session
-
-  private val binding by lazy {
-    FragmentMyAgendaSessionBinding.bind(requireView())
-  }
+  override fun bindView(inflater: LayoutInflater): FragmentMyAgendaSessionBinding =
+    FragmentMyAgendaSessionBinding.inflate(inflater)
 
   private val myAgendaSessionAdapter by lazy {
     MyAgendaSessionAdapter(this)
@@ -90,5 +86,4 @@ class MyAgendaSessionFragment() :
   override fun onFavoriteClick(sessionId: SessionId, position: Int) {
     viewModel.toggleFavoriteStatus(sessionId)
   }
-
 }

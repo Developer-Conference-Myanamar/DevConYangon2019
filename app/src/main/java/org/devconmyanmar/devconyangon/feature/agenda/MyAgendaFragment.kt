@@ -1,27 +1,24 @@
 package org.devconmyanmar.devconyangon.feature.agenda
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
-import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaBinding
 
 /**
  * Created by Vincent on 2019-11-02
  */
-class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgendaView {
+class MyAgendaFragment : MvpFragment<FragmentMyAgendaBinding, MyAgendaView, MyAgendaViewModel>(),
+  MyAgendaView {
+
+  override fun bindView(inflater: LayoutInflater): FragmentMyAgendaBinding =
+    FragmentMyAgendaBinding.inflate(inflater)
 
   override val viewModel: MyAgendaViewModel by contractedViewModel()
-
-  override val layoutId: Int
-    get() = R.layout.fragment_my_agenda
-
-  private val binding by lazy {
-    FragmentMyAgendaBinding.bind(view!!)
-  }
 
   private val myAgendaPagerAdapter by lazy {
     MyAgendaPagerAdapter(this)
@@ -42,9 +39,9 @@ class MyAgendaFragment : MvpFragment<MyAgendaView, MyAgendaViewModel>(), MyAgend
 
   override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaDateViewItem>>) {
     viewItemListLiveData.observe(viewLifecycleOwner, Observer {
-      if(it.isNotEmpty()){
+      if (it.isNotEmpty()) {
         myAgendaPagerAdapter.setItems(it)
-      }else{
+      } else {
 
       }
 

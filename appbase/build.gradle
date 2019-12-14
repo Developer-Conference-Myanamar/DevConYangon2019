@@ -9,6 +9,10 @@ android {
     minSdkVersion BuildConfig.minSdk
     targetSdkVersion BuildConfig.targetSdk
     resConfigs "en", "mm"
+
+    viewBinding {
+      enabled = true
+    }
   }
 
   buildTypes {

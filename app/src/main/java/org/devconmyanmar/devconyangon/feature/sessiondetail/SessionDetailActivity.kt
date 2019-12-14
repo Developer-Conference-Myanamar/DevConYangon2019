@@ -20,7 +20,8 @@ import javax.inject.Inject
 /**
  * Created by Vincent on 11/11/19
  */
-class SessionDetailActivity : MvpActivity<SessionDetailView, SessionDetailViewModel>(),
+class SessionDetailActivity :
+  MvpActivity<ActivitySessionDetailBinding, SessionDetailView, SessionDetailViewModel>(),
   SessionDetailView, SessionDetailSpeakerItemClickListener {
 
   companion object {
@@ -36,10 +37,7 @@ class SessionDetailActivity : MvpActivity<SessionDetailView, SessionDetailViewMo
 
   override val viewModel: SessionDetailViewModel by contractedViewModels()
 
-  override val layoutResId: Int
-    get() = R.layout.activity_session_detail
-
-  private val binding: ActivitySessionDetailBinding by lazy {
+  override val binding: ActivitySessionDetailBinding by lazy {
     ActivitySessionDetailBinding.inflate(layoutInflater)
   }
 

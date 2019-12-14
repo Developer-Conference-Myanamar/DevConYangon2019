@@ -1,13 +1,13 @@
 package org.devconmyanmar.devconyangon.feature.schedule.session
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentSessionBinding
 import org.devconmyanmar.devconyangon.domain.helper.Zones
@@ -19,7 +19,7 @@ import org.threeten.bp.LocalDate
 /**
  * Created by Vincent on 2019-11-02
  */
-class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
+class SessionFragment() : MvpFragment<FragmentSessionBinding, SessionView, SessionViewModel>(),
   SessionView, OnSessionItemClickListener {
 
   companion object {
@@ -36,6 +36,9 @@ class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
     }
   }
 
+  override fun bindView(inflater: LayoutInflater): FragmentSessionBinding =
+    FragmentSessionBinding.inflate(inflater)
+
   private val date by lazy {
     val timestamp = requireArguments().getLong(ARG_DATE)
     Instant.ofEpochMilli(timestamp).atZone(Zones.YANGON).toLocalDate()
@@ -43,15 +46,8 @@ class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
 
   override val viewModel: SessionViewModel by contractedViewModel()
 
-  override val layoutId: Int
-    get() = R.layout.fragment_session
-
   private val sessionRecyclerViewAdapter by lazy {
     SessionRecyclerViewAdapter(this)
-  }
-
-  private val sessionBinding by lazy {
-    FragmentSessionBinding.bind(view!!)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,8 +55,8 @@ class SessionFragment() : MvpFragment<SessionView, SessionViewModel>(),
     viewModel.setDate(date)
     viewModel.loadSessions()
 
-    sessionBinding.rvSession.adapter = sessionRecyclerViewAdapter
-    sessionBinding.rvSession.layoutManager = LinearLayoutManager(requireContext())
+    binding.rvSession.adapter = sessionRecyclerViewAdapter
+    binding.rvSession.layoutManager = LinearLayoutManager(requireContext())
 
   }
 

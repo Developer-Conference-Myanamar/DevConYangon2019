@@ -2,23 +2,19 @@ package org.devconmyanmar.devconyangon.base.core
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import dagger.android.DispatchingAndroidInjector
-import javax.inject.Inject
+import androidx.viewbinding.ViewBinding
 
 /**
  * Created by Vincent on 12/6/18
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
-  @get:LayoutRes
-  abstract val layoutResId: Int
-
+  abstract val binding: VB
+  
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(layoutResId)
+    setContentView(binding.root)
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
