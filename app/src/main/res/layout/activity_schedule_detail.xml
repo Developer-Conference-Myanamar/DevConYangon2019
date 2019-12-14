@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_main_bg">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        style="@style/Theme.MaterialComponents.Light.DarkActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:elevation="4dp">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_main_bg"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:title="">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/contentToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_main_bg"
+                app:layout_collapseMode="parallax"
+                android:gravity="top"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_left"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:id="@+id/contentScroll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <TextView
+                android:id="@+id/scheduleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Keynote for Developer"
+                android:textColor="@color/primary_text_color"
+                android:textSize="24sp"
+                android:transitionName="@string/transition_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="16dp" />
+
+            <TextView
+                android:id="@+id/contentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Tue, Sat 21,9:00-10:00AM"
+                android:drawableStart="@drawable/ic_access_time"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/raleway"
+                android:textSize="16sp"
+                android:drawableTint="@color/primary_icon_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scheduleTitle"
+                tools:targetApi="m"
+                android:layout_marginLeft="16dp"
+                android:drawableLeft="@drawable/ic_access_time" />
+            <TextView
+                android:id="@+id/contentLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Main Hall"
+                android:drawableStart="@drawable/ic_room"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/raleway"
+                android:textSize="16sp"
+                android:transitionName="@string/transition_location"
+                android:drawableTint="@color/primary_icon_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentTime"
+                tools:targetApi="m"
+                android:layout_marginLeft="16dp"
+                android:drawableLeft="@drawable/ic_room" />
+            <TextView
+                android:id="@+id/contentLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Beginner"
+                android:drawableTint="@color/primary_icon_color"
+                android:drawableStart="@drawable/ic_face"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/raleway"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentLocation"
+                tools:targetApi="m"
+                android:layout_marginLeft="16dp"
+                android:drawableLeft="@drawable/ic_face" />
+
+            <TextView
+                android:id="@+id/contentDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/raleway"
+                android:lineSpacingMultiplier="1.4"
+                android:textSize="16sp"
+                android:text="@string/dummy_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentLevel" />
+
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Speaker"
+                android:textSize="18sp"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/primary_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contentDescription"
+                android:layout_marginLeft="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/speakerContentInfoRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                tools:listitem="@layout/item_speaker"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/speakerContentInfoRecycler"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/clapCountLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="center|top"
+        android:alpha="0"
+        android:layout_marginBottom="16dp"
+        app:layout_anchor="@+id/clapFab">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/blue"
+            app:elevation="0dp" />
+
+        <TextView
+            android:id="@+id/tvClapCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkmode_blue"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif"
+            />
+
+    </FrameLayout>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/contentBottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="bottom"
+        app:buttonGravity="bottom|top"
+        app:fabAlignmentMode="end"
+        app:elevation="10dp"
+        app:menu="@menu/schedule_detail_menu"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="5dp"
+        app:hideOnScroll="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clapFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorWhite"
+        android:background="@color/colorWhite"
+        app:fabSize="normal"
+        app:elevation="4dp"
+        app:layout_anchor="@id/contentBottomAppBar"
+        app:srcCompat="@drawable/ic_favorite_outline_black_24dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

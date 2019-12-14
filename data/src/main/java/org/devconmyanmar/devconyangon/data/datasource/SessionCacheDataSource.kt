@@ -20,4 +20,6 @@ interface SessionCacheDataSource {
   fun getFavoriteStatus(sessionId: SessionId): Boolean
 
   fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean)
+
+  fun getSessionDetail(sessionId: SessionId):SessionEntity
 }

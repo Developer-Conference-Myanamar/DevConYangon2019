@@ -19,6 +19,8 @@ class GetSessions @Inject constructor(
     return sessionRepository.getSessionListing(params.date)
   }
 
+
+
   data class Params(
     val date: LocalDate
   )

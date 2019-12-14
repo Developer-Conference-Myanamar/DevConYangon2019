@@ -48,7 +48,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dummy_home" />
+                android:src="@drawable/welcome_splash" />
         </RelativeLayout>
 
         <TextView
