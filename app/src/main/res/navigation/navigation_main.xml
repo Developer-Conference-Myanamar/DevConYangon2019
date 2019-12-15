@@ -27,9 +27,15 @@
     android:name="org.devconmyanmar.devconyangon.feature.agenda.MyAgendaFragment"
     android:label="MyAgendaFragment"
     tools:layout="@layout/fragment_schedule">
+
     <action
       android:id="@+id/action_navigation_my_agenda_to_sessionDetailFragment"
-      app:destination="@id/sessionDetailFragment" />
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -54,7 +60,11 @@
 
     <action
       android:id="@+id/action_sessionDetailFragment_to_speakerDetailFragment"
-      app:destination="@id/speakerDetailFragment" />
+      app:destination="@id/speakerDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
   </fragment>
 
   <fragment
@@ -69,7 +79,11 @@
 
     <action
       android:id="@+id/action_speakerDetailFragment_to_sessionDetailFragment"
-      app:destination="@id/sessionDetailFragment" />
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
   </fragment>
 

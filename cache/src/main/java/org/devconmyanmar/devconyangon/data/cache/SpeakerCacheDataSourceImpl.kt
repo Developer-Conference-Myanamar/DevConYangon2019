@@ -1,12 +1,10 @@
 package org.devconmyanmar.devconyangon.data.cache
 
 import org.devconmyanmar.devconyangon.DevConYangonDb
-import org.devconmyanmar.devconyangon.data.cache.mapper.SessionTableMapper
 import org.devconmyanmar.devconyangon.data.cache.mapper.SpeakerTableMapper
 import org.devconmyanmar.devconyangon.data.datasource.SpeakerCacheDataSource
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
 import org.devconmyanmar.devconyangon.domain.model.SessionId
-import org.devconmyanmar.devconyangon.domain.model.Speaker
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import javax.inject.Inject
 
@@ -23,7 +21,7 @@ class SpeakerCacheDataSourceImpl @Inject constructor(
       speakers.forEach { speakerEntity ->
         db.speakerTableQueries.insert_or_replace(
           speakerEntity.speakerId,
-          speakerEntity.position,
+          speakerEntity.name,
           speakerEntity.biography,
           speakerEntity.position,
           speakerEntity.imageUrl
