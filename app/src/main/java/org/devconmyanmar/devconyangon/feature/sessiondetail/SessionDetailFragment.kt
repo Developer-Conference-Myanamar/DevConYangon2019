@@ -3,10 +3,12 @@ package org.devconmyanmar.devconyangon.feature.sessiondetail
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,11 +43,19 @@ class SessionDetailFragment :
   @Inject
   lateinit var imageLoader: ImageLoader
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return super.onCreateView(inflater, container, savedInstanceState)
 
     //To prevent flickering too fast
     postponeEnterTransition(500L, TimeUnit.MILLISECONDS)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
     if (requireActivity() is AppCompatActivity) {
       (requireActivity() as AppCompatActivity).apply {
@@ -91,6 +101,8 @@ class SessionDetailFragment :
   }
 
   override fun onItemClick(speakerId: SpeakerId, position: Int) {
-    //TODO: Navigate to Speaker Detail
+    val directions = SessionDetailFragmentDirections.actionSessionDetailFragmentToSpeakerDetailFragment(speakerId.value)
+    findNavController().navigate(directions)
+
   }
 }
