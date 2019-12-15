@@ -16,6 +16,7 @@ import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentSessionDetailBinding
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -42,6 +43,9 @@ class SessionDetailFragment :
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    //To prevent flickering too fast
+    postponeEnterTransition(500L, TimeUnit.MILLISECONDS)
 
     if (requireActivity() is AppCompatActivity) {
       (requireActivity() as AppCompatActivity).apply {

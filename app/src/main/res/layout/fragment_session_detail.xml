@@ -39,7 +39,7 @@
         android:paddingLeft="16dp"
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
-        android:text="What New in Myanmar Development Scene"
+        tools:text="What New in Myanmar Development Scene"
         android:textColor="@color/textColorPrimary"
         android:textSize="24sp"
         android:textStyle="bold" />
