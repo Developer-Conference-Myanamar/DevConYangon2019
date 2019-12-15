@@ -48,10 +48,11 @@ class SessionDetailFragment :
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return super.onCreateView(inflater, container, savedInstanceState)
 
     //To prevent flickering too fast
     postponeEnterTransition(500L, TimeUnit.MILLISECONDS)
+
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

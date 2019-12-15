@@ -46,7 +46,8 @@ class SessionRepositoryRealImpl @Inject constructor(
   }
 
   override suspend fun getSessionOfSpeaker(speakerId: SpeakerId): List<Session> {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val sessionOfSpeaker = sessionCacheDataSource.getSessionEntitiesOfSpeaker(speakerId)
+    return sessionOfSpeaker.map(sessionEntityMapper::map)
   }
 
   override suspend fun downloadSessions() {

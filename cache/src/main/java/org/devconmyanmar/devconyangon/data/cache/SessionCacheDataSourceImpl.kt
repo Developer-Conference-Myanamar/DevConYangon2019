@@ -76,7 +76,9 @@ class SessionCacheDataSourceImpl @Inject constructor(
   }
 
   override fun getSessionEntitiesOfSpeaker(speakerId: SpeakerId): List<SessionEntity> {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val queryResult = db.sessionTableQueries.select_by_speaker(speakerId).executeAsList()
+
+    return queryResult.map(sessionTableMapper::map)
   }
 }
 
