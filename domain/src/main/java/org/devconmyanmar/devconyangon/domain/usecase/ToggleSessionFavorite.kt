@@ -22,10 +22,11 @@ class ToggleSessionFavorite @Inject constructor(
     val session = sessionRepository.getSession(params.sessionId)
 
     if (session.isFavorite) {
-//      val notificationDateTime = session.date.atTime(session.startTime).minusMinutes(10)
-      val notificationDateTime = LocalDateTime.now().plusSeconds(5)
+      val notificationDateTime = session.date.atTime(session.startTime).minusMinutes(10)
 
-      sessionNotifier.addSessionNotification(session, notificationDateTime)
+      if (notificationDateTime > LocalDateTime.now()) {
+        sessionNotifier.addSessionNotification(session, notificationDateTime)
+      }
     } else {
       sessionNotifier.removeSessionNotification(session)
     }
