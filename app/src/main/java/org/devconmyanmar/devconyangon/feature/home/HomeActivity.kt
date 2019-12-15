@@ -31,6 +31,7 @@ class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>()
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
+
     binding.bottomNavigationView.setupWithNavController(navController)
   }
 

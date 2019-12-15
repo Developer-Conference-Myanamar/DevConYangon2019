@@ -3,6 +3,7 @@ package org.devconmyanmar.devconyangon.feature.notification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -11,13 +12,12 @@ import android.os.Build.VERSION_CODES
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavDeepLinkBuilder
+import androidx.core.net.toUri
 import dagger.android.AndroidInjection
 import kotlinx.coroutines.runBlocking
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.usecase.GetSessionDetail
-import org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFragmentArgs
 import java.util.Locale
 import javax.inject.Inject
 
@@ -54,7 +54,7 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
     val notificationTitle = session.sessionTitle
 
     val notificationMessage =
-      "\"${dateTimeFormatter.format(session.startTime)}\" at ${session.room.roomName}"
+      "Starting at ${dateTimeFormatter.format(session.startTime)} in ${session.room.roomName}"
 
     if (VERSION.SDK_INT >= VERSION_CODES.O) {
       val notificationChannel = NotificationChannel(
@@ -70,11 +70,20 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
       ) as NotificationManager).createNotificationChannel(notificationChannel)
     }
 
-    val pendingIntent = NavDeepLinkBuilder(context!!)
-      .setGraph(R.navigation.navigation_main)
-      .setDestination(R.id.sessionDetailFragment)
-      .setArguments(SessionDetailFragmentArgs(sessionId.value).toBundle())
-      .createPendingIntent()
+//    val pendingIntent = NavDeepLinkBuilder(context!!)
+//      .setGraph(R.navigation.navigation_main)
+//      .
+//      .setDestination(R.id.sessionDetailFragment)
+//      .setArguments(SessionDetailFragmentArgs(sessionId.value).toBundle())
+//      .createPendingIntent()
+
+    val url = "devconyangon://sessions/${sessionId.value}"
+    val sessionDetailDeepLinkIntent = Intent(Intent.ACTION_VIEW)
+    sessionDetailDeepLinkIntent.data = url.toUri()
+    val pendingIntent = PendingIntent.getActivity(
+      context!!, sessionId.value.toInt(), sessionDetailDeepLinkIntent,
+      PendingIntent.FLAG_ONE_SHOT
+    )
 
     val notificationBuilder = NotificationCompat.Builder(context!!, SESSION_NOTIFICATION_CHANNEL)
       .setContentTitle(notificationTitle)

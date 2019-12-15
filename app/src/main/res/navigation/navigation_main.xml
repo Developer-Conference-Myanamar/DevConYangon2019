@@ -14,7 +14,12 @@
 
     <action
       android:id="@+id/action_navigation_schedule_to_sessionDetailFragment"
-      app:destination="@id/sessionDetailFragment" />
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
   </fragment>
 
   <fragment
@@ -42,6 +47,10 @@
     <argument
       android:name="sessionId"
       app:argType="long" />
+
+    <deepLink
+      android:id="@+id/sessionDetailFragmentDeepLink"
+      app:uri="devconyangon://sessions/{sessionId}" />
 
     <action
       android:id="@+id/action_sessionDetailFragment_to_speakerDetailFragment"
