@@ -10,9 +10,10 @@ import org.devconmyanmar.devconyangon.domain.model.SpeakerId
  */
 interface SpeakerRepository {
 
+  suspend fun downloadSpeakers()
+
   suspend fun getSpeakersOfSession(sessionId: SessionId) : List<Speaker>
 
   suspend fun getSpeaker(speakerId: SpeakerId) : Speaker
-
 
 }

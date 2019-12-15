@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
 import org.devconmyanmar.devconyangon.databinding.FragmentScheduleBinding
 import org.devconmyanmar.devconyangon.feature.schedule.filter.FilterModalBottomSheet
+import timber.log.Timber
 
 /**
  * Created by Vincent on 2019-11-01
@@ -29,12 +30,14 @@ class ScheduleFragment : MvpFragment<FragmentScheduleBinding, ScheduleView, Sche
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    binding.viewPager.adapter = scheduleViewPagerAdapter
+//    try {
+//      binding.viewPager.adapter = scheduleViewPagerAdapter
+//    } catch(exception : Exception) {
+//      Timber.e(exception)
+//    }
 
-    TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-      val itemAtIndex = scheduleViewPagerAdapter.getItemAtPosition(position)
-      tab.text = itemAtIndex.dateAsString
-    }.attach()
+
+
     viewModel.loadConferenceDates()
 
     binding.fabFilter.setOnClickListener {
@@ -51,6 +54,20 @@ class ScheduleFragment : MvpFragment<FragmentScheduleBinding, ScheduleView, Sche
   private fun showBottomSheetDialog() {
     val fragment = FilterModalBottomSheet()
     fragment.show(childFragmentManager, "TAG")
+  }
+
+  override fun onPause() {
+    binding.viewPager.adapter = null
+    super.onPause()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    binding.viewPager.adapter = scheduleViewPagerAdapter
+    TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+      val itemAtIndex = scheduleViewPagerAdapter.getItemAtPosition(position)
+      tab.text = itemAtIndex.dateAsString
+    }.attach()
   }
 
 }

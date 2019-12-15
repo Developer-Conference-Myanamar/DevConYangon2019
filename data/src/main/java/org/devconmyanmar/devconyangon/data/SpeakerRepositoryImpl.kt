@@ -1,5 +1,6 @@
 package org.devconmyanmar.devconyangon.data
 
+import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.data.datasource.SpeakerCacheDataSource
 import org.devconmyanmar.devconyangon.data.entity.SessionEntityMapper
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntityMapper
@@ -14,6 +15,7 @@ import javax.inject.Inject
  */
 class SpeakerRepositoryImpl @Inject constructor(
   private val speakerCacheDataSource: SpeakerCacheDataSource,
+  private val networkDataSource: NetworkDataSource,
   private val sessionEntityMapper: SessionEntityMapper,
   private val speakerEntityMapper: SpeakerEntityMapper
 ) : SpeakerRepository {
@@ -26,6 +28,11 @@ class SpeakerRepositoryImpl @Inject constructor(
     val speakerEntity = speakerCacheDataSource.getSpeakerBySpeakerId(speakerId)
 
     return speakerEntityMapper.map(speakerEntity)
+  }
+
+  override suspend fun downloadSpeakers() {
+    val speakerEntities = networkDataSource.getAllSpeakers()
+    speakerCacheDataSource.putSpeakers(speakerEntities)
   }
 
 }

@@ -10,6 +10,7 @@ import org.devconmyanmar.devconyangon.di.AppModule.Provider
 import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.feature.home.HomeFeatureModule
 import org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFeatureModule
+import org.devconmyanmar.devconyangon.feature.sync.SyncFeatureModule
 import org.threeten.bp.Clock
 import javax.inject.Singleton
 
@@ -21,7 +22,8 @@ import javax.inject.Singleton
     Provider::class,
     BaseAppModule::class,
     HomeFeatureModule::class,
-    SessionDetailFeatureModule::class
+    SessionDetailFeatureModule::class,
+    SyncFeatureModule::class
   ]
 )
 abstract class AppModule {

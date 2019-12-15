@@ -27,25 +27,7 @@ class SessionRepositoryRealImpl @Inject constructor(
   }
 
   override suspend fun getSessionListing(date: LocalDate): List<Session> {
-
-    var networkException: Exception? = null
-    try {
-      val networkData = networkDataSource.getAllSession()
-      sessionCacheDataSource.putSessionEntities(networkData)
-    } catch (exception: Exception) {
-      networkException = exception
-    }
-
     val dataFromCache = sessionCacheDataSource.getSessionEntities(date)
-
-    if (dataFromCache.isEmpty()) {
-      if (networkException != null) {
-        throw networkException
-      } else {
-//        throw EmptyDataException()
-      }
-    }
-
     return dataFromCache.map(sessionEntityMapper::map)
   }
 
@@ -65,6 +47,11 @@ class SessionRepositoryRealImpl @Inject constructor(
 
   override suspend fun getSessionOfSpeaker(speakerId: SpeakerId): List<Session> {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override suspend fun downloadSessions() {
+    val sessionList = networkDataSource.getAllSession()
+    sessionCacheDataSource.putSessionEntities(sessionList)
   }
 
 }

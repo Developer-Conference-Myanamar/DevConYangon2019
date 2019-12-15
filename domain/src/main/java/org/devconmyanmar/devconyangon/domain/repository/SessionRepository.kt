@@ -19,5 +19,7 @@ interface SessionRepository {
   suspend fun toggleFavoriteStatus(sessionId: SessionId)
 
   suspend fun getSessionOfSpeaker(speakerId: SpeakerId) : List<Session>
+  
+  suspend fun downloadSessions()
 
 }
