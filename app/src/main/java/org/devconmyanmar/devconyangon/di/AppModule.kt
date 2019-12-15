@@ -9,6 +9,7 @@ import org.devconmyanmar.devconyangon.base.di.module.BaseAppModule
 import org.devconmyanmar.devconyangon.di.AppModule.Provider
 import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.feature.home.HomeFeatureModule
+import org.devconmyanmar.devconyangon.feature.notification.NotificationModule
 import org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFeatureModule
 import org.devconmyanmar.devconyangon.feature.speakerdetail.SpeakerDetailFeatureModule
 import org.devconmyanmar.devconyangon.feature.sync.SyncFeatureModule
@@ -25,7 +26,8 @@ import javax.inject.Singleton
     HomeFeatureModule::class,
     SessionDetailFeatureModule::class,
     SpeakerDetailFeatureModule::class,
-    SyncFeatureModule::class
+    SyncFeatureModule::class,
+    NotificationModule::class
   ]
 )
 abstract class AppModule {
