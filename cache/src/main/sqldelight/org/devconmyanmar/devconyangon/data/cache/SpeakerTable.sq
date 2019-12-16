@@ -8,8 +8,6 @@ CREATE TABLE SpeakerTable(
   imageUrl TEXT NOT NULL
 );
 
-
-
 insert_or_replace:
 INSERT OR REPLACE INTO SpeakerTable VALUES(:speaker_id, :name, :biography, :position, :imageUrl);
 
@@ -20,3 +18,6 @@ select_by_session:
 SELECT SpeakerTable.speaker_id,SpeakerTable.name, SpeakerTable.biography, SpeakerTable.position, SpeakerTable.imageUrl FROM SpeakerTable
 JOIN SessionSpeakerTable ON SessionSpeakerTable.session = :sessionId
 AND SessionSpeakerTable.speaker = SpeakerTable.speaker_id;
+
+select_all:
+SELECT * FROM SpeakerTable;

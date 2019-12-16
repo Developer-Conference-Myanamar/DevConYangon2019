@@ -43,5 +43,9 @@ class SpeakerCacheDataSourceImpl @Inject constructor(
     val result = db.speakerTableQueries.select_by_id(speakerId).executeAsOne()
     return speakerTableMapper.map(result)
   }
+
+  override fun getAllSpeakers(): List<SpeakerEntity> {
+    return db.speakerTableQueries.select_all().executeAsList().map(speakerTableMapper::map)
+  }
 }
 

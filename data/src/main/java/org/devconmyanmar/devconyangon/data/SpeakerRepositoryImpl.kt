@@ -30,6 +30,10 @@ class SpeakerRepositoryImpl @Inject constructor(
     return speakerEntityMapper.map(speakerEntity)
   }
 
+  override suspend fun getAllSpeakers(): List<Speaker> {
+    return speakerCacheDataSource.getAllSpeakers().map(speakerEntityMapper::map)
+  }
+
   override suspend fun downloadSpeakers() {
     val speakerEntities = networkDataSource.getAllSpeakers()
     speakerCacheDataSource.putSpeakers(speakerEntities)

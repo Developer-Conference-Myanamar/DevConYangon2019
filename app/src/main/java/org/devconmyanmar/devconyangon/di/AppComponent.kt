@@ -15,7 +15,8 @@ import javax.inject.Singleton
 @Component(
   modules = [AppModule::class,
     AndroidInjectionModule::class,
-    AndroidSupportInjectionModule::class]
+    AndroidSupportInjectionModule::class,
+    AssistedInjectModule::class]
 )
 interface AppComponent {
 
@@ -28,5 +29,7 @@ interface AppComponent {
   }
 
   fun inject(application: DevConApp)
+
+  fun factory(): DaggerWorkerFactory
 
 }

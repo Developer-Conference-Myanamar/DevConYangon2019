@@ -6,17 +6,19 @@ import org.devconmyanmar.devconyangon.domain.repository.SpeakerRepository
 import javax.inject.Inject
 
 /**
- * Created by Vincent on 12/15/19
+ * Created by Vincent on 12/17/19
  */
-class SyncData @Inject constructor(
+class RequireToSyncData @Inject constructor(
   private val sessionRepository: SessionRepository,
   private val speakerRepository: SpeakerRepository
-) : CoroutineUseCase<Unit, Unit>() {
+) : CoroutineUseCase<Unit, Boolean>() {
 
-  override suspend fun provide(params: Unit) {
-    sessionRepository.downloadSessions()
-    speakerRepository.downloadSpeakers()
+  override suspend fun provide(params: Unit): Boolean {
+    val sessionList = sessionRepository.getAllSessions()
 
+    val speakerList = speakerRepository.getAllSpeakers()
+
+    return sessionList.isEmpty() || speakerList.isEmpty()
   }
 
 }

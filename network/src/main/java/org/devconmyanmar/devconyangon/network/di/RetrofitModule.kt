@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import org.devconmyanmar.devconyangon.network.BuildConfig
+import org.devconmyanmar.devconyangon.network.DevconYangonApi
 import org.devconmyanmar.devconyangon.network.di.RetrofitModule.Provider
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -35,6 +36,9 @@ abstract class RetrofitModule {
         .build()
     }
 
+    @Provides fun devconYangonApi(retrofit: Retrofit): DevconYangonApi {
+      return retrofit.create(DevconYangonApi::class.java)
+    }
   }
 
 }

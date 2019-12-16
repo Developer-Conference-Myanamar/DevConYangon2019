@@ -80,5 +80,9 @@ class SessionCacheDataSourceImpl @Inject constructor(
 
     return queryResult.map(sessionTableMapper::map)
   }
+
+  override fun getAllSessions(): List<SessionEntity> {
+    return db.sessionTableQueries.select_all().executeAsList().map(sessionTableMapper::map)
+  }
 }
 
