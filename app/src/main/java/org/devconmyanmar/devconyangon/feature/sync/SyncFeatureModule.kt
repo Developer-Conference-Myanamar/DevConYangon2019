@@ -6,8 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import org.devconmyanmar.devconyangon.base.di.viewmodel.ViewModelKey
-import org.devconmyanmar.devconyangon.feature.schedule.ScheduleFragment
-import org.devconmyanmar.devconyangon.feature.schedule.ScheduleViewModel
+import org.devconmyanmar.devconyangon.di.WorkerKey
 
 /**
  * Created by Vincent on 12/15/19
@@ -23,5 +22,9 @@ abstract class SyncFeatureModule {
   @ViewModelKey(SyncViewModel::class)
   abstract fun syncViewModel(syncViewModel: SyncViewModel): ViewModel
 
+  @Binds
+  @IntoMap
+  @WorkerKey(SyncWorker::class)
+  abstract fun syncWorker(factory: SyncWorker.Factory): ChildWorkerFactory
 
 }
