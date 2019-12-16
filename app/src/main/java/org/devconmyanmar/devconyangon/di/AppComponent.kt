@@ -6,7 +6,6 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.support.AndroidSupportInjectionModule
 import org.devconmyanmar.devconyangon.DevConApp
-import org.devconmyanmar.devconyangon.feature.sync.DaggerWorkerFactory
 import javax.inject.Singleton
 
 /**

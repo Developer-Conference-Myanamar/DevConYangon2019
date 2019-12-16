@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import org.devconmyanmar.devconyangon.base.di.viewmodel.ViewModelKey
+import org.devconmyanmar.devconyangon.di.ChildWorkerFactory
 import org.devconmyanmar.devconyangon.di.WorkerKey
 
 /**

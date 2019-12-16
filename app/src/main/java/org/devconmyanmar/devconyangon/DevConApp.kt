@@ -10,7 +10,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import org.devconmyanmar.devconyangon.base.di.AppInjector
 import org.devconmyanmar.devconyangon.di.DaggerAppComponent
-import org.devconmyanmar.devconyangon.feature.sync.DaggerWorkerFactory
+import org.devconmyanmar.devconyangon.di.DaggerWorkerFactory
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject

@@ -3,7 +3,9 @@ package org.devconmyanmar.devconyangon.feature.home
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import org.devconmyanmar.devconyangon.R
@@ -33,6 +35,11 @@ class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>()
 
     val request =
       PeriodicWorkRequestBuilder<SyncWorker>(Duration.ofHours(1).seconds, TimeUnit.SECONDS)
+        .setConstraints(
+          Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        )
         .build()
 
     WorkManager.getInstance(this).enqueueUniquePeriodicWork(
