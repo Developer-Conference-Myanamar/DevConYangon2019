@@ -21,7 +21,7 @@ data class SessionEntity(
   val endTime: LocalTime,
   val room: RoomEntity,
   val speakers: List<SpeakerId>,
-  val isFavorite: Boolean
+  val isFavorite: Boolean = false
 )
 
 class SessionEntityMapper @Inject constructor(
@@ -41,7 +41,7 @@ class SessionEntityMapper @Inject constructor(
       endTime = item.endTime,
       room = roomEntityMapper.map(item.room),
       isFavorite = item.isFavorite,
-      speakers =  speakerCacheDataSource.getSpeakerOfSession(item.sessionId).map(speakerEntityMapper::map)
+      speakers = speakerCacheDataSource.getSpeakerOfSession(item.sessionId).map(speakerEntityMapper::map)
     )
   }
 

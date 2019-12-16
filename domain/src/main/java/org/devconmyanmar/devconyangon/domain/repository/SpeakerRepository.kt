@@ -1,6 +1,5 @@
 package org.devconmyanmar.devconyangon.domain.repository
 
-import org.devconmyanmar.devconyangon.domain.model.Session
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.Speaker
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
@@ -12,8 +11,10 @@ interface SpeakerRepository {
 
   suspend fun downloadSpeakers()
 
-  suspend fun getSpeakersOfSession(sessionId: SessionId) : List<Speaker>
+  suspend fun getSpeakersOfSession(sessionId: SessionId): List<Speaker>
 
-  suspend fun getSpeaker(speakerId: SpeakerId) : Speaker
+  suspend fun getSpeaker(speakerId: SpeakerId): Speaker
+
+  suspend fun getAllSpeakers(): List<Speaker>
 
 }

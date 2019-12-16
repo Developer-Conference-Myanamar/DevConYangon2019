@@ -55,4 +55,8 @@ class SessionRepositoryRealImpl @Inject constructor(
     sessionCacheDataSource.putSessionEntities(sessionList)
   }
 
+  override suspend fun getAllSessions(): List<Session> {
+    return sessionCacheDataSource.getAllSessions().map(sessionEntityMapper::map)
+  }
+
 }

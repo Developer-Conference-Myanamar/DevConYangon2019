@@ -9,171 +9,81 @@ import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
-import org.threeten.bp.Month
+import org.threeten.bp.format.DateTimeFormatter
+import java.util.Locale
 import javax.inject.Inject
 
 /**
  * Created by Vincent on 12/14/19
  */
 
-class NetworkDataSourceImpl @Inject constructor() : NetworkDataSource {
+class NetworkDataSourceImpl @Inject constructor(
+  private val devconYangonApi: DevconYangonApi
+) : NetworkDataSource {
 
   override fun getAllSpeakers(): List<SpeakerEntity> {
-    return listOf(
-      SpeakerEntity(
-        speakerId = SpeakerId(0),
-        name = "John Doe",
-        position = "Networking Enginner",
-        biography = "Biography",
-        imageUrl = "lol",
-        sessionList = listOf()
-      ),
-      SpeakerEntity(
-        speakerId = SpeakerId(1),
-        name = "Walter White",
-        position = "Five Star Chef",
-        biography = "Biography",
-        imageUrl = "lol",
-        sessionList = listOf()
-      ),
-      SpeakerEntity(
-        speakerId = SpeakerId(2),
-        name = "Very Good Person",
-        position = "Very Good PM",
-        biography = "Biography",
-        imageUrl = "lol",
-        sessionList = listOf()
-      )
-    )
+    val response = devconYangonApi.getSchedules().executeOrThrow()
+
+    val speakerAndSessionIdMap = mutableMapOf<SpeakerId, Set<SessionId>>()
+
+    response.schedules.forEachIndexed { index, schedule ->
+
+      val sessionId = SessionId(schedule.scheduleId)
+      schedule.speaker.forEach {
+
+        val speakerId = SpeakerId(it.speakerId)
+        //Check if exist already
+        speakerAndSessionIdMap[speakerId] = if (speakerAndSessionIdMap.containsKey(speakerId)) {
+          speakerAndSessionIdMap.getValue(speakerId) + sessionId
+        } else {
+          setOf(sessionId)
+        }
+      }
+    }
+
+    val speakerSet = mutableSetOf<SpeakerEntity>()
+    response.schedules.forEach { schedule ->
+
+      schedule.speaker.forEach {
+        val speakerId = SpeakerId(it.speakerId)
+        val speakerEntity = SpeakerEntity(
+          speakerId = speakerId,
+          name = it.name,
+          biography = it.info,
+          position = it.position,
+          imageUrl = "",
+          sessionList = speakerAndSessionIdMap.getValue(speakerId).toList()
+        )
+        speakerSet.add(speakerEntity)
+      }
+    }
+
+    return speakerSet.toList()
   }
 
   override fun getAllSession(): List<SessionEntity> {
-    return listOf(
+    val response = devconYangonApi.getSchedules().executeOrThrow()
+
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
+
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
+
+    return response.schedules.mapIndexed { index, schedule ->
       SessionEntity(
-        sessionId = SessionId(0),
-        sessionTitle = "Building a robust web System",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          21
-        ),
-        startTime = LocalTime.of(9, 0),
-        endTime = LocalTime.of(10, 0),
+        sessionId = SessionId(schedule.scheduleId),
+        sessionTitle = schedule.scheduleTitle,
+        startTime = LocalTime.parse(schedule.scheduleStartTime, timeFormatter),
+        endTime = LocalTime.parse(schedule.scheduleStartTime, timeFormatter).plusMinutes(45),
         room = RoomEntity(
-          roomId = RoomId(0),
-          roomName = "Main Hall"
+          RoomId(index.toLong()),
+          schedule.scheduleLocation
         ),
-        speakers = listOf(SpeakerId(0)),
-        isFavorite = false
-      ),
-      SessionEntity(
-        sessionId = SessionId(1),
-        sessionTitle = "Android X and Y",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          21
-        ),
-        startTime = LocalTime.of(9, 0),
-        endTime = LocalTime.of(10, 0),
-        room = RoomEntity(
-          roomId = RoomId(1),
-          roomName = "203"
-        ),
-        speakers = listOf(SpeakerId(1)),
-        isFavorite = false
-      ),
-      SessionEntity(
-        sessionId = SessionId(2),
-        sessionTitle = "Creating a good quality product",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          21
-        ),
-        startTime = LocalTime.of(13, 30),
-        endTime = LocalTime.of(14, 30),
-        room = RoomEntity(
-          roomId = RoomId(0),
-          roomName = "Main Hall"
-        ),
-        speakers = listOf(SpeakerId(2)),
-        isFavorite = false
-      ),
-      SessionEntity(
-        sessionId = SessionId(3),
-        sessionTitle = "Very Good Talk",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          22
-        ),
-        startTime = LocalTime.of(10, 30),
-        endTime = LocalTime.of(11, 30),
-        room = RoomEntity(
-          roomId = RoomId(2),
-          roomName = "305"
-        ),
-        speakers = listOf(SpeakerId(1), SpeakerId(2)),
-        isFavorite = false
-      ), SessionEntity(
-        sessionId = SessionId(4),
-        sessionTitle = "Very Good Talk 2",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          22
-        ),
-        startTime = LocalTime.of(10, 30),
-        endTime = LocalTime.of(11, 30),
-        room = RoomEntity(
-          roomId = RoomId(2),
-          roomName = "305"
-        ),
-        speakers = listOf(SpeakerId(0)),
-        isFavorite = false
-      ), SessionEntity(
-        sessionId = SessionId(5),
-        sessionTitle = "Very Good Talk 3",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          22
-        ),
-        startTime = LocalTime.of(12, 30),
-        endTime = LocalTime.of(13, 30),
-        room = RoomEntity(
-          roomId = RoomId(2),
-          roomName = "305"
-        ),
-        speakers = listOf(SpeakerId(2)),
-        isFavorite = false
-      ),
-      SessionEntity(
-        sessionId = SessionId(6),
-        sessionTitle = "Very Good Talk 3",
-        abstract = "Abstract",
-        date = LocalDate.of(
-          2019,
-          Month.DECEMBER.value,
-          21
-        ),
-        startTime = LocalTime.of(13, 30),
-        endTime = LocalTime.of(15, 0),
-        room = RoomEntity(
-          roomId = RoomId(2),
-          roomName = "305"
-        ),
-        speakers = listOf(SpeakerId(0)),
-        isFavorite = false
+        abstract = schedule.scheduleDescription,
+        date = LocalDate.parse(schedule.scheduleDate.substringBefore(' '), dateFormatter),
+        speakers = schedule.speaker.map { SpeakerId(it.speakerId) }
       )
-    )
+
+    }
   }
 
 }

@@ -9,4 +9,8 @@ interface SyncView : Viewable {
 
   fun navigateToHome()
 
+  fun showSyncing()
+  
+  fun showError(errorMessage: String)
+
 }

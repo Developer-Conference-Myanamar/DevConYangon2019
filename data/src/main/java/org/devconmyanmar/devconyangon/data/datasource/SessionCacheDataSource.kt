@@ -22,6 +22,8 @@ interface SessionCacheDataSource {
 
   fun updateFavoriteStatus(sessionId: SessionId, favoriteStatus: Boolean)
 
-  fun getSessionEntitiesOfSpeaker(speakerId: SpeakerId) : List<SessionEntity>
+  fun getSessionEntitiesOfSpeaker(speakerId: SpeakerId): List<SessionEntity>
+
+  fun getAllSessions(): List<SessionEntity>
 
 }

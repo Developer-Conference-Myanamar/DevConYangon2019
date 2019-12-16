@@ -34,6 +34,9 @@ SELECT SessionTable.session_id,SessionTable.session_title,SessionTable.abstract,
 JOIN SessionSpeakerTable ON SessionSpeakerTable.speaker = :speakerId
 AND SessionSpeakerTable.session = SessionTable.session_id;
 
+select_all:
+SELECT * FROM SessionTable;
+
 insert:
 INSERT INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
 VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
