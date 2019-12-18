@@ -4,9 +4,12 @@ import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
 import org.devconmyanmar.devconyangon.data.entity.SpeakerEntity
+import org.devconmyanmar.devconyangon.data.entity.SponsorEntity
 import org.devconmyanmar.devconyangon.domain.model.RoomId
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
+import org.devconmyanmar.devconyangon.domain.model.SponsorId
+import org.devconmyanmar.devconyangon.network.response.SponsorItem
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -83,6 +86,23 @@ class NetworkDataSourceImpl @Inject constructor(
         speakers = schedule.speaker.map { SpeakerId(it.speakerId) }
       )
 
+    }
+  }
+
+  override fun getAllSponsors(): List<SponsorEntity> {
+    val response = devconYangonApi.getSponsors().executeOrThrow()
+    return response.sponsor.mapIndexed { index: Int, sponsorItem: SponsorItem ->
+      val sponsorId=SponsorId(sponsorItem.id.toLong())
+      SponsorEntity(
+        id = sponsorId,
+        sponsorTitle = sponsorItem.sponsorTitle,
+        sponserType = sponsorItem.sponserType,
+        updatedAt = sponsorItem.updatedAt,
+        createdAt = sponsorItem.createdAt,
+        sponsorLogo = sponsorItem.sponsorLogo,
+        sponsorName = sponsorItem.sponsorId,
+        sponsorDetail = sponsorItem.sponsorDetail
+      )
     }
   }
 
