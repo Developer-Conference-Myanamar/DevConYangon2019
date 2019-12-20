@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import coil.ImageLoader
 import coil.api.load
+import com.bumptech.glide.Glide
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseRecyclerViewAdapter
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseViewHolder
@@ -38,10 +39,14 @@ class SponsorViewHolder(
 
     override fun bind(item: SponsorViewItem) {
         binding.tvSponsorType.text=item.sponserType
-        imageLoader.load(itemView.context, item.sponsorLogo) {
-            crossfade(true)
-            placeholder(R.drawable.ic_placeholder_speaker)
-        }
+        binding.tvSponsorName.text=item.sponsorName
+//        imageLoader.load(itemView.context, item.sponsorLogo) {
+//            crossfade(true)
+//            placeholder(R.drawable.ic_placeholder_speaker)
+//        }
+        Glide.with(itemView.context)
+            .load(item.sponsorLogo)
+            .into(binding.imgSponsorLogo)
     }
 
 }

@@ -8,8 +8,12 @@ import javax.inject.Inject
 
 class GetSponsors @Inject constructor(
     private val sponsorRepository: SponsorRepository
-) : CoroutineUseCase<SponsorId, List<Sponsor>>(){
-    override suspend fun provide(params: SponsorId):  List<Sponsor> {
+) : CoroutineUseCase<GetSponsors.Params, List<Sponsor>>(){
+    override suspend fun provide(params: Params):  List<Sponsor> {
         return sponsorRepository.getSponsorList()
     }
+
+    data class Params(
+        val value: Long
+    )
 }

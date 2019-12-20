@@ -25,7 +25,8 @@ class SponsorViewModel @Inject constructor(
         scope.launch {
             try{
                 val sponsor=getSponsors.execute(
-                    SponsorId(0)).map(sponsorViewItemMapper::map)
+                    GetSponsors.Params(0L))
+                    .map(sponsorViewItemMapper::map)
                 sponsorListLD.postValue(AsyncViewResource.Success(sponsor))
             }catch (exception:Exception){
                 Timber.e(exception)

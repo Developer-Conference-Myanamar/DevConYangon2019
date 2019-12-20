@@ -17,18 +17,27 @@ class InfoFragment : MvpFragment<FragmentInfoBinding, InfoView, InfoViewModel>()
   override fun bindView(inflater: LayoutInflater): FragmentInfoBinding =
     FragmentInfoBinding.inflate(inflater)
 
+  private val infoViewPagerAdapter by lazy {
+    MoreViewPagerAdapter(this)
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    binding.viewPager.adapter = InfoViewPagerAdapter()
-    TabLayoutMediator(binding.tabLayout, binding.viewPager,
-      TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-        when (position) {
-          0 -> tab.text = "Setting"
-          1 -> tab.text = "About"
-          2 -> tab.text = "Sponsor"
-        }
-      }).attach()
+//    binding.viewPager.adapter = InfoViewPagerAdapter()
+//    TabLayoutMediator(binding.tabLayout, binding.viewPager,
+//      TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+//        when (position) {
+//          0 -> tab.text = "Setting"
+//          1 -> tab.text = "About"
+//          2 -> tab.text = "Sponsor"
+//        }
+//      }).attach()
+
+    binding.viewPager.adapter = infoViewPagerAdapter
+    TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+      tab.text =  infoViewPagerAdapter.getItemAtPosition(position)
+    }.attach()
   }
 
 }

@@ -1,11 +1,12 @@
 buildscript {
-  repositories {
-    google()
-    mavenCentral()
-  }
-  dependencies {
-    classpath AndroidArchNavigation.safe_args_plugin
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath AndroidArchNavigation.safe_args_plugin
+    }
 }
 
 apply plugin: 'com.android.application'
@@ -14,132 +15,135 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-  compileSdkVersion BuildConfig.compileSdk
-  testOptions.unitTests.includeAndroidResources = true
+    compileSdkVersion BuildConfig.compileSdk
+    testOptions.unitTests.includeAndroidResources = true
 
-  defaultConfig {
-    applicationId "org.devconmyanmar.devconyangon"
-    minSdkVersion BuildConfig.minSdk
-    targetSdkVersion BuildConfig.targetSdk
-    versionCode BuildConfig.versionCode
-    versionName BuildConfig.versionName
-    resConfigs "en", "mm"
-    vectorDrawables.useSupportLibrary = true
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    defaultConfig {
+        applicationId "org.devconmyanmar.devconyangon"
+        minSdkVersion BuildConfig.minSdk
+        targetSdkVersion BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+        resConfigs "en", "mm"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    viewBinding {
-      enabled = true
-    }
-  }
-
-  buildTypes {
-    debug {
-      minifyEnabled false
-      debuggable true
-      manifestPlaceholders = [enableCrashReporting: "false"]
+        viewBinding {
+            enabled = true
+        }
     }
 
-    release {
-      minifyEnabled true
-      zipAlignEnabled true
-      debuggable false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            manifestPlaceholders = [enableCrashReporting: "false"]
+        }
+
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
-  }
 
-  compileOptions {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-  }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
-  kotlinOptions {
-    jvmTarget = "1.8"
-  }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation project(':appbase')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':appbase')
 
-  //ThreeTenABP
-  implementation ThreeTenBp.android
+    //ThreeTenABP
+    implementation ThreeTenBp.android
 
-  //AndroidX
-  implementation AndroidXCore.core
-  implementation AndroidXCore.core_ktx
-  implementation AndroidXAppCompat.app_compat
-  implementation AndroidXRecyclerView.recycler_view
+    //AndroidX
+    implementation AndroidXCore.core
+    implementation AndroidXCore.core_ktx
+    implementation AndroidXAppCompat.app_compat
+    implementation AndroidXRecyclerView.recycler_view
 
-  //AndroidX work
-  implementation AndroidArchWork.work_runtime_ktx
+    //AndroidX work
+    implementation AndroidArchWork.work_runtime_ktx
 
-  //Androidx Nav
-  implementation AndroidArchNavigation.fragment_ktx
-  implementation AndroidArchNavigation.ui_ktx
-  kapt AndroidArchNavigation.safe_args_generator
+    //Androidx Nav
+    implementation AndroidArchNavigation.fragment_ktx
+    implementation AndroidArchNavigation.ui_ktx
+    kapt AndroidArchNavigation.safe_args_generator
 
-  //Inject
-  implementation CommonLibs.javaxInject
-  kapt Dagger.compiler
-  kapt Dagger.android_processor
-  implementation AssistedInject.annotations_dagger
-  kapt AssistedInject.processor_dagger
+    //Inject
+    implementation CommonLibs.javaxInject
+    kapt Dagger.compiler
+    kapt Dagger.android_processor
+    implementation AssistedInject.annotations_dagger
+    kapt AssistedInject.processor_dagger
 
-  //View
-  implementation MPAndroidChart.base
+    //View
+    implementation MPAndroidChart.base
 
-  //Arch
-  kapt AndroidArchLifeCycle.lifecycle_compiler
+    //Arch
+    kapt AndroidArchLifeCycle.lifecycle_compiler
 
-  //Color
-  implementation CommonLibs.colorpicker
+    //Color
+    implementation CommonLibs.colorpicker
 
-  //ShapeOfViews
-  implementation CommonLibs.shape_of_views
+    //ShapeOfViews
+    implementation CommonLibs.shape_of_views
 
-  //Timber
-  api CommonLibs.timber
+    //Timber
+    api CommonLibs.timber
 
-  //Image Loader
-  implementation Coil.coil
+    //Image Loader
+    implementation Coil.coil
 
-  //Permission
-  implementation CommonLibs.dexter
+    //Permission
+    implementation CommonLibs.dexter
 
-  //Leak Canary
-  debugImplementation LeakCanary.android
+    //Leak Canary
+    debugImplementation LeakCanary.android
 
-  //Debugging
-  debugImplementation Flipper.flipper
-  debugImplementation Flipper.soloader
-  debugImplementation Flipper.network_plugin
-  releaseImplementation Flipper.filpper_no_op
+    //Debugging
+    debugImplementation Flipper.flipper
+    debugImplementation Flipper.soloader
+    debugImplementation Flipper.network_plugin
+    releaseImplementation Flipper.filpper_no_op
 
-  //Test
-  testImplementation CommonLibs.junit
-  testImplementation AndroidArchCore.test
-  testImplementation AndroidXTestExt.junit_ktx
-  testImplementation AndroidXTestExt.truth
-  testImplementation Mockito.core
-  testImplementation Mockito.inline
-  testImplementation Mockito.kotlin
-  testImplementation AndroidArchWork.work_testing
+    //Test
+    testImplementation CommonLibs.junit
+    testImplementation AndroidArchCore.test
+    testImplementation AndroidXTestExt.junit_ktx
+    testImplementation AndroidXTestExt.truth
+    testImplementation Mockito.core
+    testImplementation Mockito.inline
+    testImplementation Mockito.kotlin
+    testImplementation AndroidArchWork.work_testing
 
-  kaptAndroidTest Dagger.compiler
-  androidTestImplementation Mockito.core
-  androidTestImplementation Mockito.inline
-  androidTestImplementation Mockito.kotlin
-  androidTestImplementation AndroidXTest.rules
-  androidTestImplementation AndroidXTest.runner
-  androidTestImplementation AndroidArchCore.test
-  androidTestImplementation AndroidXEspresso.core
-  androidTestImplementation AndroidXEspresso.contrib
-  androidTestImplementation AndroidXEspresso.intents
-  androidTestImplementation AndroidXEspresso.idling_concurrent
-  androidTestImplementation AndroidXEspresso.idling_resource
-  androidTestImplementation FragmentTestRule.android
-  androidTestImplementation AndroidXEspresso.rx_idler
+    kaptAndroidTest Dagger.compiler
+    androidTestImplementation Mockito.core
+    androidTestImplementation Mockito.inline
+    androidTestImplementation Mockito.kotlin
+    androidTestImplementation AndroidXTest.rules
+    androidTestImplementation AndroidXTest.runner
+    androidTestImplementation AndroidArchCore.test
+    androidTestImplementation AndroidXEspresso.core
+    androidTestImplementation AndroidXEspresso.contrib
+    androidTestImplementation AndroidXEspresso.intents
+    androidTestImplementation AndroidXEspresso.idling_concurrent
+    androidTestImplementation AndroidXEspresso.idling_resource
+    androidTestImplementation FragmentTestRule.android
+    androidTestImplementation AndroidXEspresso.rx_idler
 
-  implementation 'androidx.viewpager2:viewpager2:1.0.0-rc01'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-rc01'
     implementation 'androidx.browser:browser:1.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 }

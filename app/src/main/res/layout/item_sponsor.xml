@@ -14,12 +14,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/tvSponsorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Main Sponsor"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/raleway_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSponsorType"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <ImageView
         android:id="@+id/imgSponsorLogo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvSponsorType"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/tvSponsorName"
         app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

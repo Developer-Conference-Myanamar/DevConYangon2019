@@ -12,7 +12,7 @@ object LocalDateColumnAdapter : ColumnAdapter<LocalDate, String> {
   private val dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE
 
   override fun decode(databaseValue: String): LocalDate {
-    return LocalDate.parse(databaseValue, dateTimeFormatter);
+    return LocalDate.parse(databaseValue, dateTimeFormatter)
   }
 
   override fun encode(value: LocalDate): String {

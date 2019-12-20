@@ -16,29 +16,31 @@ import org.devconmyanmar.devconyangon.base.helper.AsyncViewResource
 import org.devconmyanmar.devconyangon.databinding.FragmentSponsorBinding
 import javax.inject.Inject
 
-class SponsorFragment:MvpFragment<FragmentSponsorBinding,SponsorView,SponsorViewModel>(),SponsorView{
+class SponsorFragment : MvpFragment<FragmentSponsorBinding, SponsorView, SponsorViewModel>(),
+    SponsorView {
 
     override val viewModel: SponsorViewModel by contractedViewModel()
 
-    override fun bindView(inflater: LayoutInflater): FragmentSponsorBinding
-        = FragmentSponsorBinding.inflate(layoutInflater)
+    override fun bindView(inflater: LayoutInflater): FragmentSponsorBinding =
+        FragmentSponsorBinding.inflate(layoutInflater)
 
     @Inject
     lateinit var imageLoader: ImageLoader
 
-    private val sponsorAdapter by lazy{
+    private val sponsorAdapter by lazy {
         SponsorRecyclerViewAdapter(imageLoader)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadSponsors()
         binding.recyclerSponsorLit.apply {
             adapter = sponsorAdapter
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
 
-        viewModel.loadSponsors()
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -47,11 +49,9 @@ class SponsorFragment:MvpFragment<FragmentSponsorBinding,SponsorView,SponsorView
 
     override fun showSponsorListOnScreen(sponsorListLD: LiveData<AsyncViewResource<List<SponsorViewItem>>>) {
         sponsorListLD.observe(this, Observer {
-            when(it){
-                is AsyncViewResource.Success->{
-                    binding.apply {
-                        sponsorAdapter.submitList(it.value)
-                    }
+            when (it) {
+                is AsyncViewResource.Success -> {
+                    sponsorAdapter.submitList(it.value)
                 }
             }
         })
