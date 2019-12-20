@@ -1,6 +1,5 @@
 package org.devconmyanmar.devconyangon.network
 
-import android.util.Log
 import org.devconmyanmar.devconyangon.data.datasource.NetworkDataSource
 import org.devconmyanmar.devconyangon.data.entity.RoomEntity
 import org.devconmyanmar.devconyangon.data.entity.SessionEntity
@@ -10,113 +9,102 @@ import org.devconmyanmar.devconyangon.domain.model.RoomId
 import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.devconmyanmar.devconyangon.domain.model.SponsorId
-import org.devconmyanmar.devconyangon.network.response.GetSponsorResponse
-import org.devconmyanmar.devconyangon.network.response.SponsorItem
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 import javax.inject.Inject
-import javax.security.auth.callback.Callback
 
 /**
  * Created by Vincent on 12/14/19
  */
 
 class NetworkDataSourceImpl @Inject constructor(
-    private val devconYangonApi: DevconYangonApi
+  private val devconYangonApi: DevconYangonApi
 ) : NetworkDataSource {
 
-    override fun getAllSpeakers(): List<SpeakerEntity> {
-        val response = devconYangonApi.getSchedules().executeOrThrow()
+  override fun getAllSpeakers(): List<SpeakerEntity> {
+    val response = devconYangonApi.getSchedules().executeOrThrow()
 
-        val speakerAndSessionIdMap = mutableMapOf<SpeakerId, Set<SessionId>>()
+    val speakerAndSessionIdMap = mutableMapOf<SpeakerId, Set<SessionId>>()
 
-        response.schedules.forEachIndexed { index, schedule ->
+    response.schedules.forEachIndexed { index, schedule ->
 
-            val sessionId = SessionId(schedule.scheduleId)
-            schedule.speaker.forEach {
+      val sessionId = SessionId(schedule.scheduleId)
+      schedule.speaker.forEach {
 
-                val speakerId = SpeakerId(it.speakerId)
-                //Check if exist already
-                speakerAndSessionIdMap[speakerId] =
-                    if (speakerAndSessionIdMap.containsKey(speakerId)) {
-                        speakerAndSessionIdMap.getValue(speakerId) + sessionId
-                    } else {
-                        setOf(sessionId)
-                    }
-            }
-        }
-
-        val speakerSet = mutableSetOf<SpeakerEntity>()
-        response.schedules.forEach { schedule ->
-
-            schedule.speaker.forEach {
-                val speakerId = SpeakerId(it.speakerId)
-                val speakerEntity = SpeakerEntity(
-                    speakerId = speakerId,
-                    name = it.name,
-                    biography = it.info,
-                    position = it.position,
-                    imageUrl = "",
-                    sessionList = speakerAndSessionIdMap.getValue(speakerId).toList()
-                )
-                speakerSet.add(speakerEntity)
-            }
-        }
-
-        return speakerSet.toList()
+        val speakerId = SpeakerId(it.speakerId)
+        //Check if exist already
+        speakerAndSessionIdMap[speakerId] =
+          if (speakerAndSessionIdMap.containsKey(speakerId)) {
+            speakerAndSessionIdMap.getValue(speakerId) + sessionId
+          } else {
+            setOf(sessionId)
+          }
+      }
     }
 
-    override fun getAllSession(): List<SessionEntity> {
-        val response = devconYangonApi.getSchedules().executeOrThrow()
+    val speakerSet = mutableSetOf<SpeakerEntity>()
+    response.schedules.forEach { schedule ->
 
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
-
-        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
-
-        return response.schedules.mapIndexed { index, schedule ->
-            SessionEntity(
-                sessionId = SessionId(schedule.scheduleId),
-                sessionTitle = schedule.scheduleTitle,
-                startTime = LocalTime.parse(schedule.scheduleStartTime, timeFormatter),
-                endTime = LocalTime.parse(
-                    schedule.scheduleStartTime,
-                    timeFormatter
-                ).plusMinutes(45),
-                room = RoomEntity(
-                    RoomId(index.toLong()),
-                    schedule.scheduleLocation
-                ),
-                abstract = schedule.scheduleDescription,
-                date = LocalDate.parse(schedule.scheduleDate.substringBefore(' '), dateFormatter),
-                speakers = schedule.speaker.map { SpeakerId(it.speakerId) }
-            )
-
-        }
+      schedule.speaker.forEach {
+        val speakerId = SpeakerId(it.speakerId)
+        val speakerEntity = SpeakerEntity(
+          speakerId = speakerId,
+          name = it.name,
+          biography = it.info,
+          position = it.position,
+          imageUrl = "",
+          sessionList = speakerAndSessionIdMap.getValue(speakerId).toList()
+        )
+        speakerSet.add(speakerEntity)
+      }
     }
 
-    override fun getAllSponsors(): List<SponsorEntity> {
-        val response = devconYangonApi.getSponsors().executeOrThrow()
+    return speakerSet.toList()
+  }
 
-        val sponsorList = ArrayList<SponsorEntity>()
-        response.sponser.forEach { sponsorItem ->
-            val id=sponsorItem.id?:0
-            sponsorList.add(
-                SponsorEntity(
-                    id = SponsorId(id.toLong()),
-                    sponsorTitle = sponsorItem.sponsorTitle?:"",
-                    sponserType = sponsorItem.sponserType?:"",
-                    updatedAt = sponsorItem.updatedAt?:"",
-                    createdAt = sponsorItem.createdAt?:"",
-                    sponsorLogo = sponsorItem.sponsorLogo?:"",
-                    sponsorName = sponsorItem.sponsorId?:"",
-                    sponsorDetail = sponsorItem.sponsorDetail?:""
-                )
-            )
-        }
-        return sponsorList
+  override fun getAllSession(): List<SessionEntity> {
+    val response = devconYangonApi.getSchedules().executeOrThrow()
+
+    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.ENGLISH)
+
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
+
+    return response.schedules.mapIndexed { index, schedule ->
+      SessionEntity(
+        sessionId = SessionId(schedule.scheduleId),
+        sessionTitle = schedule.scheduleTitle,
+        startTime = LocalTime.parse(schedule.scheduleStartTime, timeFormatter),
+        endTime = LocalTime.parse(
+          schedule.scheduleStartTime,
+          timeFormatter
+        ).plusMinutes(45),
+        room = RoomEntity(
+          RoomId(index.toLong()),
+          schedule.scheduleLocation
+        ),
+        abstract = schedule.scheduleDescription,
+        date = LocalDate.parse(schedule.scheduleDate.substringBefore(' '), dateFormatter),
+        speakers = schedule.speaker.map { SpeakerId(it.speakerId) }
+      )
+
     }
+  }
 
+  override fun getAllSponsors(): List<SponsorEntity> {
+    val response = devconYangonApi.getSponsors().executeOrThrow()
+
+    return response.sponsorList.map {
+      SponsorEntity(
+        id = SponsorId(it.id),
+        title = it.sponsorTitle,
+        name = it.sponsorName,
+        type = it.sponsorType,
+        detail = it.sponsorDetail,
+        logo = it.sponsorLogo
+      )
+    }
+  }
 
 }

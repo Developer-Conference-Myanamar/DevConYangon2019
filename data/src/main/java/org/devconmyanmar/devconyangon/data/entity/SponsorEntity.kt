@@ -6,28 +6,24 @@ import org.devconmyanmar.devconyangon.domain.model.SponsorId
 import javax.inject.Inject
 
 data class SponsorEntity(
-    val sponsorTitle: String,
-    val sponserType: String,
-    val updatedAt: String,
-    val createdAt: String,
-    val id: SponsorId,
-    val sponsorLogo: String,
-    val sponsorName: String,
-    val sponsorDetail: String
+  val id: SponsorId,
+  val name: String,
+  val title: String,
+  val type: String,
+  val logo: String,
+  val detail: String
 )
 
 class SponsorEntityMapper @Inject constructor() : UnidirectionalMap<SponsorEntity, Sponsor> {
-    override fun map(item: SponsorEntity): Sponsor {
-        return Sponsor(
-            id = item.id,
-            sponsorTitle = item.sponsorTitle,
-            sponserType = item.sponserType,
-            updatedAt = item.updatedAt,
-            createdAt = item.createdAt,
-            sponsorLogo = item.sponsorLogo,
-            sponsorName = item.sponsorName,
-            sponsorDetail = item.sponsorDetail
-        )
-    }
+  override fun map(item: SponsorEntity): Sponsor {
+    return Sponsor(
+      id = item.id,
+      name = item.name,
+      title = item.title,
+      type = item.type,
+      logo = item.logo,
+      detail = item.detail
+    )
+  }
 
 }

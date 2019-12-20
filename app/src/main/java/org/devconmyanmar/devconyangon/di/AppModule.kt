@@ -11,7 +11,7 @@ import org.devconmyanmar.devconyangon.di.AppModule.Provider
 import org.devconmyanmar.devconyangon.domain.exception.ExceptionToStringMapper
 import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.exception.ExceptionToStringMapperImpl
-import org.devconmyanmar.devconyangon.feature.about.Infofragments.sponsor.SponsorFeatureModule
+import org.devconmyanmar.devconyangon.feature.about.info.sponsor.SponsorFeatureModule
 import org.devconmyanmar.devconyangon.feature.home.HomeFeatureModule
 import org.devconmyanmar.devconyangon.feature.notification.NotificationModule
 import org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFeatureModule

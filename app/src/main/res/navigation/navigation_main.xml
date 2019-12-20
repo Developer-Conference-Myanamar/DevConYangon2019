@@ -40,7 +40,7 @@
 
   <fragment
     android:id="@+id/navigation_info"
-    android:name="org.devconmyanmar.devconyangon.feature.about.InfoFragment"
+    android:name="org.devconmyanmar.devconyangon.feature.about.info.sponsor.SponsorFragment"
     android:label="InfoFragment"
     tools:layout="@layout/fragment_info" />
 

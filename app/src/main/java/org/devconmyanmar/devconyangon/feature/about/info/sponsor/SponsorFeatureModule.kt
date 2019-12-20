@@ -1,4 +1,4 @@
-package org.devconmyanmar.devconyangon.feature.about.Infofragments.sponsor
+package org.devconmyanmar.devconyangon.feature.about.info.sponsor
 
 import androidx.lifecycle.ViewModel
 import dagger.Binds

@@ -7,10 +7,12 @@ import org.devconmyanmar.devconyangon.domain.repository.SponsorRepository
 import javax.inject.Inject
 
 class SponsorRepositoryRealImpl @Inject constructor(
-    private val networkDataSource: NetworkDataSource,
-    private val sponsorEntityMapper: SponsorEntityMapper
-):SponsorRepository{
-    override suspend fun getSponsorList(): List<Sponsor> {
-        return networkDataSource.getAllSponsors().map(sponsorEntityMapper::map)
-    }
+  private val networkDataSource: NetworkDataSource,
+  private val sponsorEntityMapper: SponsorEntityMapper
+) : SponsorRepository {
+
+  override suspend fun getSponsorList(): List<Sponsor> {
+    return networkDataSource.getAllSponsors().map(sponsorEntityMapper::map)
+  }
+
 }
