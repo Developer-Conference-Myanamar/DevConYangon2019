@@ -38,7 +38,7 @@ class SponsorViewHolder(
     override val binding: ItemSponsorBinding= ItemSponsorBinding.bind(itemView)
 
     override fun bind(item: SponsorViewItem) {
-        binding.tvSponsorType.text=item.sponserType
+        binding.tvSponsorType.text="${item.sponserType} Sponsor"
         binding.tvSponsorName.text=item.sponsorName
 //        imageLoader.load(itemView.context, item.sponsorLogo) {
 //            crossfade(true)

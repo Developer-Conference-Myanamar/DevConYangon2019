@@ -19,11 +19,10 @@ import org.devconmyanmar.devconyangon.feature.about.webview.WebViewActivity
 class AboutFragment :Fragment(){
 
     private val customTabHelper: CustomTabHelper by lazy { CustomTabHelper() }
-    private val DEV_CON_URL="https://demo1.devconmyanmar.org/"
+    private val DEV_CON_URL="https://www.devconmyanmar.org/"
     private val aboutBinding by lazy{
         FragmentAboutBinding.bind(view!!)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

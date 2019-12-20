@@ -1,37 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="8dp">
+
     <TextView
         android:id="@+id/tvSponsorType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Main Sponsor"
-        android:textSize="18sp"
         android:fontFamily="@font/raleway_medium"
+        android:text="Main Sponsor"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvSponsorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Main Sponsor"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:fontFamily="@font/raleway_medium"
+        android:text="Main Sponsor"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSponsorType"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageView
-        android:id="@+id/imgSponsorLogo"
+        app:layout_constraintTop_toBottomOf="@+id/tvSponsorType" />
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardElevation="2dp"
         android:layout_marginTop="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@+id/tvSponsorName"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSponsorName">
+        <ImageView
+            android:id="@+id/imgSponsorLogo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpFragment
+import org.devconmyanmar.devconyangon.component.EmptyView
 import org.devconmyanmar.devconyangon.databinding.FragmentMyAgendaSessionBinding
 import org.devconmyanmar.devconyangon.domain.helper.Zones
 import org.devconmyanmar.devconyangon.domain.model.SessionId
@@ -53,6 +54,7 @@ class MyAgendaSessionFragment() :
     MyAgendaSessionAdapter(this)
   }
 
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.setDate(date)
@@ -67,7 +69,15 @@ class MyAgendaSessionFragment() :
 
   override fun subscribeToMyAgendaSessionViewItemListLiveData(myAgendaSessionViewItemListLiveData: LiveData<List<MyAgendaSessionViewItem>>) {
     myAgendaSessionViewItemListLiveData.observe(viewLifecycleOwner, Observer {
-      myAgendaSessionAdapter.submitList(it)
+      if(it.isNotEmpty()){
+        binding.rvSession.visibility=View.VISIBLE
+        binding.emptyAgenda.visibility=View.GONE
+        myAgendaSessionAdapter.submitList(it)
+      }else{
+        binding.rvSession.visibility=View.GONE
+        binding.emptyAgenda.visibility=View.VISIBLE
+      }
+
     })
   }
 
