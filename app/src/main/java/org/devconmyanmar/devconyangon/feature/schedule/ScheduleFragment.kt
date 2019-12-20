@@ -40,9 +40,9 @@ class ScheduleFragment : MvpFragment<FragmentScheduleBinding, ScheduleView, Sche
 
     viewModel.loadConferenceDates()
 
-    binding.fabFilter.setOnClickListener {
-      showBottomSheetDialog()
-    }
+//    binding.fabFilter.setOnClickListener {
+//      showBottomSheetDialog()
+//    }
   }
 
   override fun subscribeToScheduleDateViewItemLiveData(scheduleDateViewItemLiveData: LiveData<List<ScheduleDateViewItem>>) {

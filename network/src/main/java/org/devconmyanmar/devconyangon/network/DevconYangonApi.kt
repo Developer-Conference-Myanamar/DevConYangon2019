@@ -1,7 +1,9 @@
 package org.devconmyanmar.devconyangon.network
 
 import org.devconmyanmar.devconyangon.network.response.GetScheduleResponse
+import org.devconmyanmar.devconyangon.network.response.GetSponsorResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -11,4 +13,7 @@ interface DevconYangonApi {
 
   @GET("schedules")
   fun getSchedules(): Call<GetScheduleResponse>
+
+  @GET("sponser")
+  fun getSponsors(): Call<GetSponsorResponse>
 }
