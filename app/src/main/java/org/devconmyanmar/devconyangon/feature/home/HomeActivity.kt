@@ -51,7 +51,7 @@ class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>()
     val navGraphIds = listOf(
       R.navigation.navigation_main,
       R.navigation.navigation_agenda,
-      R.navigation.navigation_agenda
+      R.navigation.navigation_info
     )
 
     val controller = binding.bottomNavigationView.setupWithNavController(

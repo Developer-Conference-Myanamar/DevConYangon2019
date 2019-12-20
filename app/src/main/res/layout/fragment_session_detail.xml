@@ -90,6 +90,7 @@
         android:paddingLeft="16dp"
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
+        android:visibility="gone"
         android:textColor="@color/textColorSecondary"
         android:textSize="14sp"
         tools:text="@string/appbar_scrolling_view_behavior" />

@@ -66,7 +66,7 @@ class SessionDetailSpeakerRecyclerViewAdapter(
     override fun bind(item: SessionDetailSpeakerViewItem) {
       imageLoader.load(itemView.context, item.imageUrl) {
         crossfade(true)
-        placeholder(R.drawable.ic_placeholder_speaker)
+        placeholder(R.drawable.placeholder_speaker)
         this.error(R.drawable.placeholder_speaker)
         transformations(CircleCropTransformation())
         this.target(binding.ivSpeaker)

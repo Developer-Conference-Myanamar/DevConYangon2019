@@ -40,7 +40,7 @@ class SponsorViewHolder(
 
     imageLoader.load(itemView.context, item.sponsorLogo) {
       crossfade(true)
-      placeholder(R.drawable.ic_placeholder_speaker)
+      placeholder(R.drawable.placeholder_sponsor)
       target(binding.imgSponsorLogo)
     }
   }
