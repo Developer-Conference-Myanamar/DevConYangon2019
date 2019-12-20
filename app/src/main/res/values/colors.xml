@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#008577</color>
-  <color name="colorPrimaryDark">#00574B</color>
-  <color name="colorAccent">#D81B60</color>
+  <color name="colorPrimary">#FFFFFF</color>
+  <color name="colorSecondary">#EBEBEB</color>
+  <color name="colorAccent">#E91B1A</color>
+  <color name="statusBarColor">#000000</color>
+  <color name="colorEmbedded">#5EECAB</color>
+
+
+  <color name="colorBlack">#000000</color>
+  <color name="colorWhite">#FFFFFF</color>
+  <color name="colorGrey">#9E9E9E</color>
+
+  <color name="textColorPrimary">#212121</color>
+  <color name="textColorSecondary">#424242</color>
+  <color name="textColorDisabled">#33000000</color>
+
+  <color name="transparent_black">#CC000000</color>
+  <color name="transparent">#00000000</color>
+  <color name="blue">#132FEC</color>
+
+  <color name="colorPlaceHolder">#BDBDBD</color>
+  <color name="primary_text_color">#000000</color>
+  <color name="secondary_text_color">#808080</color>
+  <color name="primary_icon_color">#000000</color>
+  <color name="primary_main_bg">#ffffff</color>
+  <color name="secondary_icon_tint">#132FEC</color>
+  <color name="darkmode_blue">#FFFFFF</color>
+
+  <color name="floating_color">#FFFFFF</color>
+
 </resources>

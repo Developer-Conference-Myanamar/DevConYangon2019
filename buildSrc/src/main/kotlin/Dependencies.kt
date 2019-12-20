@@ -3,13 +3,13 @@
  */
 object BuildConfig {
   const val compileSdk = 28
-  const val minSdk = 16
+  const val minSdk = 21
   const val targetSdk = 28
 
-  private const val versionMajor = 0
+  private const val versionMajor = 1
   private const val versionMinor = 0
   private const val versionPatch = 0
-  private const val versionBuild = 1
+  private const val versionBuild = 0
 
   const val versionName =
     "$versionMajor.$versionMinor.$versionPatch"
@@ -19,7 +19,7 @@ object BuildConfig {
 }
 
 object CommonLibs {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:3.5.1"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:3.6.0-rc01"
 
   const val dexter = "com.karumi:dexter:5.0.0"
 
@@ -61,7 +61,7 @@ object AndroidXCardView {
 }
 
 object AndroidXConstraintLayout {
-  private const val version = "2.0.0-beta2"
+  private const val version = "2.0.0-beta3"
 
   const val constraint_layout = "androidx.constraintlayout:constraintlayout:$version"
 }
@@ -69,7 +69,7 @@ object AndroidXConstraintLayout {
 object AndroidXViewPager {
   const val view_pager = "androidx.viewpager:viewpager:1.0.0"
 
-  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0-beta03"
+  const val view_pager_2 = "androidx.viewpager2:viewpager2:1.0.0-rc01"
 }
 
 object AndroidXLegacy {
@@ -114,7 +114,7 @@ object AndroidArchWork {
 }
 
 object AndroidArchNavigation {
-  private const val version = "2.2.0-alpha02"
+  private const val version = "2.1.0"
 
   const val common = "androidx.navigation:navigation-common:$version"
   const val common_ktx = "androidx.navigation:navigation-common-ktx:$version"
@@ -124,8 +124,6 @@ object AndroidArchNavigation {
   const val runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$version"
   const val safe_args_generator = "androidx.navigation:navigation-safe-args-generator:$version"
   const val safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
-  const val testing = "androidx.navigation:navigation-testing:$version"
-  const val testing_ktx = "androidx.navigation:navigation-testing-ktx:$version"
   const val ui = "androidx.navigation:navigation-ui:$version"
   const val ui_ktx = "androidx.navigation:navigation-ui-ktx:$version"
 }
@@ -203,7 +201,7 @@ object Material {
 }
 
 object Coil {
-  const val coil = "io.coil-kt:coil:0.6.1"
+  const val coil = "io.coil-kt:coil:0.8.0"
 }
 
 object Dagger {
@@ -246,7 +244,7 @@ object Firebase {
 }
 
 object Flipper {
-  private const val version = "0.25.0"
+  private const val version = "0.27.0"
 
   const val flipper = "com.facebook.flipper:flipper:$version"
   const val soloader = "com.facebook.soloader:soloader:0.5.1"
@@ -282,14 +280,14 @@ object GoogleService {
 }
 
 object Kotlin {
-  private const val version = "1.3.50"
+  private const val version = "1.3.61"
 
   const val stdblib_jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
   const val gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
 }
 
 object KotlinCoroutine {
-  private const val version = "1.3.0"
+  private const val version = "1.3.2"
 
   const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
   const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
@@ -323,58 +321,22 @@ object MPAndroidChart {
 }
 
 object OkHttp {
-  private const val version = "3.12.0"
+  private const val version = "4.2.2"
 
   const val client = "com.squareup.okhttp3:okhttp:$version"
   const val logger = "com.squareup.okhttp3:logging-interceptor:$version"
   const val mock_web_server = "com.squareup.okhttp3:mockwebserver:$version"
 }
 
-object ReactiveX {
-  const val rxjava = "io.reactivex.rxjava2:rxjava:2.2.8"
-  const val rxandroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
-  const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:2.3.0"
-  const val rxComprehension = "com.github.pakoito.RxComprehensions:rxcomprehensions2:1.3.0"
-}
-
-object AutoDipsose {
-  private const val version = "1.3.0"
-
-  const val autoDispose = "com.uber.autodispose:autodispose:$version"
-  const val autoDisposeAndroid = "com.uber.autodispose:autodispose-android:$version"
-  const val autoDisposeAndroidArch =
-    "com.uber.autodispose:autodispose-android-archcomponents:$version"
-}
-
-object OpenStreetMap {
-  private const val osmdroid = "org.osmdroid:osmdroid-android:6.1.0"
-  private const val osmbonuspack = "com.github.MKergall:osmbonuspack:6.6.0"
-}
-
-object RxDogTag {
-  private const val version = "0.2.0"
-
-  const val rxDogTag = "com.uber.rxdogtag:rxdogtag:$version"
-  const val rxDogTagAutoDispose = "com.uber.rxdogtag:rxdogtag-autodispose:$version"
-
-}
-
-object RxBinding {
-  private const val version = "3.0.0-alpha2"
-
-  const val platform = "com.jakewharton.rxbinding3:rxbinding:$version"
-  const val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:$version"
-}
-
 object Retrofit {
-  private const val version = "2.6.1"
+  private const val version = "2.6.2"
 
   const val core = "com.squareup.retrofit2:retrofit:$version"
   const val moshi_converter = "com.squareup.retrofit2:converter-moshi:$version"
 }
 
 object SqlDelight {
-  private const val version = "1.2.0"
+  private const val version = "1.2.1"
 
   const val gradle_plugin = "com.squareup.sqldelight:gradle-plugin:$version"
   const val android_driver = "com.squareup.sqldelight:android-driver:$version"

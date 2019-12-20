@@ -1,0 +1,47 @@
+import java.lang.Boolean;
+import org.devconmyanmar.devconyangon.domain.model.RoomId;
+import org.devconmyanmar.devconyangon.domain.model.SessionId;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalTime;
+
+CREATE TABLE SessionTable(
+  session_id INTEGER AS SessionId NOT NULL PRIMARY KEY,
+  session_title TEXT NOT NULL,
+  abstract TEXT NOT NULL,
+  date TEXT As LocalDate NOT NULL,
+  start_time TEXT AS LocalTime NOT NULL,
+  end_time TEXT AS LocalTime NOT NULL,
+  room INTEGER AS RoomId NOT NULL,
+  FOREIGN KEY (room) REFERENCES RoomTable(room_id)
+);
+
+select_all_at_date:
+SELECT * FROM SessionTable
+WHERE date = :date;
+
+select_favorite_at_date:
+SELECT * FROM SessionTable
+WHERE SessionTable.date = :date
+AND SessionTable.session_id IN (SELECT session_id FROM FavoriteSessionTable);
+
+select_by_id:
+SELECT * FROM SessionTable
+WHERE session_id = :session_id;
+
+select_by_speaker:
+SELECT SessionTable.session_id,SessionTable.session_title,SessionTable.abstract,SessionTable.date,SessionTable.start_time, SessionTable.end_time, SessionTable.room  FROM SessionTable
+JOIN SessionSpeakerTable ON SessionSpeakerTable.speaker = :speakerId
+AND SessionSpeakerTable.session = SessionTable.session_id;
+
+select_all:
+SELECT * FROM SessionTable;
+
+insert:
+INSERT INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
+VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
+
+insert_or_replace:
+INSERT OR REPLACE INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
+VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
+

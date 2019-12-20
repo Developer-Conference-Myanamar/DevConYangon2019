@@ -1,7 +1,18 @@
+buildscript {
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath AndroidArchNavigation.safe_args_plugin
+  }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
   compileSdkVersion BuildConfig.compileSdk
@@ -14,9 +25,22 @@ android {
     versionCode BuildConfig.versionCode
     versionName BuildConfig.versionName
     resConfigs "en", "mm"
-    multiDexEnabled true
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    viewBinding {
+      enabled = true
+    }
+  }
+
+  signingConfigs {
+    release {
+      storeFile file("../keystore/release_key.jks")
+      storePassword "release"
+      keyAlias "Release"
+      keyPassword "release"
+      v2SigningEnabled true
+    }
   }
 
   buildTypes {
@@ -28,8 +52,10 @@ android {
 
     release {
       minifyEnabled true
+      shrinkResources true
       zipAlignEnabled true
-      debuggable false
+      debuggable true
+      signingConfig signingConfigs.release
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
@@ -60,6 +86,11 @@ dependencies {
   //AndroidX work
   implementation AndroidArchWork.work_runtime_ktx
 
+  //Androidx Nav
+  implementation AndroidArchNavigation.fragment_ktx
+  implementation AndroidArchNavigation.ui_ktx
+  kapt AndroidArchNavigation.safe_args_generator
+
   //Inject
   implementation CommonLibs.javaxInject
   kapt Dagger.compiler
@@ -69,9 +100,6 @@ dependencies {
 
   //View
   implementation MPAndroidChart.base
-
-  //RX
-  api ReactiveX.rxandroid
 
   //Arch
   kapt AndroidArchLifeCycle.lifecycle_compiler
@@ -93,6 +121,12 @@ dependencies {
 
   //Leak Canary
   debugImplementation LeakCanary.android
+
+  //Debugging
+  debugImplementation Flipper.flipper
+  debugImplementation Flipper.soloader
+  debugImplementation Flipper.network_plugin
+  releaseImplementation Flipper.filpper_no_op
 
   //Test
   testImplementation CommonLibs.junit
@@ -118,4 +152,7 @@ dependencies {
   androidTestImplementation AndroidXEspresso.idling_resource
   androidTestImplementation FragmentTestRule.android
   androidTestImplementation AndroidXEspresso.rx_idler
+
+  implementation 'androidx.viewpager2:viewpager2:1.0.0-rc01'
+  implementation 'androidx.browser:browser:1.0.0'
 }

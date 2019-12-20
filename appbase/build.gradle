@@ -9,6 +9,10 @@ android {
     minSdkVersion BuildConfig.minSdk
     targetSdkVersion BuildConfig.targetSdk
     resConfigs "en", "mm"
+
+    viewBinding {
+      enabled = true
+    }
   }
 
   buildTypes {
@@ -66,9 +70,6 @@ dependencies {
   //Moshi
   implementation Moshi.core
   kapt Moshi.code_gen
-
-  //Rx
-  implementation ReactiveX.rxandroid
 
   //Kotlin
   implementation Kotlin.stdblib_jdk

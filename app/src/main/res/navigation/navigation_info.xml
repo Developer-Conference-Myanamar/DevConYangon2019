@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/navigation_info"
+  app:startDestination="@id/navigation_sponsor">
+
+  <fragment
+    android:id="@+id/navigation_sponsor"
+    android:name="org.devconmyanmar.devconyangon.feature.about.info.sponsor.SponsorFragment"
+    android:label="InfoFragment"
+    tools:layout="@layout/fragment_info" />
+
+
+</navigation>

@@ -3,6 +3,7 @@ package org.devconmyanmar.devconyangon.base.core.mvp
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import org.devconmyanmar.devconyangon.base.core.BaseActivity
 import org.devconmyanmar.devconyangon.base.di.Injectable
 import timber.log.Timber
@@ -12,8 +13,8 @@ import kotlin.reflect.KClass
 /**
  * Created by Vincent on 12/6/18
  */
-abstract class MvpActivity<V : Viewable, VM : BaseViewModel<V>> :
-  BaseActivity(), Injectable {
+abstract class MvpActivity<VB : ViewBinding, V : Viewable, VM : BaseViewModel<V>> :
+  BaseActivity<VB>(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,6 +29,7 @@ abstract class MvpActivity<V : Viewable, VM : BaseViewModel<V>> :
       Timber.e(exception)
       throw InvalidMvpImplementationException()
     }
+    setContentView(binding.root)
   }
 
   override fun onDestroy() {
@@ -38,7 +40,7 @@ abstract class MvpActivity<V : Viewable, VM : BaseViewModel<V>> :
   /**
    * Helper function for easily init of viewModel
    */
-  protected inline fun <reified VM : BaseViewModel<V>> contractedViewModels(): Lazy<VM> =
+  protected inline fun <reified VM : BaseViewModel<V>> contractedViewModel(): Lazy<VM> =
     ViewModelLazy(VM::class)
 
   inner class ViewModelLazy<VM : ViewModel>(

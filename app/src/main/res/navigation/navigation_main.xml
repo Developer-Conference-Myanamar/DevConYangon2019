@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/navigation_main"
+  app:startDestination="@id/navigation_schedule">
+
+
+  <fragment
+    android:id="@+id/navigation_schedule"
+    android:name="org.devconmyanmar.devconyangon.feature.schedule.ScheduleFragment"
+    android:label="ScheduleFragment"
+    tools:layout="@layout/fragment_my_agenda">
+
+    <action
+      android:id="@+id/action_navigation_schedule_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/navigation_my_agenda"
+    android:name="org.devconmyanmar.devconyangon.feature.agenda.MyAgendaFragment"
+    android:label="MyAgendaFragment"
+    tools:layout="@layout/fragment_schedule">
+
+    <action
+      android:id="@+id/action_navigation_my_agenda_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+  </fragment>
+
+  <fragment
+    android:id="@+id/navigation_info"
+    android:name="org.devconmyanmar.devconyangon.feature.about.info.sponsor.SponsorFragment"
+    android:label="InfoFragment"
+    tools:layout="@layout/fragment_info" />
+
+  <fragment
+    android:id="@+id/sessionDetailFragment"
+    android:name="org.devconmyanmar.devconyangon.feature.sessiondetail.SessionDetailFragment"
+    android:label="SessionDetailFragment"
+    tools:layout="@layout/fragment_session_detail">
+
+    <argument
+      android:name="sessionId"
+      app:argType="long" />
+
+    <deepLink
+      android:id="@+id/sessionDetailFragmentDeepLink"
+      app:uri="devconyangon://sessions/{sessionId}" />
+
+    <action
+      android:id="@+id/action_sessionDetailFragment_to_speakerDetailFragment"
+      app:destination="@id/speakerDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/speakerDetailFragment"
+    android:name="org.devconmyanmar.devconyangon.feature.speakerdetail.SpeakerDetailFragment"
+    android:label="SpeakerDetailFragment"
+    tools:layout="@layout/fragment_speaker_detail">
+
+    <argument
+      android:name="speakerId"
+      app:argType="long" />
+
+    <action
+      android:id="@+id/action_speakerDetailFragment_to_sessionDetailFragment"
+      app:destination="@id/sessionDetailFragment"
+      app:enterAnim="@anim/nav_default_enter_anim"
+      app:exitAnim="@anim/nav_default_exit_anim"
+      app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+      app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+  </fragment>
+
+
+</navigation>

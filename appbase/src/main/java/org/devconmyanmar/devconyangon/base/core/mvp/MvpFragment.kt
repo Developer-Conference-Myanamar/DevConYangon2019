@@ -3,6 +3,7 @@ package org.devconmyanmar.devconyangon.base.core.mvp
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import org.devconmyanmar.devconyangon.base.core.BaseFragment
 import org.devconmyanmar.devconyangon.base.di.Injectable
 import timber.log.Timber
@@ -12,8 +13,8 @@ import kotlin.reflect.KClass
 /**
  * Created by Vincent on 12/6/18
  */
-abstract class MvpFragment<V : Viewable, VM : BaseViewModel<V>> :
-  BaseFragment(), Injectable {
+abstract class MvpFragment<VB : ViewBinding, V : Viewable, VM : BaseViewModel<V>> :
+  BaseFragment<VB>(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -25,7 +26,7 @@ abstract class MvpFragment<V : Viewable, VM : BaseViewModel<V>> :
     try {
       viewModel.attachView(this as V)
     } catch (exception: Exception) {
-      Timber.e(InvalidMvpImplementationException())
+      Timber.e(exception)
       throw InvalidMvpImplementationException()
     }
   }

@@ -15,8 +15,6 @@ dependencies {
     api CommonLibs.javaxInject
 
     api KotlinCoroutine.core
-    api ReactiveX.rxjava
-    api ReactiveX.rxKotlin
     api ThreeTenBp.no_tz_db
 }
 

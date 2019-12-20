@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#434343</color>
+  <color name="colorSecondary">#434343</color>
+  <color name="colorAccent">#E91B1A</color>
+  <color name="statusBarColor">#FFFFFF</color>
+
+  <color name="textColorPrimary">#FFFFFF</color>
+  <color name="textColorSecondary">#EBEBEB</color>
+  <color name="textColorDisabled">#33000000</color>
+
+
+  <color name="primary_text_color">#ffffff</color>
+  <color name="secondary_text_color">#ffffff</color>
+  <color name="primary_icon_color">#ffffff</color>
+  <color name="primary_main_bg">#000000</color>
+
+  <color name="blue">#7986CB</color>
+  <color name="secondary_icon_tint">#7986CB</color>
+  <color name="darkmode_blue">#132FEC</color>
+
+  <color name="floating_color">#000000</color>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/navigation_main"
+    android:icon="@drawable/ic_event"
+    android:title="@string/schedule" />
+
+  <item
+    android:id="@+id/navigation_agenda"
+    android:icon="@drawable/ic_agenda"
+    android:title="@string/agenda" />
+
+  <item
+    android:id="@+id/navigation_info"
+    android:icon="@drawable/ic_menu"
+    android:title="Sponsors" />
+
+
+</menu>
