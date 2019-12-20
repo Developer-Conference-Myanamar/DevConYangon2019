@@ -2,7 +2,6 @@ package org.devconmyanmar.devconyangon.feature.home
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -12,6 +11,7 @@ import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.mvp.MvpActivity
 import org.devconmyanmar.devconyangon.databinding.ActivityHomeBinding
 import org.devconmyanmar.devconyangon.feature.sync.SyncWorker
+import org.devconmyanmar.devconyangon.setupWithNavController
 import org.threeten.bp.Duration
 import java.util.concurrent.TimeUnit
 
@@ -48,7 +48,18 @@ class HomeActivity : MvpActivity<ActivityHomeBinding, HomeView, HomeViewModel>()
       request
     )
 
-    binding.bottomNavigationView.setupWithNavController(navController)
+    val navGraphIds = listOf(
+      R.navigation.navigation_main,
+      R.navigation.navigation_agenda,
+      R.navigation.navigation_agenda
+    )
+
+    val controller = binding.bottomNavigationView.setupWithNavController(
+      navGraphIds = navGraphIds,
+      fragmentManager = supportFragmentManager,
+      containerId = R.id.navFragment,
+      intent = intent
+    )
   }
 
   override fun onBackPressed() {

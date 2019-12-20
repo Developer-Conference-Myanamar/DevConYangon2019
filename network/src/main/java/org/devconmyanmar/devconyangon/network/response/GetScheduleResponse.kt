@@ -28,6 +28,7 @@ data class GetScheduleResponseScheduleSpeaker(
   @Json(name = "id") val speakerId: Long,
   @Json(name = "name") val name: String,
   @Json(name = "position") val position: String,
-  @Json(name = "info") val info: String
+  @Json(name = "info") val info: String,
+  @Json(name = "speaker_image") val speakerImage: String
 
 )

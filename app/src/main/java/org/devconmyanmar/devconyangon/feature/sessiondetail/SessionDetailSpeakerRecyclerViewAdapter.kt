@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import coil.ImageLoader
 import coil.api.load
+import coil.transform.CircleCropTransformation
 import org.devconmyanmar.devconyangon.R
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseRecyclerViewAdapter
 import org.devconmyanmar.devconyangon.base.core.recyclerview.BaseViewHolder
@@ -66,6 +67,9 @@ class SessionDetailSpeakerRecyclerViewAdapter(
       imageLoader.load(itemView.context, item.imageUrl) {
         crossfade(true)
         placeholder(R.drawable.ic_placeholder_speaker)
+        this.error(R.drawable.placeholder_speaker)
+        transformations(CircleCropTransformation())
+        this.target(binding.ivSpeaker)
       }
 
       binding.tvSpeaker.text = item.name

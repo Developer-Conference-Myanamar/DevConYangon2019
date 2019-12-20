@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-    android:id="@+id/navigation_schedule"
+    android:id="@+id/navigation_main"
     android:icon="@drawable/ic_event"
     android:title="@string/schedule" />
 
   <item
-    android:id="@+id/navigation_my_agenda"
+    android:id="@+id/navigation_agenda"
     android:icon="@drawable/ic_agenda"
     android:title="@string/agenda" />
 

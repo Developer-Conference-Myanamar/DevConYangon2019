@@ -59,7 +59,11 @@ class MyAgendaSessionViewItemMapper @Inject constructor() :
         sessionTitle = it.sessionTitle,
         isFavorite = it.isFavorite,
         roomName = it.room.roomName,
-        speakerNames = it.speakers.map { it.name }.asDelimitedString(',')
+        speakerNames = if (it.speakers.isEmpty()) {
+          "-"
+        } else {
+          it.speakers.map { it.name }.asDelimitedString(',')
+        }
       )
 
       listViewItems.add(sessionItem)

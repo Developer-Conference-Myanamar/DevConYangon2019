@@ -54,7 +54,7 @@ class NetworkDataSourceImpl @Inject constructor(
           name = it.name,
           biography = it.info,
           position = it.position,
-          imageUrl = "",
+          imageUrl = it.speakerImage,
           sessionList = speakerAndSessionIdMap.getValue(speakerId).toList()
         )
         speakerSet.add(speakerEntity)

@@ -52,7 +52,11 @@ class SessionViewItemListMapper @Inject constructor() :
         amPmOfTime = sessionTime.format(amPmFormatter),
         shouldShowTime = shouldShowTime,
         roomName = it.room.roomName,
-        speakerNames = it.speakers.map { it.name }.asDelimitedString(','),
+        speakerNames = if (it.speakers.isEmpty()) {
+          "-"
+        } else {
+          it.speakers.map { it.name }.asDelimitedString(',')
+        },
         isFavorite = it.isFavorite
       )
     }

@@ -27,6 +27,19 @@ class MyAgendaFragment : MvpFragment<FragmentMyAgendaBinding, MyAgendaView, MyAg
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
+
+    viewModel.loadSessions()
+  }
+
+  override fun onPause() {
+    binding.viewPager.adapter = null
+    super.onPause()
+
+  }
+
+  override fun onResume() {
+    super.onResume()
     binding.viewPager.adapter = myAgendaPagerAdapter
 
     TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -34,7 +47,6 @@ class MyAgendaFragment : MvpFragment<FragmentMyAgendaBinding, MyAgendaView, MyAg
       tab.text = itemAtIndex.dateAsString
     }.attach()
 
-    viewModel.loadSessions()
   }
 
   override fun subscribeToViewItemListLiveData(viewItemListLiveData: LiveData<List<MyAgendaDateViewItem>>) {

@@ -2,7 +2,6 @@ package org.devconmyanmar.devconyangon.feature.speakerdetail
 
 import org.devconmyanmar.devconyangon.domain.mapper.UnidirectionalMap
 import org.devconmyanmar.devconyangon.domain.model.Session
-import org.devconmyanmar.devconyangon.domain.model.SessionId
 import org.devconmyanmar.devconyangon.domain.model.Speaker
 import org.devconmyanmar.devconyangon.domain.model.SpeakerId
 import org.devconmyanmar.devconyangon.feature.schedule.session.SessionViewItem
@@ -18,10 +17,9 @@ data class SpeakerDetailViewItem(
   val biography: String,
   val position: String,
   val imageUrl: String,
-  val sessionList : List<SessionViewItem>
+  val sessionList: List<SessionViewItem>
 
 )
-
 
 class SpeakerDetailViewItemMapper @Inject constructor(
   private val sessionViewItemListMapper: SessionViewItemListMapper
@@ -29,7 +27,7 @@ class SpeakerDetailViewItemMapper @Inject constructor(
 
   data class Params(
     val speaker: Speaker,
-    val sessionList : List<Session>
+    val sessionList: List<Session>
   )
 
   override fun map(item: Params): SpeakerDetailViewItem {
@@ -38,7 +36,11 @@ class SpeakerDetailViewItemMapper @Inject constructor(
       speakerId = speaker.speakerId,
       name = speaker.name,
       biography = speaker.biography,
-      position = speaker.position,
+      position = if (speaker.position.isEmpty()) {
+        "-"
+      } else {
+        speaker.position
+      },
       imageUrl = speaker.imageUrl,
       sessionList = sessionViewItemListMapper.map(item.sessionList)
     )
