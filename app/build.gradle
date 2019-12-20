@@ -33,6 +33,16 @@ android {
     }
   }
 
+  signingConfigs {
+    release {
+      storeFile file("../keystore/release_key.jks")
+      storePassword "release"
+      keyAlias "Release"
+      keyPassword "release"
+      v2SigningEnabled true
+    }
+  }
+
   buildTypes {
     debug {
       minifyEnabled false
@@ -42,8 +52,10 @@ android {
 
     release {
       minifyEnabled true
+      shrinkResources true
       zipAlignEnabled true
-      debuggable false
+      debuggable true
+      signingConfig signingConfigs.release
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }

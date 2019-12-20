@@ -11,63 +11,63 @@
     android:id="@+id/rvSession"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="gone"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:listitem="@layout/item_agenda_session" />
+
   <org.devconmyanmar.devconyangon.component.EmptyView
-      android:id="@+id/emptyAgenda"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/emptyAgenda"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:layout_margin="8dp"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/emptyTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_centerInParent="true">
-
-
-      <ImageView
-          android:id="@+id/emptyImage"
-          android:layout_width="200dp"
-          android:layout_height="200dp"
-          android:layout_marginTop="24dp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/shortDescTitle"
-          app:srcCompat="@drawable/ic_favourite_illustration" />
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/raleway_bold"
+        android:gravity="center"
+        android:text="Favourite Empty"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
       <TextView
-          android:id="@+id/emptyTitle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:text="Favourite Empty"
-          android:textSize="18sp"
-          android:textColor="@color/colorBlack"
-          android:fontFamily="@font/raleway_bold"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/emptyImage" />
+        android:id="@+id/emptyDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="Your Favourite don't have any session"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emptyTitle" />
 
-      <TextView
-          android:id="@+id/emptyDescription"
-          android:layout_width="250dp"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:gravity="center"
-          android:text="Your Favourite don't have any session"
-          android:textSize="16sp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/emptyTitle" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
   </org.devconmyanmar.devconyangon.component.EmptyView>
 

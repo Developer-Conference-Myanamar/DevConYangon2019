@@ -42,7 +42,7 @@
       android:textStyle="bold"
       app:layout_constraintEnd_toStartOf="@+id/ivFavorite"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/tvTime"
+      app:layout_constraintTop_toTopOf="parent"
       tools:text="Keynote for Developer" />
 
     <TextView
