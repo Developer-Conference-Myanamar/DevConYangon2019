@@ -5,8 +5,8 @@ CREATE TABLE SessionSpeakerTable(
   session INTEGER AS SessionId NOT NULL,
   speaker INTEGER AS SpeakerId NOT NULL,
   PRIMARY KEY(session, speaker),
-  FOREIGN KEY (session) REFERENCES SessionTable(session_id),
-  FOREIGN KEY (speaker) REFERENCES SpeakerTable(speaker_id)
+  FOREIGN KEY (session) REFERENCES SessionTable(session_id) ON DELETE CASCADE,
+  FOREIGN KEY (speaker) REFERENCES SpeakerTable(speaker_id) ON DELETE CASCADE
 );
 
 insert_or_replace:
@@ -14,3 +14,6 @@ INSERT OR REPLACE INTO SessionSpeakerTable VALUES(:session, :speaker);
 
 select_by_session_id:
 SELECT * FROM SessionSpeakerTable WHERE session =?;
+
+delete_by_session_id:
+DELETE FROM SessionSpeakerTable WHERE session = :session_id;

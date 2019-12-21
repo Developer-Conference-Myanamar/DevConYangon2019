@@ -21,3 +21,6 @@ AND SessionSpeakerTable.speaker = SpeakerTable.speaker_id;
 
 select_all:
 SELECT * FROM SpeakerTable;
+
+delete_all:
+DELETE FROM SpeakerTable;

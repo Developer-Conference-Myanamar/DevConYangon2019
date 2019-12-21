@@ -45,3 +45,5 @@ insert_or_replace:
 INSERT OR REPLACE INTO SessionTable(session_id, session_title,abstract, date, start_time, end_time, room)
 VALUES(:session_id, :session_title, :abstract, :date, :start_time, :end_time, :room);
 
+delete_all:
+DELETE FROM SessionTable;

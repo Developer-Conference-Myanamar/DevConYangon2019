@@ -34,6 +34,9 @@ class SessionCacheDataSourceImpl @Inject constructor(
           sessionEntity.endTime,
           sessionEntity.room.roomId
         )
+
+        db.sessionSpeakerTableQueries.delete_by_session_id(sessionEntity.sessionId)
+
         sessionEntity.speakers.forEach { speakerIds ->
           db.sessionSpeakerTableQueries.insert_or_replace(
             sessionEntity.sessionId,
